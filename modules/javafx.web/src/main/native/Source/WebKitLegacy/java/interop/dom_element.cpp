@@ -24,6 +24,7 @@ using namespace WebCore;
 
 #include "dom_element_api.hj"
 #include "char16_string_exchange_support.h"
+#include "dom_exception_exchange_support.h"
 
 extern "C" {
 
@@ -165,6 +166,19 @@ void jfxpanama_dom_Element_removeAttribute(Element* peer, const char* name)
     peer->removeAttribute(AtomString { String::fromUTF8(name) });
 }
 
+// Exception forwarding (plans/patterns/pattern-exception-forwarding.md): void
+// downcall, exchange param leads (returnExchange, ...parameters) -- same
+// struct ByteExchangeKind already generates for String returns, but this
+// shim never calls reserve() (there is no data to hand back on success),
+// only throwFn() on failure.
+void jfxpanama_dom_Element_setAttribute(Exchange* exchange, Element* peer, const char* name, const char* value)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(
+            peer->setAttribute(AtomString { String::fromUTF8(name) }, AtomString { String::fromUTF8(value) }),
+            exchange);
+}
+
 void jfxpanama_dom_Element_setId(Element* peer, const char* value)
 {
     WebCore::JSMainThreadNullState state;
@@ -197,13 +211,13 @@ void jfxpanama_dom_Element_setOuterHTML(Element* peer, const char* value)
 // null, so a null String (e.g. no id attribute set) round-trips as Java null
 // exactly like the old JavaReturn<String>, since Char16StringExchange.value()
 // returns null when reserve() was never invoked.
-void jfxpanama_dom_Element_getTagName(Element* peer, Char16StringExchange* exchange)
+void jfxpanama_dom_Element_getTagName(Char16StringExchange* exchange, Element* peer)
 {
     WebCore::JSMainThreadNullState state;
     writeChar16String(peer->tagName(), exchange);
 }
 
-void jfxpanama_dom_Element_getId(Element* peer, Char16StringExchange* exchange)
+void jfxpanama_dom_Element_getId(Char16StringExchange* exchange, Element* peer)
 {
     WebCore::JSMainThreadNullState state;
     writeChar16String(peer->getIdAttribute(), exchange);

@@ -1,5 +1,6 @@
 package com.sun.webkit.dom.interop;
 
+import org.openjfx.interop.ByteExchangeKind;
 import org.openjfx.interop.Char16StringExchangeKind;
 import org.openjfx.interop.NativeSignatureEntry;
 import org.openjfx.interop.PrimitiveKind;
@@ -86,14 +87,22 @@ public enum ElementImplSignature implements NativeSignatureEntry {
     SET_OUTER_HTML("jfxpanama_dom_Element_setOuterHTML",
             Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
 
-    // String returns (plans/patterns/pattern-string-return.md): void downcall +
-    // trailing Char16StringExchange param, native reserve()s a UTF-16 buffer sized
-    // to the WTF::String's own length (or never reserves at all, for a null
-    // String) rather than returning a value directly.
+    // String returns (plans/patterns/pattern-string-return.md): void downcall,
+    // exchange param leads (returnExchange, ...parameters) -- native reserve()s
+    // a UTF-16 buffer sized to the WTF::String's own length (or never reserves
+    // at all, for a null String) rather than returning a value directly.
     GET_TAG_NAME("jfxpanama_dom_Element_getTagName",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, Char16StringExchangeKind.EXCHANGE)),
+            Signature.of(PrimitiveKind.VOID, Char16StringExchangeKind.EXCHANGE, DomKind.ELEMENT)),
     GET_ID("jfxpanama_dom_Element_getId",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, Char16StringExchangeKind.EXCHANGE));
+            Signature.of(PrimitiveKind.VOID, Char16StringExchangeKind.EXCHANGE, DomKind.ELEMENT)),
+
+    // Exception forwarding (plans/patterns/pattern-exception-forwarding.md):
+    // same (returnExchange, ...parameters) shape as the String returns above,
+    // but the shim never reserve()s -- only throwFn() on failure, nothing to
+    // hand back on success.
+    SET_ATTRIBUTE("jfxpanama_dom_Element_setAttribute",
+            Signature.of(PrimitiveKind.VOID, ByteExchangeKind.EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

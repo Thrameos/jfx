@@ -977,9 +977,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public void setAttribute(String name
         , String value) throws DOMException
     {
-        setAttributeImpl(getPeer()
-            , name
-            , value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setAttribute(getPeer(), name, value);
     }
     native static void setAttributeImpl(long peer
         , String name

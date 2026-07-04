@@ -5,11 +5,13 @@ import java.lang.foreign.SymbolLookup;
 import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
+import org.openjfx.interop.ByteExchange;
 import org.openjfx.interop.Char16StringExchange;
 import org.openjfx.interop.CString8;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
 import org.openjfx.interop.TransferPool;
+import org.w3c.dom.DOMException;
 
 /**
  * Real {@link Binder}-bound {@link MethodHandle}s for {@link ElementImplSignature}'s
@@ -62,6 +64,8 @@ public final class ElementImplBinding {
 
     private static final MethodHandle GET_TAG_NAME = bind(ElementImplSignature.GET_TAG_NAME);
     private static final MethodHandle GET_ID = bind(ElementImplSignature.GET_ID);
+
+    private static final MethodHandle SET_ATTRIBUTE = bind(ElementImplSignature.SET_ATTRIBUTE);
 
     private ElementImplBinding() {
     }
@@ -284,7 +288,7 @@ public final class ElementImplBinding {
 
     public static String getTagName(long peer) {
         try (Char16StringExchange exchange = new Char16StringExchange()) {
-            GET_TAG_NAME.invokeExact(MemorySegment.ofAddress(peer), exchange.segment());
+            GET_TAG_NAME.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
             return exchange.value();
         } catch (Throwable t) {
             throw Downcall.failed(ElementImplSignature.GET_TAG_NAME.symbol(), t);
@@ -293,10 +297,29 @@ public final class ElementImplBinding {
 
     public static String getId(long peer) {
         try (Char16StringExchange exchange = new Char16StringExchange()) {
-            GET_ID.invokeExact(MemorySegment.ofAddress(peer), exchange.segment());
+            GET_ID.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
             return exchange.value();
         } catch (Throwable t) {
             throw Downcall.failed(ElementImplSignature.GET_ID.symbol(), t);
+        }
+    }
+
+    // DOMException construction stays here, on the DOM-specific side of the
+    // boundary -- ByteExchange only ever hands back a generic (int code,
+    // String message) pair, never anything org.w3c.dom-shaped.
+    public static void setAttribute(long peer, String name, String value) {
+        try (Transfer nameUtf8 = CString8.of(name, TransferPool.SHARED);
+                Transfer valueUtf8 = CString8.of(value, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            try {
+                SET_ATTRIBUTE.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), nameUtf8.segment(), valueUtf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.SET_ATTRIBUTE.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
         }
     }
 }
