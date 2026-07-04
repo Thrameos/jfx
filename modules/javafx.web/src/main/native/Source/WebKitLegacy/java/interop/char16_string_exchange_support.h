@@ -2,8 +2,8 @@
 // plans/patterns/pattern-string-return.md. Include *after* whichever
 // generated dom_*_api.hj the .cpp file already needs (it defines the real
 // Char16StringExchange struct layout via com.sun.webkit.dom.interop.
-// Char16StringExchangeKind; this header only uses that name, never defines
-// it, so any one dom_*_api.hj that references Char16StringExchangeKind is
+// ReturnExchangeKind.CHAR16_STRING; this header only uses that name, never defines
+// it, so any one dom_*_api.hj that references ReturnExchangeKind.CHAR16_STRING is
 // enough).
 #pragma once
 

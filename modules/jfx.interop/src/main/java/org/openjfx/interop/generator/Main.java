@@ -37,7 +37,7 @@ public final class Main {
         }
         // Last argument is the output dir; every argument before it is a classes
         // dir to scan. More than one is needed because @NativeKindSet-annotated
-        // Kind enums (e.g. PrimitiveKind, ByteExchangeKind) can live in a dependency
+        // Kind enums (e.g. PrimitiveKind, ReturnExchangeKind) can live in a dependency
         // module's own target/classes, not just the module currently being built.
         Path outputDir = Path.of(args[args.length - 1]);
         List<Path> classesDirs = new ArrayList<>();

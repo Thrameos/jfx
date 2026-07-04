@@ -23,7 +23,7 @@ import java.lang.foreign.ValueLayout;
  * <p>Named {@code UTF8_CSTRING}, not {@code STRING} -- a bare "string" Kind is
  * exactly the ambiguity {@link Kind} exists to rule out: this project alone
  * has three incompatible on-the-wire string shapes (this one, input-only
- * NUL-terminated UTF-8 via {@link CString8}; {@link Char16StringExchangeKind},
+ * NUL-terminated UTF-8 via {@link CString8}; {@link ReturnExchangeKind#CHAR16_STRING},
  * output-only length-prefixed UTF-16 matching {@code WTF::String}'s native
  * form; and whatever a future UTF-32 or raw-bytes need turns out to require).
  * A generic {@code STRING} constant would silently invite exactly the

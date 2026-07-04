@@ -4,9 +4,9 @@
 // side of the boundary -- org.openjfx.interop's ByteExchange only ever
 // carries a generic (int code, const char* message) pair, exactly the same
 // domain-agnostic-core-vs-DOM-specific-Kind split DomKind and
-// Char16StringExchangeKind already keep. Include after whichever generated
+// ReturnExchangeKind.CHAR16_STRING already keep. Include after whichever generated
 // dom_*_api.hj the .cpp file needs (it defines the real Exchange struct
-// layout via com.sun.webkit.dom.interop.ByteExchangeKind).
+// layout via org.openjfx.interop.ReturnExchangeKind).
 #pragma once
 
 #include <WebCore/DOMException.h>
@@ -19,8 +19,8 @@
 // only reads ec.code()), so this preserves that behavior rather than
 // "improving" it into a mismatch with JNI's fallback path.
 //
-// Templated on the exchange struct type: Exchange (ByteExchangeKind) and
-// Char16StringExchange (Char16StringExchangeKind) are distinct generated C
+// Templated on the exchange struct type: Exchange (ReturnExchangeKind.BYTE_EXCHANGE) and
+// Char16StringExchange (ReturnExchangeKind.CHAR16_STRING) are distinct generated C
 // struct names -- deliberately, so the generated header states each
 // downcall's exact wire shape (plans/patterns/pattern-string-return.md) --
 // but both have the identical (reserve, throwFn, data, closure) field shape,

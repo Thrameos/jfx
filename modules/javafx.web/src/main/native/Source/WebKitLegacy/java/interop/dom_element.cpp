@@ -168,7 +168,7 @@ void jfxpanama_dom_Element_removeAttribute(Element* peer, const char* name)
 
 // Exception forwarding (plans/patterns/pattern-exception-forwarding.md): void
 // downcall, exchange param leads (returnExchange, ...parameters) -- same
-// struct ByteExchangeKind already generates for String returns, but this
+// struct ReturnExchangeKind.BYTE_EXCHANGE already generates for String returns, but this
 // shim never calls reserve() (there is no data to hand back on success),
 // only throwFn() on failure.
 void jfxpanama_dom_Element_setAttribute(Exchange* exchange, Element* peer, const char* name, const char* value)

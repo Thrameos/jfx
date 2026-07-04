@@ -8,7 +8,7 @@ package org.openjfx.interop;
  * {@code exchange.threw()} instead of every {@code *ImplBinding} repeating
  * {@code readUtf16String()} and the raw-bytes vocabulary that word implies.
  *
- * <p>Same wire shape as {@link ByteExchange} ({@link ByteExchangeKind#EXCHANGE} is
+ * <p>Same wire shape as {@link ByteExchange} ({@link ReturnExchangeKind#BYTE_EXCHANGE} is
  * still the {@code Kind} a {@code Signature} declares -- there is nothing
  * Char16-specific for the generated header to know about), purely a Java-side
  * naming/typing convenience. A future exchange shape with a genuinely different

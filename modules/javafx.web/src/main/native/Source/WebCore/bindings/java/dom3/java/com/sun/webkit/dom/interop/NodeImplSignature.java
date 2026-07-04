@@ -1,6 +1,6 @@
 package com.sun.webkit.dom.interop;
 
-import org.openjfx.interop.ByteExchangeKind;
+import org.openjfx.interop.ReturnExchangeKind;
 import org.openjfx.interop.NativeSignatureEntry;
 import org.openjfx.interop.PrimitiveKind;
 import org.openjfx.interop.Signature;
@@ -48,13 +48,13 @@ public enum NodeImplSignature implements NativeSignatureEntry {
     // oldChild peer the caller already passed in, exactly mirroring the old
     // JNI shim's `return JavaReturn<Node>(env, pnewChild)`.
     APPEND_CHILD("jfxpanama_dom_Node_appendChild",
-            Signature.of(PrimitiveKind.VOID, ByteExchangeKind.EXCHANGE, DomKind.NODE, DomKind.NODE)),
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE)),
     INSERT_BEFORE("jfxpanama_dom_Node_insertBefore",
-            Signature.of(PrimitiveKind.VOID, ByteExchangeKind.EXCHANGE, DomKind.NODE, DomKind.NODE, DomKind.NODE)),
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE, DomKind.NODE)),
     REPLACE_CHILD("jfxpanama_dom_Node_replaceChild",
-            Signature.of(PrimitiveKind.VOID, ByteExchangeKind.EXCHANGE, DomKind.NODE, DomKind.NODE, DomKind.NODE)),
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE, DomKind.NODE)),
     REMOVE_CHILD("jfxpanama_dom_Node_removeChild",
-            Signature.of(PrimitiveKind.VOID, ByteExchangeKind.EXCHANGE, DomKind.NODE, DomKind.NODE));
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE));
 
     private final String symbol;
     private final Signature signature;
