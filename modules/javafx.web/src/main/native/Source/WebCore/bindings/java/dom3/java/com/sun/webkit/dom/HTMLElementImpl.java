@@ -29,6 +29,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.html.HTMLElement;
+import com.sun.webkit.dom.interop.HTMLElementImplBinding;
 
 public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     HTMLElementImpl(long peer) {
@@ -49,7 +50,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
 
     @Override
     public void setId(String value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setId(getPeer(), value);
+        HTMLElementImplBinding.setId(getPeer(), value);
     }
     native static void setIdImpl(long peer, String value);
 
@@ -61,7 +62,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
 
     @Override
     public void setTitle(String value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setTitle(getPeer(), value);
+        HTMLElementImplBinding.setTitle(getPeer(), value);
     }
     native static void setTitleImpl(long peer, String value);
 
@@ -73,17 +74,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
 
     @Override
     public void setLang(String value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setLang(getPeer(), value);
+        HTMLElementImplBinding.setLang(getPeer(), value);
     }
     native static void setLangImpl(long peer, String value);
 
     public boolean getTranslate() {
-        return com.sun.webkit.dom.interop.HTMLElementImplBinding.getTranslate(getPeer());
+        return HTMLElementImplBinding.getTranslate(getPeer());
     }
     native static boolean getTranslateImpl(long peer);
 
     public void setTranslate(boolean value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setTranslate(getPeer(), value);
+        HTMLElementImplBinding.setTranslate(getPeer(), value);
     }
     native static void setTranslateImpl(long peer, boolean value);
 
@@ -110,12 +111,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     native static void setTabIndexImpl(long peer, int value);
 
     public boolean getDraggable() {
-        return com.sun.webkit.dom.interop.HTMLElementImplBinding.getDraggable(getPeer());
+        return HTMLElementImplBinding.getDraggable(getPeer());
     }
     native static boolean getDraggableImpl(long peer);
 
     public void setDraggable(boolean value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setDraggable(getPeer(), value);
+        HTMLElementImplBinding.setDraggable(getPeer(), value);
     }
     native static void setDraggableImpl(long peer, boolean value);
 
@@ -125,17 +126,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     native static String getWebkitdropzoneImpl(long peer);
 
     public void setWebkitdropzone(String value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setWebkitdropzone(getPeer(), value);
+        HTMLElementImplBinding.setWebkitdropzone(getPeer(), value);
     }
     native static void setWebkitdropzoneImpl(long peer, String value);
 
     public boolean getHidden() {
-        return com.sun.webkit.dom.interop.HTMLElementImplBinding.getHidden(getPeer());
+        return HTMLElementImplBinding.getHidden(getPeer());
     }
     native static boolean getHiddenImpl(long peer);
 
     public void setHidden(boolean value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setHidden(getPeer(), value);
+        HTMLElementImplBinding.setHidden(getPeer(), value);
     }
     native static void setHiddenImpl(long peer, boolean value);
 
@@ -145,7 +146,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     native static String getAccessKeyImpl(long peer);
 
     public void setAccessKey(String value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setAccessKey(getPeer(), value);
+        HTMLElementImplBinding.setAccessKey(getPeer(), value);
     }
     native static void setAccessKeyImpl(long peer, String value);
 
@@ -155,7 +156,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     native static String getInnerTextImpl(long peer);
 
     public void setInnerText(String value) throws DOMException {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setInnerText(getPeer(), value);
+        HTMLElementImplBinding.setInnerText(getPeer(), value);
     }
     native static void setInnerTextImpl(long peer, String value);
 
@@ -165,7 +166,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     native static String getOuterTextImpl(long peer);
 
     public void setOuterText(String value) throws DOMException {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setOuterText(getPeer(), value);
+        HTMLElementImplBinding.setOuterText(getPeer(), value);
     }
     native static void setOuterTextImpl(long peer, String value);
 
@@ -181,22 +182,22 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement {
     native static String getContentEditableImpl(long peer);
 
     public void setContentEditable(String value) throws DOMException {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setContentEditable(getPeer(), value);
+        HTMLElementImplBinding.setContentEditable(getPeer(), value);
     }
     native static void setContentEditableImpl(long peer, String value);
 
     public boolean getIsContentEditable() {
-        return com.sun.webkit.dom.interop.HTMLElementImplBinding.getIsContentEditable(getPeer());
+        return HTMLElementImplBinding.getIsContentEditable(getPeer());
     }
     native static boolean getIsContentEditableImpl(long peer);
 
     public boolean getSpellcheck() {
-        return com.sun.webkit.dom.interop.HTMLElementImplBinding.getSpellcheck(getPeer());
+        return HTMLElementImplBinding.getSpellcheck(getPeer());
     }
     native static boolean getSpellcheckImpl(long peer);
 
     public void setSpellcheck(boolean value) {
-        com.sun.webkit.dom.interop.HTMLElementImplBinding.setSpellcheck(getPeer(), value);
+        HTMLElementImplBinding.setSpellcheck(getPeer(), value);
     }
     native static void setSpellcheckImpl(long peer, boolean value);
 

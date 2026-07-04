@@ -29,6 +29,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.TypeInfo;
+import com.sun.webkit.dom.interop.AttrImplBinding;
 
 public class AttrImpl extends NodeImpl implements Attr {
     AttrImpl(long peer) {
@@ -49,7 +50,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 
     @Override
     public boolean getSpecified() {
-        return com.sun.webkit.dom.interop.AttrImplBinding.getSpecified(getPeer());
+        return AttrImplBinding.getSpecified(getPeer());
     }
     native static boolean getSpecifiedImpl(long peer);
 
@@ -61,19 +62,19 @@ public class AttrImpl extends NodeImpl implements Attr {
 
     @Override
     public void setValue(String value) throws DOMException {
-        com.sun.webkit.dom.interop.AttrImplBinding.setValue(getPeer(), value);
+        AttrImplBinding.setValue(getPeer(), value);
     }
     native static void setValueImpl(long peer, String value);
 
     @Override
     public Element getOwnerElement() {
-        return ElementImpl.getImpl(com.sun.webkit.dom.interop.AttrImplBinding.getOwnerElement(getPeer()));
+        return ElementImpl.getImpl(AttrImplBinding.getOwnerElement(getPeer()));
     }
     native static long getOwnerElementImpl(long peer);
 
     @Override
     public boolean isId() {
-        return com.sun.webkit.dom.interop.AttrImplBinding.isId(getPeer());
+        return AttrImplBinding.isId(getPeer());
     }
     native static boolean isIdImpl(long peer);
 

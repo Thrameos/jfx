@@ -26,6 +26,7 @@
 package com.sun.webkit.dom;
 
 import org.w3c.dom.html.HTMLImageElement;
+import com.sun.webkit.dom.interop.HTMLImageElementImplBinding;
 
 public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageElement {
     HTMLImageElementImpl(long peer) {
@@ -46,7 +47,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setName(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setName(getPeer(), value);
+        HTMLImageElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
@@ -58,7 +59,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setAlign(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setAlign(getPeer(), value);
+        HTMLImageElementImplBinding.setAlign(getPeer(), value);
     }
     native static void setAlignImpl(long peer, String value);
 
@@ -70,7 +71,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setAlt(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setAlt(getPeer(), value);
+        HTMLImageElementImplBinding.setAlt(getPeer(), value);
     }
     native static void setAltImpl(long peer, String value);
 
@@ -82,7 +83,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setBorder(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setBorder(getPeer(), value);
+        HTMLImageElementImplBinding.setBorder(getPeer(), value);
     }
     native static void setBorderImpl(long peer, String value);
 
@@ -122,13 +123,13 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public boolean getIsMap() {
-        return com.sun.webkit.dom.interop.HTMLImageElementImplBinding.getIsMap(getPeer());
+        return HTMLImageElementImplBinding.getIsMap(getPeer());
     }
     native static boolean getIsMapImpl(long peer);
 
     @Override
     public void setIsMap(boolean value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setIsMap(getPeer(), value);
+        HTMLImageElementImplBinding.setIsMap(getPeer(), value);
     }
     native static void setIsMapImpl(long peer, boolean value);
 
@@ -140,7 +141,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setLongDesc(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setLongDesc(getPeer(), value);
+        HTMLImageElementImplBinding.setLongDesc(getPeer(), value);
     }
     native static void setLongDescImpl(long peer, String value);
 
@@ -152,7 +153,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setSrc(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setSrc(getPeer(), value);
+        HTMLImageElementImplBinding.setSrc(getPeer(), value);
     }
     native static void setSrcImpl(long peer, String value);
 
@@ -162,7 +163,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
     native static String getSrcsetImpl(long peer);
 
     public void setSrcset(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setSrcset(getPeer(), value);
+        HTMLImageElementImplBinding.setSrcset(getPeer(), value);
     }
     native static void setSrcsetImpl(long peer, String value);
 
@@ -172,7 +173,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
     native static String getSizesImpl(long peer);
 
     public void setSizes(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setSizes(getPeer(), value);
+        HTMLImageElementImplBinding.setSizes(getPeer(), value);
     }
     native static void setSizesImpl(long peer, String value);
 
@@ -189,7 +190,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
     @Override
     public void setUseMap(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setUseMap(getPeer(), value);
+        HTMLImageElementImplBinding.setUseMap(getPeer(), value);
     }
     native static void setUseMapImpl(long peer, String value);
 
@@ -218,7 +219,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
     native static void setWidthImpl(long peer, int value);
 
     public boolean getComplete() {
-        return com.sun.webkit.dom.interop.HTMLImageElementImplBinding.getComplete(getPeer());
+        return HTMLImageElementImplBinding.getComplete(getPeer());
     }
     native static boolean getCompleteImpl(long peer);
 
@@ -228,27 +229,27 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
     native static String getLowsrcImpl(long peer);
 
     public void setLowsrc(String value) {
-        com.sun.webkit.dom.interop.HTMLImageElementImplBinding.setLowsrc(getPeer(), value);
+        HTMLImageElementImplBinding.setLowsrc(getPeer(), value);
     }
     native static void setLowsrcImpl(long peer, String value);
 
     public int getNaturalHeight() {
-        return com.sun.webkit.dom.interop.HTMLImageElementImplBinding.getNaturalHeight(getPeer());
+        return HTMLImageElementImplBinding.getNaturalHeight(getPeer());
     }
     native static int getNaturalHeightImpl(long peer);
 
     public int getNaturalWidth() {
-        return com.sun.webkit.dom.interop.HTMLImageElementImplBinding.getNaturalWidth(getPeer());
+        return HTMLImageElementImplBinding.getNaturalWidth(getPeer());
     }
     native static int getNaturalWidthImpl(long peer);
 
     public int getX() {
-        return com.sun.webkit.dom.interop.HTMLImageElementImplBinding.getX(getPeer());
+        return HTMLImageElementImplBinding.getX(getPeer());
     }
     native static int getXImpl(long peer);
 
     public int getY() {
-        return com.sun.webkit.dom.interop.HTMLImageElementImplBinding.getY(getPeer());
+        return HTMLImageElementImplBinding.getY(getPeer());
     }
     native static int getYImpl(long peer);
 

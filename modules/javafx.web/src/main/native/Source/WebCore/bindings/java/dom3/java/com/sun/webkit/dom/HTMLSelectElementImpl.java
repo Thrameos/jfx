@@ -32,6 +32,7 @@ import org.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.html.HTMLElement;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLSelectElement;
+import com.sun.webkit.dom.interop.HTMLSelectElementImplBinding;
 
 public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelectElement {
     HTMLSelectElementImpl(long peer) {
@@ -45,42 +46,42 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 // Attributes
     public boolean getAutofocus() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getAutofocus(getPeer());
+        return HTMLSelectElementImplBinding.getAutofocus(getPeer());
     }
     native static boolean getAutofocusImpl(long peer);
 
     public void setAutofocus(boolean value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setAutofocus(getPeer(), value);
+        HTMLSelectElementImplBinding.setAutofocus(getPeer(), value);
     }
     native static void setAutofocusImpl(long peer, boolean value);
 
     @Override
     public boolean getDisabled() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getDisabled(getPeer());
+        return HTMLSelectElementImplBinding.getDisabled(getPeer());
     }
     native static boolean getDisabledImpl(long peer);
 
     @Override
     public void setDisabled(boolean value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setDisabled(getPeer(), value);
+        HTMLSelectElementImplBinding.setDisabled(getPeer(), value);
     }
     native static void setDisabledImpl(long peer, boolean value);
 
     @Override
     public HTMLFormElement getForm() {
-        return HTMLFormElementImpl.getImpl(com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getForm(getPeer()));
+        return HTMLFormElementImpl.getImpl(HTMLSelectElementImplBinding.getForm(getPeer()));
     }
     native static long getFormImpl(long peer);
 
     @Override
     public boolean getMultiple() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getMultiple(getPeer());
+        return HTMLSelectElementImplBinding.getMultiple(getPeer());
     }
     native static boolean getMultipleImpl(long peer);
 
     @Override
     public void setMultiple(boolean value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setMultiple(getPeer(), value);
+        HTMLSelectElementImplBinding.setMultiple(getPeer(), value);
     }
     native static void setMultipleImpl(long peer, boolean value);
 
@@ -92,29 +93,29 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public void setName(String value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setName(getPeer(), value);
+        HTMLSelectElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
     public boolean getRequired() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getRequired(getPeer());
+        return HTMLSelectElementImplBinding.getRequired(getPeer());
     }
     native static boolean getRequiredImpl(long peer);
 
     public void setRequired(boolean value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setRequired(getPeer(), value);
+        HTMLSelectElementImplBinding.setRequired(getPeer(), value);
     }
     native static void setRequiredImpl(long peer, boolean value);
 
     @Override
     public int getSize() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getSize(getPeer());
+        return HTMLSelectElementImplBinding.getSize(getPeer());
     }
     native static int getSizeImpl(long peer);
 
     @Override
     public void setSize(int value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setSize(getPeer(), value);
+        HTMLSelectElementImplBinding.setSize(getPeer(), value);
     }
     native static void setSizeImpl(long peer, int value);
 
@@ -132,7 +133,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public int getLength() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getLength(getPeer());
+        return HTMLSelectElementImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -143,13 +144,13 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public int getSelectedIndex() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getSelectedIndex(getPeer());
+        return HTMLSelectElementImplBinding.getSelectedIndex(getPeer());
     }
     native static int getSelectedIndexImpl(long peer);
 
     @Override
     public void setSelectedIndex(int value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setSelectedIndex(getPeer(), value);
+        HTMLSelectElementImplBinding.setSelectedIndex(getPeer(), value);
     }
     native static void setSelectedIndexImpl(long peer, int value);
 
@@ -161,12 +162,12 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public void setValue(String value) {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setValue(getPeer(), value);
+        HTMLSelectElementImplBinding.setValue(getPeer(), value);
     }
     native static void setValueImpl(long peer, String value);
 
     public boolean getWillValidate() {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.getWillValidate(getPeer());
+        return HTMLSelectElementImplBinding.getWillValidate(getPeer());
     }
     native static boolean getWillValidateImpl(long peer);
 
@@ -226,7 +227,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
     @Override
     public void remove(int index)
     {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.remove(getPeer(), index);
+        HTMLSelectElementImplBinding.remove(getPeer(), index);
     }
     native static void removeImpl(long peer
         , int index);
@@ -234,14 +235,14 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     public boolean checkValidity()
     {
-        return com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.checkValidity(getPeer());
+        return HTMLSelectElementImplBinding.checkValidity(getPeer());
     }
     native static boolean checkValidityImpl(long peer);
 
 
     public void setCustomValidity(String error)
     {
-        com.sun.webkit.dom.interop.HTMLSelectElementImplBinding.setCustomValidity(getPeer(), error);
+        HTMLSelectElementImplBinding.setCustomValidity(getPeer(), error);
     }
     native static void setCustomValidityImpl(long peer
         , String error);

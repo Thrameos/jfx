@@ -30,6 +30,7 @@ import com.sun.webkit.DisposerRecord;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import com.sun.webkit.dom.interop.NamedNodeMapImplBinding;
 
 public class NamedNodeMapImpl implements NamedNodeMap {
     private static class SelfDisposer implements DisposerRecord {
@@ -83,7 +84,7 @@ public class NamedNodeMapImpl implements NamedNodeMap {
 // Attributes
     @Override
     public int getLength() {
-        return com.sun.webkit.dom.interop.NamedNodeMapImplBinding.getLength(getPeer());
+        return NamedNodeMapImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -122,7 +123,7 @@ public class NamedNodeMapImpl implements NamedNodeMap {
     @Override
     public Node item(int index)
     {
-        return NodeImpl.getImpl(com.sun.webkit.dom.interop.NamedNodeMapImplBinding.item(getPeer()
+        return NodeImpl.getImpl(NamedNodeMapImplBinding.item(getPeer()
             , index));
     }
     native static long itemImpl(long peer

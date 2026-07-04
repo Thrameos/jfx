@@ -27,6 +27,7 @@ package com.sun.webkit.dom;
 
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.html.HTMLBodyElement;
+import com.sun.webkit.dom.interop.HTMLBodyElementImplBinding;
 
 public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElement {
     HTMLBodyElementImpl(long peer) {
@@ -47,7 +48,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setALink(String value) {
-        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setALink(getPeer(), value);
+        HTMLBodyElementImplBinding.setALink(getPeer(), value);
     }
     native static void setALinkImpl(long peer, String value);
 
@@ -59,7 +60,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setBackground(String value) {
-        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setBackground(getPeer(), value);
+        HTMLBodyElementImplBinding.setBackground(getPeer(), value);
     }
     native static void setBackgroundImpl(long peer, String value);
 
@@ -71,7 +72,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setBgColor(String value) {
-        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setBgColor(getPeer(), value);
+        HTMLBodyElementImplBinding.setBgColor(getPeer(), value);
     }
     native static void setBgColorImpl(long peer, String value);
 
@@ -83,7 +84,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setLink(String value) {
-        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setLink(getPeer(), value);
+        HTMLBodyElementImplBinding.setLink(getPeer(), value);
     }
     native static void setLinkImpl(long peer, String value);
 
@@ -95,7 +96,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setText(String value) {
-        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setText(getPeer(), value);
+        HTMLBodyElementImplBinding.setText(getPeer(), value);
     }
     native static void setTextImpl(long peer, String value);
 
@@ -107,7 +108,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setVLink(String value) {
-        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setVLink(getPeer(), value);
+        HTMLBodyElementImplBinding.setVLink(getPeer(), value);
     }
     native static void setVLinkImpl(long peer, String value);
 

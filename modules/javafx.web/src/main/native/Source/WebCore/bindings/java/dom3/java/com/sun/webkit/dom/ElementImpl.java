@@ -34,6 +34,7 @@ import org.w3c.dom.TypeInfo;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.html.HTMLCollection;
+import com.sun.webkit.dom.interop.ElementImplBinding;
 
 public class ElementImpl extends NodeImpl implements Element {
     ElementImpl(long peer) {
@@ -53,7 +54,7 @@ public class ElementImpl extends NodeImpl implements Element {
 // Attributes
     @Override
     public String getTagName() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getTagName(getPeer());
+        return ElementImplBinding.getTagName(getPeer());
     }
     native static String getTagNameImpl(long peer);
 
@@ -69,82 +70,82 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getStyleImpl(long peer);
 
     public String getId() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getId(getPeer());
+        return ElementImplBinding.getId(getPeer());
     }
     native static String getIdImpl(long peer);
 
     public void setId(String value) {
-        com.sun.webkit.dom.interop.ElementImplBinding.setId(getPeer(), value);
+        ElementImplBinding.setId(getPeer(), value);
     }
     native static void setIdImpl(long peer, String value);
 
     public double getOffsetLeft() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetLeft(getPeer());
+        return ElementImplBinding.getOffsetLeft(getPeer());
     }
     native static double getOffsetLeftImpl(long peer);
 
     public double getOffsetTop() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetTop(getPeer());
+        return ElementImplBinding.getOffsetTop(getPeer());
     }
     native static double getOffsetTopImpl(long peer);
 
     public double getOffsetWidth() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetWidth(getPeer());
+        return ElementImplBinding.getOffsetWidth(getPeer());
     }
     native static double getOffsetWidthImpl(long peer);
 
     public double getOffsetHeight() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetHeight(getPeer());
+        return ElementImplBinding.getOffsetHeight(getPeer());
     }
     native static double getOffsetHeightImpl(long peer);
 
     public double getClientLeft() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getClientLeft(getPeer());
+        return ElementImplBinding.getClientLeft(getPeer());
     }
     native static double getClientLeftImpl(long peer);
 
     public double getClientTop() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getClientTop(getPeer());
+        return ElementImplBinding.getClientTop(getPeer());
     }
     native static double getClientTopImpl(long peer);
 
     public double getClientWidth() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getClientWidth(getPeer());
+        return ElementImplBinding.getClientWidth(getPeer());
     }
     native static double getClientWidthImpl(long peer);
 
     public double getClientHeight() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getClientHeight(getPeer());
+        return ElementImplBinding.getClientHeight(getPeer());
     }
     native static double getClientHeightImpl(long peer);
 
     public int getScrollLeft() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollLeft(getPeer());
+        return ElementImplBinding.getScrollLeft(getPeer());
     }
     native static int getScrollLeftImpl(long peer);
 
     public void setScrollLeft(int value) {
-        com.sun.webkit.dom.interop.ElementImplBinding.setScrollLeft(getPeer(), value);
+        ElementImplBinding.setScrollLeft(getPeer(), value);
     }
     native static void setScrollLeftImpl(long peer, int value);
 
     public int getScrollTop() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollTop(getPeer());
+        return ElementImplBinding.getScrollTop(getPeer());
     }
     native static int getScrollTopImpl(long peer);
 
     public void setScrollTop(int value) {
-        com.sun.webkit.dom.interop.ElementImplBinding.setScrollTop(getPeer(), value);
+        ElementImplBinding.setScrollTop(getPeer(), value);
     }
     native static void setScrollTopImpl(long peer, int value);
 
     public int getScrollWidth() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollWidth(getPeer());
+        return ElementImplBinding.getScrollWidth(getPeer());
     }
     native static int getScrollWidthImpl(long peer);
 
     public int getScrollHeight() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollHeight(getPeer());
+        return ElementImplBinding.getScrollHeight(getPeer());
     }
     native static int getScrollHeightImpl(long peer);
 
@@ -159,7 +160,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getInnerHTMLImpl(long peer);
 
     public void setInnerHTML(String value) throws DOMException {
-        com.sun.webkit.dom.interop.ElementImplBinding.setInnerHTML(getPeer(), value);
+        ElementImplBinding.setInnerHTML(getPeer(), value);
     }
     native static void setInnerHTMLImpl(long peer, String value);
 
@@ -169,7 +170,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getOuterHTMLImpl(long peer);
 
     public void setOuterHTML(String value) throws DOMException {
-        com.sun.webkit.dom.interop.ElementImplBinding.setOuterHTML(getPeer(), value);
+        ElementImplBinding.setOuterHTML(getPeer(), value);
     }
     native static void setOuterHTMLImpl(long peer, String value);
 
@@ -179,7 +180,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getClassNameImpl(long peer);
 
     public void setClassName(String value) {
-        com.sun.webkit.dom.interop.ElementImplBinding.setClassName(getPeer(), value);
+        ElementImplBinding.setClassName(getPeer(), value);
     }
     native static void setClassNameImpl(long peer, String value);
 
@@ -924,12 +925,12 @@ public class ElementImpl extends NodeImpl implements Element {
     native static void setOnwheelImpl(long peer, long value);
 
     public Element getPreviousElementSibling() {
-        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getPreviousElementSibling(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getPreviousElementSibling(getPeer()));
     }
     native static long getPreviousElementSiblingImpl(long peer);
 
     public Element getNextElementSibling() {
-        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getNextElementSibling(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getNextElementSibling(getPeer()));
     }
     native static long getNextElementSiblingImpl(long peer);
 
@@ -939,7 +940,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getChildrenImpl(long peer);
 
     public Element getFirstElementChild() {
-        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getFirstElementChild(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getFirstElementChild(getPeer()));
     }
     // Migration pilot: getFirstElementChild() above now calls the Panama
     // downcall in interop.ElementImplBinding instead. getFirstElementChildImpl/
@@ -948,12 +949,12 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getFirstElementChildImpl(long peer);
 
     public Element getLastElementChild() {
-        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getLastElementChild(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getLastElementChild(getPeer()));
     }
     native static long getLastElementChildImpl(long peer);
 
     public int getChildElementCount() {
-        return com.sun.webkit.dom.interop.ElementImplBinding.getChildElementCount(getPeer());
+        return ElementImplBinding.getChildElementCount(getPeer());
     }
     // Migration pilot: getChildElementCount() above now calls the Panama
     // downcall in interop.ElementImplBinding instead. getChildElementCountImpl/
@@ -977,7 +978,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public void setAttribute(String name
         , String value) throws DOMException
     {
-        com.sun.webkit.dom.interop.ElementImplBinding.setAttribute(getPeer(), name, value);
+        ElementImplBinding.setAttribute(getPeer(), name, value);
     }
     native static void setAttributeImpl(long peer
         , String name
@@ -987,7 +988,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public void removeAttribute(String name)
     {
-        com.sun.webkit.dom.interop.ElementImplBinding.removeAttribute(getPeer(), name);
+        ElementImplBinding.removeAttribute(getPeer(), name);
     }
     native static void removeAttributeImpl(long peer
         , String name);
@@ -1036,7 +1037,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public boolean hasAttributes()
     {
-        return com.sun.webkit.dom.interop.ElementImplBinding.hasAttributes(getPeer());
+        return ElementImplBinding.hasAttributes(getPeer());
     }
     native static boolean hasAttributesImpl(long peer);
 
@@ -1122,7 +1123,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public boolean hasAttribute(String name)
     {
-        return com.sun.webkit.dom.interop.ElementImplBinding.hasAttribute(getPeer(), name);
+        return ElementImplBinding.hasAttribute(getPeer(), name);
     }
     native static boolean hasAttributeImpl(long peer
         , String name);
