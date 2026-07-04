@@ -30,6 +30,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLTextAreaElement;
 
+import com.sun.webkit.dom.interop.HTMLTextAreaElementImplBinding;
+
 public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLTextAreaElement {
     HTMLTextAreaElementImpl(long peer) {
         super(peer);
@@ -42,228 +44,231 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
 
 // Attributes
     public boolean getAutofocus() {
-        return getAutofocusImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getAutofocus(getPeer());
     }
     native static boolean getAutofocusImpl(long peer);
 
     public void setAutofocus(boolean value) {
-        setAutofocusImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setAutofocus(getPeer(), value);
     }
     native static void setAutofocusImpl(long peer, boolean value);
 
     public String getDirName() {
-        return getDirNameImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getDirName(getPeer());
     }
     native static String getDirNameImpl(long peer);
 
     public void setDirName(String value) {
-        setDirNameImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setDirName(getPeer(), value);
     }
     native static void setDirNameImpl(long peer, String value);
 
     @Override
     public boolean getDisabled() {
-        return getDisabledImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getDisabled(getPeer());
     }
     native static boolean getDisabledImpl(long peer);
 
     @Override
     public void setDisabled(boolean value) {
-        setDisabledImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setDisabled(getPeer(), value);
     }
     native static void setDisabledImpl(long peer, boolean value);
 
     @Override
     public HTMLFormElement getForm() {
-        return HTMLFormElementImpl.getImpl(getFormImpl(getPeer()));
+        return HTMLFormElementImpl.getImpl(HTMLTextAreaElementImplBinding.getForm(getPeer()));
     }
     native static long getFormImpl(long peer);
 
     public int getMaxLength() {
-        return getMaxLengthImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getMaxLength(getPeer());
     }
     native static int getMaxLengthImpl(long peer);
 
     public void setMaxLength(int value) throws DOMException {
-        setMaxLengthImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setMaxLength(getPeer(), value);
     }
     native static void setMaxLengthImpl(long peer, int value);
 
     @Override
     public String getName() {
-        return getNameImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getName(getPeer());
     }
     native static String getNameImpl(long peer);
 
     @Override
     public void setName(String value) {
-        setNameImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
     public String getPlaceholder() {
-        return getPlaceholderImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getPlaceholder(getPeer());
     }
     native static String getPlaceholderImpl(long peer);
 
     public void setPlaceholder(String value) {
-        setPlaceholderImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setPlaceholder(getPeer(), value);
     }
     native static void setPlaceholderImpl(long peer, String value);
 
     @Override
     public boolean getReadOnly() {
-        return getReadOnlyImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getReadOnly(getPeer());
     }
     native static boolean getReadOnlyImpl(long peer);
 
     @Override
     public void setReadOnly(boolean value) {
-        setReadOnlyImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setReadOnly(getPeer(), value);
     }
     native static void setReadOnlyImpl(long peer, boolean value);
 
     public boolean getRequired() {
-        return getRequiredImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getRequired(getPeer());
     }
     native static boolean getRequiredImpl(long peer);
 
     public void setRequired(boolean value) {
-        setRequiredImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setRequired(getPeer(), value);
     }
     native static void setRequiredImpl(long peer, boolean value);
 
     @Override
     public int getRows() {
-        return getRowsImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getRows(getPeer());
     }
     native static int getRowsImpl(long peer);
 
     @Override
     public void setRows(int value) {
-        setRowsImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setRows(getPeer(), value);
     }
     native static void setRowsImpl(long peer, int value);
 
     @Override
     public int getCols() {
-        return getColsImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getCols(getPeer());
     }
     native static int getColsImpl(long peer);
 
     @Override
     public void setCols(int value) {
-        setColsImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setCols(getPeer(), value);
     }
     native static void setColsImpl(long peer, int value);
 
     public String getWrap() {
-        return getWrapImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getWrap(getPeer());
     }
     native static String getWrapImpl(long peer);
 
     public void setWrap(String value) {
-        setWrapImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setWrap(getPeer(), value);
     }
     native static void setWrapImpl(long peer, String value);
 
     @Override
     public String getType() {
-        return getTypeImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getType(getPeer());
     }
     native static String getTypeImpl(long peer);
 
     @Override
     public String getDefaultValue() {
-        return getDefaultValueImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getDefaultValue(getPeer());
     }
     native static String getDefaultValueImpl(long peer);
 
     @Override
     public void setDefaultValue(String value) {
-        setDefaultValueImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setDefaultValue(getPeer(), value);
     }
     native static void setDefaultValueImpl(long peer, String value);
 
     @Override
     public String getValue() {
-        return getValueImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getValue(getPeer());
     }
     native static String getValueImpl(long peer);
 
     @Override
     public void setValue(String value) {
-        setValueImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setValue(getPeer(), value);
     }
     native static void setValueImpl(long peer, String value);
 
     public int getTextLength() {
-        return getTextLengthImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getTextLength(getPeer());
     }
     native static int getTextLengthImpl(long peer);
 
     public boolean getWillValidate() {
-        return getWillValidateImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getWillValidate(getPeer());
     }
     native static boolean getWillValidateImpl(long peer);
 
     public String getValidationMessage() {
-        return getValidationMessageImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getValidationMessage(getPeer());
     }
     native static String getValidationMessageImpl(long peer);
 
     public NodeList getLabels() {
-        return NodeListImpl.getImpl(getLabelsImpl(getPeer()));
+        return NodeListImpl.getImpl(HTMLTextAreaElementImplBinding.getLabels(getPeer()));
     }
     native static long getLabelsImpl(long peer);
 
     public int getSelectionStart() {
-        return getSelectionStartImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getSelectionStart(getPeer());
     }
     native static int getSelectionStartImpl(long peer);
 
     public void setSelectionStart(int value) {
-        setSelectionStartImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setSelectionStart(getPeer(), value);
     }
     native static void setSelectionStartImpl(long peer, int value);
 
     public int getSelectionEnd() {
-        return getSelectionEndImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getSelectionEnd(getPeer());
     }
     native static int getSelectionEndImpl(long peer);
 
     public void setSelectionEnd(int value) {
-        setSelectionEndImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setSelectionEnd(getPeer(), value);
     }
     native static void setSelectionEndImpl(long peer, int value);
 
     public String getSelectionDirection() {
-        return getSelectionDirectionImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getSelectionDirection(getPeer());
     }
     native static String getSelectionDirectionImpl(long peer);
 
     public void setSelectionDirection(String value) {
-        setSelectionDirectionImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setSelectionDirection(getPeer(), value);
     }
     native static void setSelectionDirectionImpl(long peer, String value);
 
     @Override
     public String getAccessKey() {
-        return getAccessKeyImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getAccessKey(getPeer());
     }
     native static String getAccessKeyImpl(long peer);
 
     @Override
     public void setAccessKey(String value) {
-        setAccessKeyImpl(getPeer(), value);
+        HTMLTextAreaElementImplBinding.setAccessKey(getPeer(), value);
     }
     native static void setAccessKeyImpl(long peer, String value);
 
     public String getAutocomplete() {
-        return getAutocompleteImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.getAutocomplete(getPeer());
     }
     native static String getAutocompleteImpl(long peer);
 
+    // setAutocomplete is NOT migrated -- no working JNI implementation exists
+    // (confirmed via `nm -D`), so this stays on the old dead-code path rather
+    // than gaining new functionality during migration.
     public void setAutocomplete(String value) {
         setAutocompleteImpl(getPeer(), value);
     }
@@ -273,15 +278,14 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
 // Functions
     public boolean checkValidity()
     {
-        return checkValidityImpl(getPeer());
+        return HTMLTextAreaElementImplBinding.checkValidity(getPeer());
     }
     native static boolean checkValidityImpl(long peer);
 
 
     public void setCustomValidity(String error)
     {
-        setCustomValidityImpl(getPeer()
-            , error);
+        HTMLTextAreaElementImplBinding.setCustomValidity(getPeer(), error);
     }
     native static void setCustomValidityImpl(long peer
         , String error);
@@ -290,15 +294,14 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
     @Override
     public void select()
     {
-        selectImpl(getPeer());
+        HTMLTextAreaElementImplBinding.select(getPeer());
     }
     native static void selectImpl(long peer);
 
 
     public void setRangeText(String replacement) throws DOMException
     {
-        setRangeTextImpl(getPeer()
-            , replacement);
+        HTMLTextAreaElementImplBinding.setRangeText(getPeer(), replacement);
     }
     native static void setRangeTextImpl(long peer
         , String replacement);
@@ -309,11 +312,7 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
         , int end
         , String selectionMode) throws DOMException
     {
-        setRangeTextExImpl(getPeer()
-            , replacement
-            , start
-            , end
-            , selectionMode);
+        HTMLTextAreaElementImplBinding.setRangeTextEx(getPeer(), replacement, start, end, selectionMode);
     }
     native static void setRangeTextExImpl(long peer
         , String replacement
@@ -326,10 +325,7 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
         , int end
         , String direction)
     {
-        setSelectionRangeImpl(getPeer()
-            , start
-            , end
-            , direction);
+        HTMLTextAreaElementImplBinding.setSelectionRange(getPeer(), start, end, direction);
     }
     native static void setSelectionRangeImpl(long peer
         , int start
@@ -338,4 +334,3 @@ public class HTMLTextAreaElementImpl extends HTMLElementImpl implements HTMLText
 
 
 }
-

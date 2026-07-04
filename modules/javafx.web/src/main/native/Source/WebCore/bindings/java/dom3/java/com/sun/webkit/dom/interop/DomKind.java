@@ -53,6 +53,7 @@ public enum DomKind implements Kind {
     HTML_FORM_ELEMENT("HTMLFormElement*"),
     HTML_BODY_ELEMENT("HTMLBodyElement*"),
     HTML_INPUT_ELEMENT("HTMLInputElement*"),
+    HTML_TEXT_AREA_ELEMENT("HTMLTextAreaElement*"),
     NAMED_NODE_MAP("NamedNodeMap*"),
     NODE_LIST("NodeList*");
 
