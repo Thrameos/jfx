@@ -60,6 +60,8 @@ import org.w3c.dom.xpath.XPathExpression;
 import org.w3c.dom.xpath.XPathNSResolver;
 import org.w3c.dom.xpath.XPathResult;
 
+import com.sun.webkit.dom.interop.DocumentImplBinding;
+
 public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, DocumentView, DocumentEvent {
     DocumentImpl(long peer) {
         super(peer);
@@ -69,7 +71,15 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
         return (Document)create(peer);
     }
 
-    native static boolean isHTMLDocumentImpl(long peer);
+    // isHTMLDocumentImpl is called directly as a static helper from
+    // NodeImpl.create()'s type-dispatch logic (not through an instance
+    // wrapper like every other migrated method here) -- converting its body
+    // in place, rather than leaving the native declaration as an unused
+    // fallback, is what keeps that call site routed through the Panama
+    // downcall without touching NodeImpl.java.
+    static boolean isHTMLDocumentImpl(long peer) {
+        return DocumentImplBinding.isHTMLDocument(peer);
+    }
 
     @Override public Object evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result) throws DOMException {
         return evaluate(expression, contextNode, resolver, type, (XPathResult)result);
@@ -91,55 +101,55 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
 
     @Override
     public Element getDocumentElement() {
-        return ElementImpl.getImpl(getDocumentElementImpl(getPeer()));
+        return ElementImpl.getImpl(DocumentImplBinding.getDocumentElement(getPeer()));
     }
     native static long getDocumentElementImpl(long peer);
 
     @Override
     public String getInputEncoding() {
-        return getInputEncodingImpl(getPeer());
+        return DocumentImplBinding.getInputEncoding(getPeer());
     }
     native static String getInputEncodingImpl(long peer);
 
     @Override
     public String getXmlEncoding() {
-        return getXmlEncodingImpl(getPeer());
+        return DocumentImplBinding.getXmlEncoding(getPeer());
     }
     native static String getXmlEncodingImpl(long peer);
 
     @Override
     public String getXmlVersion() {
-        return getXmlVersionImpl(getPeer());
+        return DocumentImplBinding.getXmlVersion(getPeer());
     }
     native static String getXmlVersionImpl(long peer);
 
     @Override
     public void setXmlVersion(String value) throws DOMException {
-        setXmlVersionImpl(getPeer(), value);
+        DocumentImplBinding.setXmlVersion(getPeer(), value);
     }
     native static void setXmlVersionImpl(long peer, String value);
 
     @Override
     public boolean getXmlStandalone() {
-        return getXmlStandaloneImpl(getPeer());
+        return DocumentImplBinding.getXmlStandalone(getPeer());
     }
     native static boolean getXmlStandaloneImpl(long peer);
 
     @Override
     public void setXmlStandalone(boolean value) throws DOMException {
-        setXmlStandaloneImpl(getPeer(), value);
+        DocumentImplBinding.setXmlStandalone(getPeer(), value);
     }
     native static void setXmlStandaloneImpl(long peer, boolean value);
 
     @Override
     public String getDocumentURI() {
-        return getDocumentURIImpl(getPeer());
+        return DocumentImplBinding.getDocumentURI(getPeer());
     }
     native static String getDocumentURIImpl(long peer);
 
     @Override
     public void setDocumentURI(String value) {
-        setDocumentURIImpl(getPeer(), value);
+        DocumentImplBinding.setDocumentURI(getPeer(), value);
     }
     native static void setDocumentURIImpl(long peer, String value);
 
@@ -155,57 +165,57 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     native static long getStyleSheetsImpl(long peer);
 
     public String getContentType() {
-        return getContentTypeImpl(getPeer());
+        return DocumentImplBinding.getContentType(getPeer());
     }
     native static String getContentTypeImpl(long peer);
 
     public String getTitle() {
-        return getTitleImpl(getPeer());
+        return DocumentImplBinding.getTitle(getPeer());
     }
     native static String getTitleImpl(long peer);
 
     public void setTitle(String value) {
-        setTitleImpl(getPeer(), value);
+        DocumentImplBinding.setTitle(getPeer(), value);
     }
     native static void setTitleImpl(long peer, String value);
 
     public String getReferrer() {
-        return getReferrerImpl(getPeer());
+        return DocumentImplBinding.getReferrer(getPeer());
     }
     native static String getReferrerImpl(long peer);
 
     public String getDomain() {
-        return getDomainImpl(getPeer());
+        return DocumentImplBinding.getDomain(getPeer());
     }
     native static String getDomainImpl(long peer);
 
     public String getURL() {
-        return getURLImpl(getPeer());
+        return DocumentImplBinding.getURL(getPeer());
     }
     native static String getURLImpl(long peer);
 
     public String getCookie() throws DOMException {
-        return getCookieImpl(getPeer());
+        return DocumentImplBinding.getCookie(getPeer());
     }
     native static String getCookieImpl(long peer);
 
     public void setCookie(String value) throws DOMException {
-        setCookieImpl(getPeer(), value);
+        DocumentImplBinding.setCookie(getPeer(), value);
     }
     native static void setCookieImpl(long peer, String value);
 
     public HTMLElement getBody() {
-        return HTMLElementImpl.getImpl(getBodyImpl(getPeer()));
+        return HTMLElementImpl.getImpl(DocumentImplBinding.getBody(getPeer()));
     }
     native static long getBodyImpl(long peer);
 
     public void setBody(HTMLElement value) throws DOMException {
-        setBodyImpl(getPeer(), HTMLElementImpl.getPeer(value));
+        DocumentImplBinding.setBody(getPeer(), HTMLElementImpl.getPeer(value));
     }
     native static void setBodyImpl(long peer, long value);
 
     public HTMLHeadElement getHead() {
-        return HTMLHeadElementImpl.getImpl(getHeadImpl(getPeer()));
+        return HTMLHeadElementImpl.getImpl(DocumentImplBinding.getHead(getPeer()));
     }
     native static long getHeadImpl(long peer);
 
@@ -235,52 +245,52 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     native static long getAnchorsImpl(long peer);
 
     public String getLastModified() {
-        return getLastModifiedImpl(getPeer());
+        return DocumentImplBinding.getLastModified(getPeer());
     }
     native static String getLastModifiedImpl(long peer);
 
     public String getCharset() {
-        return getCharsetImpl(getPeer());
+        return DocumentImplBinding.getCharset(getPeer());
     }
     native static String getCharsetImpl(long peer);
 
     public String getDefaultCharset() {
-        return getDefaultCharsetImpl(getPeer());
+        return DocumentImplBinding.getDefaultCharset(getPeer());
     }
     native static String getDefaultCharsetImpl(long peer);
 
     public String getReadyState() {
-        return getReadyStateImpl(getPeer());
+        return DocumentImplBinding.getReadyState(getPeer());
     }
     native static String getReadyStateImpl(long peer);
 
     public String getCharacterSet() {
-        return getCharacterSetImpl(getPeer());
+        return DocumentImplBinding.getCharacterSet(getPeer());
     }
     native static String getCharacterSetImpl(long peer);
 
     public String getPreferredStylesheetSet() {
-        return getPreferredStylesheetSetImpl(getPeer());
+        return DocumentImplBinding.getPreferredStylesheetSet(getPeer());
     }
     native static String getPreferredStylesheetSetImpl(long peer);
 
     public String getSelectedStylesheetSet() {
-        return getSelectedStylesheetSetImpl(getPeer());
+        return DocumentImplBinding.getSelectedStylesheetSet(getPeer());
     }
     native static String getSelectedStylesheetSetImpl(long peer);
 
     public void setSelectedStylesheetSet(String value) {
-        setSelectedStylesheetSetImpl(getPeer(), value);
+        DocumentImplBinding.setSelectedStylesheetSet(getPeer(), value);
     }
     native static void setSelectedStylesheetSetImpl(long peer, String value);
 
     public Element getActiveElement() {
-        return ElementImpl.getImpl(getActiveElementImpl(getPeer()));
+        return ElementImpl.getImpl(DocumentImplBinding.getActiveElement(getPeer()));
     }
     native static long getActiveElementImpl(long peer);
 
     public String getCompatMode() {
-        return getCompatModeImpl(getPeer());
+        return DocumentImplBinding.getCompatMode(getPeer());
     }
     native static String getCompatModeImpl(long peer);
 
@@ -310,12 +320,12 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     native static long getWebkitFullscreenElementImpl(long peer);
 
     public String getVisibilityState() {
-        return getVisibilityStateImpl(getPeer());
+        return DocumentImplBinding.getVisibilityState(getPeer());
     }
     native static String getVisibilityStateImpl(long peer);
 
     public boolean getHidden() {
-        return getHiddenImpl(getPeer());
+        return DocumentImplBinding.getHidden(getPeer());
     }
     native static boolean getHiddenImpl(long peer);
 
@@ -325,12 +335,12 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     native static long getCurrentScriptImpl(long peer);
 
     public String getOrigin() {
-        return getOriginImpl(getPeer());
+        return DocumentImplBinding.getOrigin(getPeer());
     }
     native static String getOriginImpl(long peer);
 
     public Element getScrollingElement() {
-        return ElementImpl.getImpl(getScrollingElementImpl(getPeer()));
+        return ElementImpl.getImpl(DocumentImplBinding.getScrollingElement(getPeer()));
     }
     native static long getScrollingElementImpl(long peer);
 
@@ -990,17 +1000,17 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     native static long getChildrenImpl(long peer);
 
     public Element getFirstElementChild() {
-        return ElementImpl.getImpl(getFirstElementChildImpl(getPeer()));
+        return ElementImpl.getImpl(DocumentImplBinding.getFirstElementChild(getPeer()));
     }
     native static long getFirstElementChildImpl(long peer);
 
     public Element getLastElementChild() {
-        return ElementImpl.getImpl(getLastElementChildImpl(getPeer()));
+        return ElementImpl.getImpl(DocumentImplBinding.getLastElementChild(getPeer()));
     }
     native static long getLastElementChildImpl(long peer);
 
     public int getChildElementCount() {
-        return getChildElementCountImpl(getPeer());
+        return DocumentImplBinding.getChildElementCount(getPeer());
     }
     native static int getChildElementCountImpl(long peer);
 
@@ -1379,7 +1389,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
 
     public boolean hasFocus()
     {
-        return hasFocusImpl(getPeer());
+        return DocumentImplBinding.hasFocus(getPeer());
     }
     native static boolean hasFocusImpl(long peer);
 
