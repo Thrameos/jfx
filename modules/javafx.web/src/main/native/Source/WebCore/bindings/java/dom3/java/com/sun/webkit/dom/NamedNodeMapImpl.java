@@ -83,7 +83,7 @@ public class NamedNodeMapImpl implements NamedNodeMap {
 // Attributes
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return com.sun.webkit.dom.interop.NamedNodeMapImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -122,7 +122,7 @@ public class NamedNodeMapImpl implements NamedNodeMap {
     @Override
     public Node item(int index)
     {
-        return NodeImpl.getImpl(itemImpl(getPeer()
+        return NodeImpl.getImpl(com.sun.webkit.dom.interop.NamedNodeMapImplBinding.item(getPeer()
             , index));
     }
     native static long itemImpl(long peer
