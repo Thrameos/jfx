@@ -6,6 +6,7 @@ import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
 import org.openjfx.interop.CString8;
+import org.openjfx.interop.Char16StringExchange;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
 import org.openjfx.interop.TransferPool;
@@ -24,6 +25,12 @@ public final class HTMLBodyElementImplBinding {
     private static final MethodHandle SET_LINK = bind(HTMLBodyElementImplSignature.SET_LINK);
     private static final MethodHandle SET_TEXT = bind(HTMLBodyElementImplSignature.SET_TEXT);
     private static final MethodHandle SET_VLINK = bind(HTMLBodyElementImplSignature.SET_VLINK);
+    private static final MethodHandle GET_ALINK = bind(HTMLBodyElementImplSignature.GET_ALINK);
+    private static final MethodHandle GET_BACKGROUND = bind(HTMLBodyElementImplSignature.GET_BACKGROUND);
+    private static final MethodHandle GET_BGCOLOR = bind(HTMLBodyElementImplSignature.GET_BGCOLOR);
+    private static final MethodHandle GET_LINK = bind(HTMLBodyElementImplSignature.GET_LINK);
+    private static final MethodHandle GET_TEXT = bind(HTMLBodyElementImplSignature.GET_TEXT);
+    private static final MethodHandle GET_VLINK = bind(HTMLBodyElementImplSignature.GET_VLINK);
 
     private HTMLBodyElementImplBinding() {
     }
@@ -62,5 +69,38 @@ public final class HTMLBodyElementImplBinding {
 
     public static void setVLink(long peer, String value) {
         invokeSetter(SET_VLINK, HTMLBodyElementImplSignature.SET_VLINK.symbol(), peer, value);
+    }
+
+    private static String invokeGetter(MethodHandle handle, String symbol, long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            handle.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(symbol, t);
+        }
+    }
+
+    public static String getALink(long peer) {
+        return invokeGetter(GET_ALINK, HTMLBodyElementImplSignature.GET_ALINK.symbol(), peer);
+    }
+
+    public static String getBackground(long peer) {
+        return invokeGetter(GET_BACKGROUND, HTMLBodyElementImplSignature.GET_BACKGROUND.symbol(), peer);
+    }
+
+    public static String getBgColor(long peer) {
+        return invokeGetter(GET_BGCOLOR, HTMLBodyElementImplSignature.GET_BGCOLOR.symbol(), peer);
+    }
+
+    public static String getLink(long peer) {
+        return invokeGetter(GET_LINK, HTMLBodyElementImplSignature.GET_LINK.symbol(), peer);
+    }
+
+    public static String getText(long peer) {
+        return invokeGetter(GET_TEXT, HTMLBodyElementImplSignature.GET_TEXT.symbol(), peer);
+    }
+
+    public static String getVLink(long peer) {
+        return invokeGetter(GET_VLINK, HTMLBodyElementImplSignature.GET_VLINK.symbol(), peer);
     }
 }

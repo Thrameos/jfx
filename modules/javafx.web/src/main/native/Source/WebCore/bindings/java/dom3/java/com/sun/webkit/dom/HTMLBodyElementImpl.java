@@ -42,7 +42,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 // Attributes
     @Override
     public String getALink() {
-        return getALinkImpl(getPeer());
+        return HTMLBodyElementImplBinding.getALink(getPeer());
     }
     native static String getALinkImpl(long peer);
 
@@ -54,7 +54,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public String getBackground() {
-        return getBackgroundImpl(getPeer());
+        return HTMLBodyElementImplBinding.getBackground(getPeer());
     }
     native static String getBackgroundImpl(long peer);
 
@@ -66,7 +66,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public String getBgColor() {
-        return getBgColorImpl(getPeer());
+        return HTMLBodyElementImplBinding.getBgColor(getPeer());
     }
     native static String getBgColorImpl(long peer);
 
@@ -78,7 +78,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public String getLink() {
-        return getLinkImpl(getPeer());
+        return HTMLBodyElementImplBinding.getLink(getPeer());
     }
     native static String getLinkImpl(long peer);
 
@@ -90,7 +90,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public String getText() {
-        return getTextImpl(getPeer());
+        return HTMLBodyElementImplBinding.getText(getPeer());
     }
     native static String getTextImpl(long peer);
 
@@ -102,7 +102,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public String getVLink() {
-        return getVLinkImpl(getPeer());
+        return HTMLBodyElementImplBinding.getVLink(getPeer());
     }
     native static String getVLinkImpl(long peer);
 
