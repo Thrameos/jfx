@@ -152,6 +152,7 @@ list(APPEND WebKitLegacy_SOURCES
     java/interop/dom_html_form_element.cpp
     java/interop/dom_html_body_element.cpp
     java/interop/dom_named_node_map.cpp
+    java/interop/dom_node_list.cpp
 )
 
 # for DRT

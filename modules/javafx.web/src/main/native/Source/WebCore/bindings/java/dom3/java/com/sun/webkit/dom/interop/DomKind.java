@@ -53,7 +53,8 @@ public enum DomKind implements Kind {
     HTML_FORM_ELEMENT("HTMLFormElement*"),
     HTML_BODY_ELEMENT("HTMLBodyElement*"),
     HTML_INPUT_ELEMENT("HTMLInputElement*"),
-    NAMED_NODE_MAP("NamedNodeMap*");
+    NAMED_NODE_MAP("NamedNodeMap*"),
+    NODE_LIST("NodeList*");
 
     private final Layout.Primitive cLayout;
 

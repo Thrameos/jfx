@@ -27,6 +27,7 @@ package com.sun.webkit.dom;
 
 import com.sun.webkit.Disposer;
 import com.sun.webkit.DisposerRecord;
+import com.sun.webkit.dom.interop.NodeListImplBinding;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -82,7 +83,7 @@ public class NodeListImpl implements NodeList {
 // Attributes
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return NodeListImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -91,8 +92,7 @@ public class NodeListImpl implements NodeList {
     @Override
     public Node item(int index)
     {
-        return NodeImpl.getImpl(itemImpl(getPeer()
-            , index));
+        return NodeImpl.getImpl(NodeListImplBinding.item(getPeer(), index));
     }
     native static long itemImpl(long peer
         , int index);
