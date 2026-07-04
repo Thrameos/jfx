@@ -13,10 +13,13 @@
 // the generated prototypes spell the real pointee type bare (`Element*`,
 // via DomKind.ELEMENT), not a forward declaration the generator would need
 // new machinery to emit, so the real declaration must already be visible.
+#include <WebCore/Attr.h>
 #include <WebCore/Element.h>
 #include <WebCore/ElementInlines.h>
 #include <WebCore/HTMLNames.h>
 #include <WebCore/JSExecState.h>
+#include <WebCore/NamedNodeMap.h>
+#include <WebCore/NodeList.h>
 #include <WebCore/TrustedHTML.h>
 #include <wtf/text/WTFString.h>
 
@@ -221,6 +224,198 @@ void jfxpanama_dom_Element_getId(Char16StringExchange* exchange, Element* peer)
 {
     WebCore::JSMainThreadNullState state;
     writeChar16String(peer->getIdAttribute(), exchange);
+}
+
+// Re-sweep pass additions below -- same shapes as above, just applied to the
+// rest of ElementImpl's still-JNI methods that fit them.
+
+// Object-handle returns (shape 3).
+NamedNodeMap* jfxpanama_dom_Element_getAttributes(Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    return RefPtr<NamedNodeMap> { &peer->attributesMap() }.leakRef();
+}
+
+Element* jfxpanama_dom_Element_getOffsetParent(Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    return RefPtr<Element> { peer->offsetParentForBindings() }.leakRef();
+}
+
+// Object-handle return + input string arg (shape 3 + shape 2 composition).
+Attr* jfxpanama_dom_Element_getAttributeNode(Element* peer, const char* name)
+{
+    WebCore::JSMainThreadNullState state;
+    return RefPtr<Attr> { peer->getAttributeNode(AtomString { String::fromUTF8(name) }) }.leakRef();
+}
+
+Attr* jfxpanama_dom_Element_getAttributeNodeNS(Element* peer, const char* namespaceURI, const char* localName)
+{
+    WebCore::JSMainThreadNullState state;
+    return RefPtr<Attr> { peer->getAttributeNodeNS(
+            AtomString { String::fromUTF8(namespaceURI) }, AtomString { String::fromUTF8(localName) }) }.leakRef();
+}
+
+// String returns (shape 4), some combined with input string args (shape 2).
+void jfxpanama_dom_Element_getInnerHTML(Char16StringExchange* exchange, Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->innerHTML(), exchange);
+}
+
+void jfxpanama_dom_Element_getOuterHTML(Char16StringExchange* exchange, Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->outerHTML(), exchange);
+}
+
+void jfxpanama_dom_Element_getClassName(Char16StringExchange* exchange, Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->getAttribute(WebCore::HTMLNames::classAttr), exchange);
+}
+
+void jfxpanama_dom_Element_getAttribute(Char16StringExchange* exchange, Element* peer, const char* name)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->getAttribute(AtomString { String::fromUTF8(name) }), exchange);
+}
+
+void jfxpanama_dom_Element_getAttributeNS(Char16StringExchange* exchange, Element* peer, const char* namespaceURI, const char* localName)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->getAttributeNS(
+            AtomString { String::fromUTF8(namespaceURI) }, AtomString { String::fromUTF8(localName) }), exchange);
+}
+
+// Input-only string args (shape 2), void, no exception forwarding.
+void jfxpanama_dom_Element_removeAttributeNS(Element* peer, const char* namespaceURI, const char* localName)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->removeAttributeNS(AtomString { String::fromUTF8(namespaceURI) }, AtomString { String::fromUTF8(localName) });
+}
+
+// Primitive getter/setter (shape 1), including no-arg void methods and ones
+// taking only PrimitiveKind params.
+bool jfxpanama_dom_Element_hasAttributeNS(Element* peer, const char* namespaceURI, const char* localName)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->hasAttributeNS(AtomString { String::fromUTF8(namespaceURI) }, AtomString { String::fromUTF8(localName) });
+}
+
+void jfxpanama_dom_Element_focus(Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->focus();
+}
+
+void jfxpanama_dom_Element_blur(Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->blur();
+}
+
+void jfxpanama_dom_Element_scrollIntoView(Element* peer, bool alignWithTop)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->scrollIntoView(alignWithTop);
+}
+
+void jfxpanama_dom_Element_scrollIntoViewIfNeeded(Element* peer, bool centerIfNeeded)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->scrollIntoViewIfNeeded(centerIfNeeded);
+}
+
+// The old JNI shim ignored its jshort flags argument too (always called the
+// no-argument webkitRequestFullscreen()) -- preserved as-is here.
+void jfxpanama_dom_Element_webkitRequestFullScreen(Element* peer, int16_t)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->webkitRequestFullscreen();
+}
+
+void jfxpanama_dom_Element_webkitRequestFullscreen(Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->webkitRequestFullscreen();
+}
+
+// Exception forwarding (shape 5), void.
+void jfxpanama_dom_Element_remove(Exchange* exchange, Element* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(peer->remove(), exchange);
+}
+
+void jfxpanama_dom_Element_setAttributeNS(Exchange* exchange, Element* peer, const char* namespaceURI, const char* qualifiedName, const char* value)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(
+            peer->setAttributeNS(AtomString { String::fromUTF8(namespaceURI) },
+                    AtomString { String::fromUTF8(qualifiedName) }, AtomString { String::fromUTF8(value) }),
+            exchange);
+}
+
+// Primitive/object-handle return + exception forwarding combined (shape 7):
+// the downcall's own non-VOID return is unaffected by the exchange, which
+// only ever carries error info via throwFn() -- same one-instance-does-both
+// idea as CharacterData::substringData (dom_character_data.cpp), just with
+// a bool/Element*/NodeList* payload on success instead of a UTF-16 string.
+bool jfxpanama_dom_Element_matches(Exchange* exchange, Element* peer, const char* selectors)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->matches(AtomString { String::fromUTF8(selectors) });
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return false;
+    }
+    return result.releaseReturnValue();
+}
+
+bool jfxpanama_dom_Element_webkitMatchesSelector(Exchange* exchange, Element* peer, const char* selectors)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->matches(AtomString { String::fromUTF8(selectors) });
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return false;
+    }
+    return result.releaseReturnValue();
+}
+
+Element* jfxpanama_dom_Element_closest(Exchange* exchange, Element* peer, const char* selectors)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->closest(AtomString { String::fromUTF8(selectors) });
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return nullptr;
+    }
+    return RefPtr<Element> { result.releaseReturnValue() }.leakRef();
+}
+
+Element* jfxpanama_dom_Element_querySelector(Exchange* exchange, Element* peer, const char* selectors)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->querySelector(AtomString { String::fromUTF8(selectors) });
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return nullptr;
+    }
+    return RefPtr<Element> { result.releaseReturnValue() }.leakRef();
+}
+
+NodeList* jfxpanama_dom_Element_querySelectorAll(Exchange* exchange, Element* peer, const char* selectors)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->querySelectorAll(AtomString { String::fromUTF8(selectors) });
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return nullptr;
+    }
+    Ref<NodeList> nodeList = result.releaseReturnValue();
+    return RefPtr<NodeList> { nodeList.ptr() }.leakRef();
 }
 
 }
