@@ -101,7 +101,84 @@ public enum ElementImplSignature implements NativeSignatureEntry {
     // hand back on success.
     SET_ATTRIBUTE("jfxpanama_dom_Element_setAttribute",
             Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
-                    PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING));
+                    PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+
+    // Re-sweep pass additions below -- same shapes as above, just applied to
+    // the rest of ElementImpl's still-JNI methods that fit them.
+
+    // Object-handle returns (shape 3): self ELEMENT, return an existing
+    // DomKind value, fresh ref minted per call.
+    GET_ATTRIBUTES("jfxpanama_dom_Element_getAttributes",
+            Signature.of(DomKind.NAMED_NODE_MAP, DomKind.ELEMENT)),
+    GET_OFFSET_PARENT("jfxpanama_dom_Element_getOffsetParent",
+            Signature.of(DomKind.ELEMENT, DomKind.ELEMENT)),
+
+    // Object-handle return + input string arg (shape 3 + shape 2 composition).
+    GET_ATTRIBUTE_NODE("jfxpanama_dom_Element_getAttributeNode",
+            Signature.of(DomKind.ATTR, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
+    GET_ATTRIBUTE_NODE_NS("jfxpanama_dom_Element_getAttributeNodeNS",
+            Signature.of(DomKind.ATTR, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+
+    // String returns (shape 4), some combined with input string args (shape 2).
+    GET_INNER_HTML("jfxpanama_dom_Element_getInnerHTML",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT)),
+    GET_OUTER_HTML("jfxpanama_dom_Element_getOuterHTML",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT)),
+    GET_CLASS_NAME("jfxpanama_dom_Element_getClassName",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT)),
+    GET_ATTRIBUTE("jfxpanama_dom_Element_getAttribute",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING)),
+    GET_ATTRIBUTE_NS("jfxpanama_dom_Element_getAttributeNS",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+
+    // Input-only string args (shape 2), void, no exception forwarding.
+    REMOVE_ATTRIBUTE_NS("jfxpanama_dom_Element_removeAttributeNS",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+
+    // Primitive getter/setter (shape 1), including no-arg void methods and
+    // ones taking only PrimitiveKind params.
+    HAS_ATTRIBUTE_NS("jfxpanama_dom_Element_hasAttributeNS",
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+    FOCUS("jfxpanama_dom_Element_focus",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT)),
+    BLUR("jfxpanama_dom_Element_blur",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT)),
+    SCROLL_INTO_VIEW("jfxpanama_dom_Element_scrollIntoView",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.BOOLEAN)),
+    SCROLL_INTO_VIEW_IF_NEEDED("jfxpanama_dom_Element_scrollIntoViewIfNeeded",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.BOOLEAN)),
+    WEBKIT_REQUEST_FULL_SCREEN("jfxpanama_dom_Element_webkitRequestFullScreen",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.SHORT)),
+    WEBKIT_REQUEST_FULLSCREEN("jfxpanama_dom_Element_webkitRequestFullscreen",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT)),
+
+    // Exception forwarding (shape 5), void.
+    REMOVE("jfxpanama_dom_Element_remove",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT)),
+    SET_ATTRIBUTE_NS("jfxpanama_dom_Element_setAttributeNS",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+
+    // Primitive/object-handle return + exception forwarding combined (shape 7):
+    // the downcall's own non-VOID return is unaffected by the exchange, which
+    // only ever carries error info via throwFn().
+    MATCHES("jfxpanama_dom_Element_matches",
+            Signature.of(PrimitiveKind.BOOLEAN, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING)),
+    WEBKIT_MATCHES_SELECTOR("jfxpanama_dom_Element_webkitMatchesSelector",
+            Signature.of(PrimitiveKind.BOOLEAN, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING)),
+    CLOSEST("jfxpanama_dom_Element_closest",
+            Signature.of(DomKind.ELEMENT, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING)),
+    QUERY_SELECTOR("jfxpanama_dom_Element_querySelector",
+            Signature.of(DomKind.ELEMENT, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING)),
+    QUERY_SELECTOR_ALL("jfxpanama_dom_Element_querySelectorAll",
+            Signature.of(DomKind.NODE_LIST, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
+                    PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

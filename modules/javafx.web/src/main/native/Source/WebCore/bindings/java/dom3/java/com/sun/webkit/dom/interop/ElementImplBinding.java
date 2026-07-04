@@ -67,6 +67,36 @@ public final class ElementImplBinding {
 
     private static final MethodHandle SET_ATTRIBUTE = bind(ElementImplSignature.SET_ATTRIBUTE);
 
+    private static final MethodHandle GET_ATTRIBUTES = bind(ElementImplSignature.GET_ATTRIBUTES);
+    private static final MethodHandle GET_OFFSET_PARENT = bind(ElementImplSignature.GET_OFFSET_PARENT);
+    private static final MethodHandle GET_ATTRIBUTE_NODE = bind(ElementImplSignature.GET_ATTRIBUTE_NODE);
+    private static final MethodHandle GET_ATTRIBUTE_NODE_NS = bind(ElementImplSignature.GET_ATTRIBUTE_NODE_NS);
+
+    private static final MethodHandle GET_INNER_HTML = bind(ElementImplSignature.GET_INNER_HTML);
+    private static final MethodHandle GET_OUTER_HTML = bind(ElementImplSignature.GET_OUTER_HTML);
+    private static final MethodHandle GET_CLASS_NAME = bind(ElementImplSignature.GET_CLASS_NAME);
+    private static final MethodHandle GET_ATTRIBUTE = bind(ElementImplSignature.GET_ATTRIBUTE);
+    private static final MethodHandle GET_ATTRIBUTE_NS = bind(ElementImplSignature.GET_ATTRIBUTE_NS);
+
+    private static final MethodHandle REMOVE_ATTRIBUTE_NS = bind(ElementImplSignature.REMOVE_ATTRIBUTE_NS);
+
+    private static final MethodHandle HAS_ATTRIBUTE_NS = bind(ElementImplSignature.HAS_ATTRIBUTE_NS);
+    private static final MethodHandle FOCUS = bind(ElementImplSignature.FOCUS);
+    private static final MethodHandle BLUR = bind(ElementImplSignature.BLUR);
+    private static final MethodHandle SCROLL_INTO_VIEW = bind(ElementImplSignature.SCROLL_INTO_VIEW);
+    private static final MethodHandle SCROLL_INTO_VIEW_IF_NEEDED = bind(ElementImplSignature.SCROLL_INTO_VIEW_IF_NEEDED);
+    private static final MethodHandle WEBKIT_REQUEST_FULL_SCREEN = bind(ElementImplSignature.WEBKIT_REQUEST_FULL_SCREEN);
+    private static final MethodHandle WEBKIT_REQUEST_FULLSCREEN = bind(ElementImplSignature.WEBKIT_REQUEST_FULLSCREEN);
+
+    private static final MethodHandle REMOVE = bind(ElementImplSignature.REMOVE);
+    private static final MethodHandle SET_ATTRIBUTE_NS = bind(ElementImplSignature.SET_ATTRIBUTE_NS);
+
+    private static final MethodHandle MATCHES = bind(ElementImplSignature.MATCHES);
+    private static final MethodHandle WEBKIT_MATCHES_SELECTOR = bind(ElementImplSignature.WEBKIT_MATCHES_SELECTOR);
+    private static final MethodHandle CLOSEST = bind(ElementImplSignature.CLOSEST);
+    private static final MethodHandle QUERY_SELECTOR = bind(ElementImplSignature.QUERY_SELECTOR);
+    private static final MethodHandle QUERY_SELECTOR_ALL = bind(ElementImplSignature.QUERY_SELECTOR_ALL);
+
     private ElementImplBinding() {
     }
 
@@ -320,6 +350,272 @@ public final class ElementImplBinding {
             if (exchange.threw()) {
                 throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
             }
+        }
+    }
+
+    public static long getAttributes(long peer) {
+        try {
+            MemorySegment result = (MemorySegment) GET_ATTRIBUTES.invokeExact(MemorySegment.ofAddress(peer));
+            return result.address();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_ATTRIBUTES.symbol(), t);
+        }
+    }
+
+    public static long getOffsetParent(long peer) {
+        try {
+            MemorySegment result = (MemorySegment) GET_OFFSET_PARENT.invokeExact(MemorySegment.ofAddress(peer));
+            return result.address();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_OFFSET_PARENT.symbol(), t);
+        }
+    }
+
+    public static long getAttributeNode(long peer, String name) {
+        try (Transfer utf8 = CString8.of(name, TransferPool.SHARED)) {
+            MemorySegment result = (MemorySegment) GET_ATTRIBUTE_NODE.invokeExact(MemorySegment.ofAddress(peer), utf8.segment());
+            return result.address();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_ATTRIBUTE_NODE.symbol(), t);
+        }
+    }
+
+    public static long getAttributeNodeNS(long peer, String namespaceURI, String localName) {
+        try (Transfer nsUtf8 = CString8.of(namespaceURI, TransferPool.SHARED);
+                Transfer localNameUtf8 = CString8.of(localName, TransferPool.SHARED)) {
+            MemorySegment result = (MemorySegment) GET_ATTRIBUTE_NODE_NS.invokeExact(
+                    MemorySegment.ofAddress(peer), nsUtf8.segment(), localNameUtf8.segment());
+            return result.address();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_ATTRIBUTE_NODE_NS.symbol(), t);
+        }
+    }
+
+    public static String getInnerHTML(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_INNER_HTML.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_INNER_HTML.symbol(), t);
+        }
+    }
+
+    public static String getOuterHTML(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_OUTER_HTML.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_OUTER_HTML.symbol(), t);
+        }
+    }
+
+    public static String getClassName(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_CLASS_NAME.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_CLASS_NAME.symbol(), t);
+        }
+    }
+
+    public static String getAttribute(long peer, String name) {
+        try (Char16StringExchange exchange = new Char16StringExchange();
+                Transfer utf8 = CString8.of(name, TransferPool.SHARED)) {
+            GET_ATTRIBUTE.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_ATTRIBUTE.symbol(), t);
+        }
+    }
+
+    public static String getAttributeNS(long peer, String namespaceURI, String localName) {
+        try (Char16StringExchange exchange = new Char16StringExchange();
+                Transfer nsUtf8 = CString8.of(namespaceURI, TransferPool.SHARED);
+                Transfer localNameUtf8 = CString8.of(localName, TransferPool.SHARED)) {
+            GET_ATTRIBUTE_NS.invokeExact(
+                    exchange.segment(), MemorySegment.ofAddress(peer), nsUtf8.segment(), localNameUtf8.segment());
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_ATTRIBUTE_NS.symbol(), t);
+        }
+    }
+
+    public static void removeAttributeNS(long peer, String namespaceURI, String localName) {
+        try (Transfer nsUtf8 = CString8.of(namespaceURI, TransferPool.SHARED);
+                Transfer localNameUtf8 = CString8.of(localName, TransferPool.SHARED)) {
+            REMOVE_ATTRIBUTE_NS.invokeExact(MemorySegment.ofAddress(peer), nsUtf8.segment(), localNameUtf8.segment());
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.REMOVE_ATTRIBUTE_NS.symbol(), t);
+        }
+    }
+
+    public static boolean hasAttributeNS(long peer, String namespaceURI, String localName) {
+        try (Transfer nsUtf8 = CString8.of(namespaceURI, TransferPool.SHARED);
+                Transfer localNameUtf8 = CString8.of(localName, TransferPool.SHARED)) {
+            return (boolean) HAS_ATTRIBUTE_NS.invokeExact(
+                    MemorySegment.ofAddress(peer), nsUtf8.segment(), localNameUtf8.segment());
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.HAS_ATTRIBUTE_NS.symbol(), t);
+        }
+    }
+
+    public static void focus(long peer) {
+        try {
+            FOCUS.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.FOCUS.symbol(), t);
+        }
+    }
+
+    public static void blur(long peer) {
+        try {
+            BLUR.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.BLUR.symbol(), t);
+        }
+    }
+
+    public static void scrollIntoView(long peer, boolean alignWithTop) {
+        try {
+            SCROLL_INTO_VIEW.invokeExact(MemorySegment.ofAddress(peer), alignWithTop);
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.SCROLL_INTO_VIEW.symbol(), t);
+        }
+    }
+
+    public static void scrollIntoViewIfNeeded(long peer, boolean centerIfNeeded) {
+        try {
+            SCROLL_INTO_VIEW_IF_NEEDED.invokeExact(MemorySegment.ofAddress(peer), centerIfNeeded);
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.SCROLL_INTO_VIEW_IF_NEEDED.symbol(), t);
+        }
+    }
+
+    public static void webkitRequestFullScreen(long peer, short flags) {
+        try {
+            WEBKIT_REQUEST_FULL_SCREEN.invokeExact(MemorySegment.ofAddress(peer), flags);
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.WEBKIT_REQUEST_FULL_SCREEN.symbol(), t);
+        }
+    }
+
+    public static void webkitRequestFullscreen(long peer) {
+        try {
+            WEBKIT_REQUEST_FULLSCREEN.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.WEBKIT_REQUEST_FULLSCREEN.symbol(), t);
+        }
+    }
+
+    public static void remove(long peer) {
+        try (ByteExchange exchange = new ByteExchange()) {
+            try {
+                REMOVE.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.REMOVE.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+        }
+    }
+
+    public static void setAttributeNS(long peer, String namespaceURI, String qualifiedName, String value) {
+        try (Transfer nsUtf8 = CString8.of(namespaceURI, TransferPool.SHARED);
+                Transfer qualifiedNameUtf8 = CString8.of(qualifiedName, TransferPool.SHARED);
+                Transfer valueUtf8 = CString8.of(value, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            try {
+                SET_ATTRIBUTE_NS.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer),
+                        nsUtf8.segment(), qualifiedNameUtf8.segment(), valueUtf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.SET_ATTRIBUTE_NS.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+        }
+    }
+
+    public static boolean matches(long peer, String selectors) {
+        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            boolean result;
+            try {
+                result = (boolean) MATCHES.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.MATCHES.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return result;
+        }
+    }
+
+    public static boolean webkitMatchesSelector(long peer, String selectors) {
+        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            boolean result;
+            try {
+                result = (boolean) WEBKIT_MATCHES_SELECTOR.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.WEBKIT_MATCHES_SELECTOR.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return result;
+        }
+    }
+
+    public static long closest(long peer, String selectors) {
+        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            MemorySegment result;
+            try {
+                result = (MemorySegment) CLOSEST.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.CLOSEST.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return result.address();
+        }
+    }
+
+    public static long querySelector(long peer, String selectors) {
+        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            MemorySegment result;
+            try {
+                result = (MemorySegment) QUERY_SELECTOR.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.QUERY_SELECTOR.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return result.address();
+        }
+    }
+
+    public static long querySelectorAll(long peer, String selectors) {
+        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
+                ByteExchange exchange = new ByteExchange()) {
+            MemorySegment result;
+            try {
+                result = (MemorySegment) QUERY_SELECTOR_ALL.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            } catch (Throwable t) {
+                throw Downcall.failed(ElementImplSignature.QUERY_SELECTOR_ALL.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return result.address();
         }
     }
 }
