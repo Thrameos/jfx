@@ -49,7 +49,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 
     @Override
     public boolean getSpecified() {
-        return getSpecifiedImpl(getPeer());
+        return com.sun.webkit.dom.interop.AttrImplBinding.getSpecified(getPeer());
     }
     native static boolean getSpecifiedImpl(long peer);
 
@@ -61,19 +61,19 @@ public class AttrImpl extends NodeImpl implements Attr {
 
     @Override
     public void setValue(String value) throws DOMException {
-        setValueImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.AttrImplBinding.setValue(getPeer(), value);
     }
     native static void setValueImpl(long peer, String value);
 
     @Override
     public Element getOwnerElement() {
-        return ElementImpl.getImpl(getOwnerElementImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.AttrImplBinding.getOwnerElement(getPeer()));
     }
     native static long getOwnerElementImpl(long peer);
 
     @Override
     public boolean isId() {
-        return isIdImpl(getPeer());
+        return com.sun.webkit.dom.interop.AttrImplBinding.isId(getPeer());
     }
     native static boolean isIdImpl(long peer);
 

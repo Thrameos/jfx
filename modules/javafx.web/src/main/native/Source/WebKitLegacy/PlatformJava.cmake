@@ -135,6 +135,24 @@ list(APPEND WebKitLegacy_SOURCES
     java/storage/WebDatabaseProviderJava.cpp
 )
 
+# JNI-to-Panama migration: new leaf downcall targets live only here, never
+# mixed into the java/DOM, java/WebCoreSupport, etc. files above -- so that
+# retiring a subsystem's old JNI files at the end of the migration is a plain
+# deletion, not an untangling.
+list(APPEND WebKitLegacy_SOURCES
+    java/interop/dom_element.cpp
+    java/interop/dom_node.cpp
+    java/interop/dom_character_data.cpp
+    java/interop/dom_attr.cpp
+    java/interop/dom_html_element.cpp
+    java/interop/dom_html_anchor_element.cpp
+    java/interop/dom_html_image_element.cpp
+    java/interop/dom_html_table_element.cpp
+    java/interop/dom_html_select_element.cpp
+    java/interop/dom_html_form_element.cpp
+    java/interop/dom_html_body_element.cpp
+)
+
 # for DRT
 list(APPEND WebKitLegacy_PRIVATE_LIBRARIES
     WebKit::WebCoreTestSupport

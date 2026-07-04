@@ -74,77 +74,77 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getIdImpl(long peer);
 
     public void setId(String value) {
-        setIdImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setId(getPeer(), value);
     }
     native static void setIdImpl(long peer, String value);
 
     public double getOffsetLeft() {
-        return getOffsetLeftImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetLeft(getPeer());
     }
     native static double getOffsetLeftImpl(long peer);
 
     public double getOffsetTop() {
-        return getOffsetTopImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetTop(getPeer());
     }
     native static double getOffsetTopImpl(long peer);
 
     public double getOffsetWidth() {
-        return getOffsetWidthImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetWidth(getPeer());
     }
     native static double getOffsetWidthImpl(long peer);
 
     public double getOffsetHeight() {
-        return getOffsetHeightImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getOffsetHeight(getPeer());
     }
     native static double getOffsetHeightImpl(long peer);
 
     public double getClientLeft() {
-        return getClientLeftImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getClientLeft(getPeer());
     }
     native static double getClientLeftImpl(long peer);
 
     public double getClientTop() {
-        return getClientTopImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getClientTop(getPeer());
     }
     native static double getClientTopImpl(long peer);
 
     public double getClientWidth() {
-        return getClientWidthImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getClientWidth(getPeer());
     }
     native static double getClientWidthImpl(long peer);
 
     public double getClientHeight() {
-        return getClientHeightImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getClientHeight(getPeer());
     }
     native static double getClientHeightImpl(long peer);
 
     public int getScrollLeft() {
-        return getScrollLeftImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollLeft(getPeer());
     }
     native static int getScrollLeftImpl(long peer);
 
     public void setScrollLeft(int value) {
-        setScrollLeftImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setScrollLeft(getPeer(), value);
     }
     native static void setScrollLeftImpl(long peer, int value);
 
     public int getScrollTop() {
-        return getScrollTopImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollTop(getPeer());
     }
     native static int getScrollTopImpl(long peer);
 
     public void setScrollTop(int value) {
-        setScrollTopImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setScrollTop(getPeer(), value);
     }
     native static void setScrollTopImpl(long peer, int value);
 
     public int getScrollWidth() {
-        return getScrollWidthImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollWidth(getPeer());
     }
     native static int getScrollWidthImpl(long peer);
 
     public int getScrollHeight() {
-        return getScrollHeightImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getScrollHeight(getPeer());
     }
     native static int getScrollHeightImpl(long peer);
 
@@ -159,7 +159,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getInnerHTMLImpl(long peer);
 
     public void setInnerHTML(String value) throws DOMException {
-        setInnerHTMLImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setInnerHTML(getPeer(), value);
     }
     native static void setInnerHTMLImpl(long peer, String value);
 
@@ -169,7 +169,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getOuterHTMLImpl(long peer);
 
     public void setOuterHTML(String value) throws DOMException {
-        setOuterHTMLImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setOuterHTML(getPeer(), value);
     }
     native static void setOuterHTMLImpl(long peer, String value);
 
@@ -179,7 +179,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static String getClassNameImpl(long peer);
 
     public void setClassName(String value) {
-        setClassNameImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.ElementImplBinding.setClassName(getPeer(), value);
     }
     native static void setClassNameImpl(long peer, String value);
 
@@ -924,12 +924,12 @@ public class ElementImpl extends NodeImpl implements Element {
     native static void setOnwheelImpl(long peer, long value);
 
     public Element getPreviousElementSibling() {
-        return ElementImpl.getImpl(getPreviousElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getPreviousElementSibling(getPeer()));
     }
     native static long getPreviousElementSiblingImpl(long peer);
 
     public Element getNextElementSibling() {
-        return ElementImpl.getImpl(getNextElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getNextElementSibling(getPeer()));
     }
     native static long getNextElementSiblingImpl(long peer);
 
@@ -939,18 +939,26 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getChildrenImpl(long peer);
 
     public Element getFirstElementChild() {
-        return ElementImpl.getImpl(getFirstElementChildImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getFirstElementChild(getPeer()));
     }
+    // Migration pilot: getFirstElementChild() above now calls the Panama
+    // downcall in interop.ElementImplBinding instead. getFirstElementChildImpl/
+    // its JNI native implementation are kept, unmodified, as the fallback/
+    // reference implementation until the Panama path is proven out.
     native static long getFirstElementChildImpl(long peer);
 
     public Element getLastElementChild() {
-        return ElementImpl.getImpl(getLastElementChildImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.ElementImplBinding.getLastElementChild(getPeer()));
     }
     native static long getLastElementChildImpl(long peer);
 
     public int getChildElementCount() {
-        return getChildElementCountImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getChildElementCount(getPeer());
     }
+    // Migration pilot: getChildElementCount() above now calls the Panama
+    // downcall in interop.ElementImplBinding instead. getChildElementCountImpl/
+    // its JNI native implementation are kept, unmodified, as the fallback/
+    // reference implementation until the Panama path is proven out.
     native static int getChildElementCountImpl(long peer);
 
 
@@ -981,8 +989,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public void removeAttribute(String name)
     {
-        removeAttributeImpl(getPeer()
-            , name);
+        com.sun.webkit.dom.interop.ElementImplBinding.removeAttribute(getPeer(), name);
     }
     native static void removeAttributeImpl(long peer
         , String name);
@@ -1031,7 +1038,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public boolean hasAttributes()
     {
-        return hasAttributesImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.hasAttributes(getPeer());
     }
     native static boolean hasAttributesImpl(long peer);
 
@@ -1117,8 +1124,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public boolean hasAttribute(String name)
     {
-        return hasAttributeImpl(getPeer()
-            , name);
+        return com.sun.webkit.dom.interop.ElementImplBinding.hasAttribute(getPeer(), name);
     }
     native static boolean hasAttributeImpl(long peer
         , String name);

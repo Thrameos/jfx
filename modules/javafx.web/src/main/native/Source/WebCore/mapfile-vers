@@ -1992,6 +1992,19 @@ SUNWprivate_1.0 {
                Java_com_sun_webkit_network_URLLoaderBase_twkDidSendData;
                Java_com_sun_webkit_network_URLLoaderBase_twkWillSendRequest;
                kJSClassDefinitionEmpty;
+
+               # JNI-to-Panama migration: Panama downcall targets, plain C
+               # symbols (no Java_... JNI naming), resolved via
+               # SymbolLookup/Linker instead of JNI's native-method dispatch.
+               # One glob covers every jfxpanama_-prefixed symbol from every
+               # subsystem -- a per-symbol whitelist here would just grow
+               # without bound across the full migration; the prefix itself
+               # is the whitelist. Individual symbol names are still spelled
+               # out per-subsystem in each *Signature enum (the real source
+               # of truth read by the .hj generator) and in mapfile-vers'
+               # own git history -- this pattern only controls dynamic-
+               # symbol visibility, nothing else.
+               jfxpanama_*;
         local:
                 *;
 };

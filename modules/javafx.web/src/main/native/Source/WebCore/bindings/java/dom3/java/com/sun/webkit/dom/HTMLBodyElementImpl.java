@@ -47,7 +47,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setALink(String value) {
-        setALinkImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setALink(getPeer(), value);
     }
     native static void setALinkImpl(long peer, String value);
 
@@ -59,7 +59,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setBackground(String value) {
-        setBackgroundImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setBackground(getPeer(), value);
     }
     native static void setBackgroundImpl(long peer, String value);
 
@@ -71,7 +71,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setBgColor(String value) {
-        setBgColorImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setBgColor(getPeer(), value);
     }
     native static void setBgColorImpl(long peer, String value);
 
@@ -83,7 +83,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setLink(String value) {
-        setLinkImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setLink(getPeer(), value);
     }
     native static void setLinkImpl(long peer, String value);
 
@@ -95,7 +95,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setText(String value) {
-        setTextImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setText(getPeer(), value);
     }
     native static void setTextImpl(long peer, String value);
 
@@ -107,7 +107,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
     @Override
     public void setVLink(String value) {
-        setVLinkImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLBodyElementImplBinding.setVLink(getPeer(), value);
     }
     native static void setVLinkImpl(long peer, String value);
 

@@ -107,23 +107,23 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
 
     @Override
     public void setData(String value) {
-        setDataImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.CharacterDataImplBinding.setData(getPeer(), value);
     }
     native static void setDataImpl(long peer, String value);
 
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return com.sun.webkit.dom.interop.CharacterDataImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
     public Element getPreviousElementSibling() {
-        return ElementImpl.getImpl(getPreviousElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.CharacterDataImplBinding.getPreviousElementSibling(getPeer()));
     }
     native static long getPreviousElementSiblingImpl(long peer);
 
     public Element getNextElementSibling() {
-        return ElementImpl.getImpl(getNextElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(com.sun.webkit.dom.interop.CharacterDataImplBinding.getNextElementSibling(getPeer()));
     }
     native static long getNextElementSiblingImpl(long peer);
 
@@ -145,8 +145,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     @Override
     public void appendData(String data)
     {
-        appendDataImpl(getPeer()
-            , data);
+        com.sun.webkit.dom.interop.CharacterDataImplBinding.appendData(getPeer(), data);
     }
     native static void appendDataImpl(long peer
         , String data);

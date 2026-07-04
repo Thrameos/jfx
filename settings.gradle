@@ -37,6 +37,7 @@ include "base",
         "swt",
         "fxml",
         "jsobject",
+        "interop",
         "web",
         "media",
         "systemTests"
@@ -55,6 +56,7 @@ project(":swing").projectDir = file("modules/javafx.swing")
 project(":swt").projectDir = file("modules/javafx.swt")
 project(":fxml").projectDir = file("modules/javafx.fxml")
 project(":jsobject").projectDir = file("modules/jdk.jsobject")
+project(":interop").projectDir = file("modules/jfx.interop")
 project(":web").projectDir = file("modules/javafx.web")
 project(":media").projectDir = file("modules/javafx.media")
 project(":systemTests").projectDir = file("tests/system")

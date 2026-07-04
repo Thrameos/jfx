@@ -47,7 +47,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setCharset(String value) {
-        setCharsetImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setCharset(getPeer(), value);
     }
     native static void setCharsetImpl(long peer, String value);
 
@@ -59,7 +59,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setCoords(String value) {
-        setCoordsImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setCoords(getPeer(), value);
     }
     native static void setCoordsImpl(long peer, String value);
 
@@ -71,7 +71,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setHreflang(String value) {
-        setHreflangImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setHreflang(getPeer(), value);
     }
     native static void setHreflangImpl(long peer, String value);
 
@@ -83,7 +83,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setName(String value) {
-        setNameImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
@@ -93,7 +93,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getPingImpl(long peer);
 
     public void setPing(String value) {
-        setPingImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setPing(getPeer(), value);
     }
     native static void setPingImpl(long peer, String value);
 
@@ -105,7 +105,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setRel(String value) {
-        setRelImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setRel(getPeer(), value);
     }
     native static void setRelImpl(long peer, String value);
 
@@ -117,7 +117,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setRev(String value) {
-        setRevImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setRev(getPeer(), value);
     }
     native static void setRevImpl(long peer, String value);
 
@@ -129,7 +129,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setShape(String value) {
-        setShapeImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setShape(getPeer(), value);
     }
     native static void setShapeImpl(long peer, String value);
 
@@ -141,7 +141,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setTarget(String value) {
-        setTargetImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setTarget(getPeer(), value);
     }
     native static void setTargetImpl(long peer, String value);
 
@@ -153,7 +153,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setType(String value) {
-        setTypeImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setType(getPeer(), value);
     }
     native static void setTypeImpl(long peer, String value);
 
@@ -163,7 +163,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getTextImpl(long peer);
 
     public void setText(String value) throws DOMException {
-        setTextImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setText(getPeer(), value);
     }
     native static void setTextImpl(long peer, String value);
 
@@ -175,7 +175,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 
     @Override
     public void setHref(String value) {
-        setHrefImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setHref(getPeer(), value);
     }
     native static void setHrefImpl(long peer, String value);
 
@@ -190,7 +190,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getProtocolImpl(long peer);
 
     public void setProtocol(String value) {
-        setProtocolImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setProtocol(getPeer(), value);
     }
     native static void setProtocolImpl(long peer, String value);
 
@@ -200,7 +200,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getUsernameImpl(long peer);
 
     public void setUsername(String value) {
-        setUsernameImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setUsername(getPeer(), value);
     }
     native static void setUsernameImpl(long peer, String value);
 
@@ -210,7 +210,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getPasswordImpl(long peer);
 
     public void setPassword(String value) {
-        setPasswordImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setPassword(getPeer(), value);
     }
     native static void setPasswordImpl(long peer, String value);
 
@@ -220,7 +220,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getHostImpl(long peer);
 
     public void setHost(String value) {
-        setHostImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setHost(getPeer(), value);
     }
     native static void setHostImpl(long peer, String value);
 
@@ -230,7 +230,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getHostnameImpl(long peer);
 
     public void setHostname(String value) {
-        setHostnameImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setHostname(getPeer(), value);
     }
     native static void setHostnameImpl(long peer, String value);
 
@@ -240,7 +240,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getPortImpl(long peer);
 
     public void setPort(String value) {
-        setPortImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setPort(getPeer(), value);
     }
     native static void setPortImpl(long peer, String value);
 
@@ -250,7 +250,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getPathnameImpl(long peer);
 
     public void setPathname(String value) {
-        setPathnameImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setPathname(getPeer(), value);
     }
     native static void setPathnameImpl(long peer, String value);
 
@@ -260,7 +260,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getSearchImpl(long peer);
 
     public void setSearch(String value) {
-        setSearchImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setSearch(getPeer(), value);
     }
     native static void setSearchImpl(long peer, String value);
 
@@ -270,7 +270,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
     native static String getHashImpl(long peer);
 
     public void setHash(String value) {
-        setHashImpl(getPeer(), value);
+        com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding.setHash(getPeer(), value);
     }
     native static void setHashImpl(long peer, String value);
 
