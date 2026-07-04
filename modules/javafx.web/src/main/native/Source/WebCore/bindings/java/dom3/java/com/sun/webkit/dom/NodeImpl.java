@@ -262,7 +262,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
 
     @Override
     public String getNodeValue() {
-        return getNodeValueImpl(getPeer());
+        return NodeImplBinding.getNodeValue(getPeer());
     }
     native static String getNodeValueImpl(long peer);
 
@@ -274,7 +274,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
 
     @Override
     public short getNodeType() {
-        return getNodeTypeImpl(getPeer());
+        return NodeImplBinding.getNodeType(getPeer());
     }
     native static short getNodeTypeImpl(long peer);
 
@@ -322,7 +322,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
 
     @Override
     public String getNamespaceURI() {
-        return getNamespaceURIImpl(getPeer());
+        return NodeImplBinding.getNamespaceURI(getPeer());
     }
     native static String getNamespaceURIImpl(long peer);
 
@@ -340,25 +340,25 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
 
     @Override
     public String getLocalName() {
-        return getLocalNameImpl(getPeer());
+        return NodeImplBinding.getLocalName(getPeer());
     }
     native static String getLocalNameImpl(long peer);
 
     @Override
     public NamedNodeMap getAttributes() {
-        return NamedNodeMapImpl.getImpl(getAttributesImpl(getPeer()));
+        return NamedNodeMapImpl.getImpl(NodeImplBinding.getAttributes(getPeer()));
     }
     native static long getAttributesImpl(long peer);
 
     @Override
     public String getBaseURI() {
-        return getBaseURIImpl(getPeer());
+        return NodeImplBinding.getBaseURI(getPeer());
     }
     native static String getBaseURIImpl(long peer);
 
     @Override
     public String getTextContent() {
-        return getTextContentImpl(getPeer());
+        return NodeImplBinding.getTextContent(getPeer());
     }
     native static String getTextContentImpl(long peer);
 
@@ -424,7 +424,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public boolean hasChildNodes()
     {
-        return hasChildNodesImpl(getPeer());
+        return NodeImplBinding.hasChildNodes(getPeer());
     }
     native static boolean hasChildNodesImpl(long peer);
 
@@ -432,7 +432,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public Node cloneNode(boolean deep) throws DOMException
     {
-        return NodeImpl.getImpl(cloneNodeImpl(getPeer()
+        return NodeImpl.getImpl(NodeImplBinding.cloneNode(getPeer()
             , deep));
     }
     native static long cloneNodeImpl(long peer
@@ -442,7 +442,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public void normalize()
     {
-        normalizeImpl(getPeer());
+        NodeImplBinding.normalize(getPeer());
     }
     native static void normalizeImpl(long peer);
 
@@ -463,7 +463,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public boolean hasAttributes()
     {
-        return hasAttributesImpl(getPeer());
+        return NodeImplBinding.hasAttributes(getPeer());
     }
     native static boolean hasAttributesImpl(long peer);
 
@@ -471,7 +471,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public boolean isSameNode(Node other)
     {
-        return isSameNodeImpl(getPeer()
+        return NodeImplBinding.isSameNode(getPeer()
             , NodeImpl.getPeer(other));
     }
     native static boolean isSameNodeImpl(long peer
@@ -481,7 +481,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public boolean isEqualNode(Node other)
     {
-        return isEqualNodeImpl(getPeer()
+        return NodeImplBinding.isEqualNode(getPeer()
             , NodeImpl.getPeer(other));
     }
     native static boolean isEqualNodeImpl(long peer
@@ -491,7 +491,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public String lookupPrefix(String namespaceURI)
     {
-        return lookupPrefixImpl(getPeer()
+        return NodeImplBinding.lookupPrefix(getPeer()
             , namespaceURI);
     }
     native static String lookupPrefixImpl(long peer
@@ -510,7 +510,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public String lookupNamespaceURI(String prefix)
     {
-        return lookupNamespaceURIImpl(getPeer()
+        return NodeImplBinding.lookupNamespaceURI(getPeer()
             , prefix);
     }
     native static String lookupNamespaceURIImpl(long peer
@@ -520,7 +520,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public short compareDocumentPosition(Node other)
     {
-        return compareDocumentPositionImpl(getPeer()
+        return NodeImplBinding.compareDocumentPosition(getPeer()
             , NodeImpl.getPeer(other));
     }
     native static short compareDocumentPositionImpl(long peer
@@ -529,7 +529,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
 
     public boolean contains(Node other)
     {
-        return containsImpl(getPeer()
+        return NodeImplBinding.contains(getPeer()
             , NodeImpl.getPeer(other));
     }
     native static boolean containsImpl(long peer

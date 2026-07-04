@@ -54,7 +54,62 @@ public enum NodeImplSignature implements NativeSignatureEntry {
     REPLACE_CHILD("jfxpanama_dom_Node_replaceChild",
             Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE, DomKind.NODE)),
     REMOVE_CHILD("jfxpanama_dom_Node_removeChild",
-            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE));
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, DomKind.NODE)),
+
+    // Re-sweep additions below.
+
+    // Primitive getter (shape 1): no-arg, PrimitiveKind return only.
+    GET_NODE_TYPE("jfxpanama_dom_Node_getNodeType",
+            Signature.of(PrimitiveKind.SHORT, DomKind.NODE)),
+    HAS_CHILD_NODES("jfxpanama_dom_Node_hasChildNodes",
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE)),
+    HAS_ATTRIBUTES("jfxpanama_dom_Node_hasAttributes",
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE)),
+    // void, no-arg action -- same "primitive shape" family as the getters/
+    // setters above, just with a VOID return and no extra parameter.
+    NORMALIZE("jfxpanama_dom_Node_normalize",
+            Signature.of(PrimitiveKind.VOID, DomKind.NODE)),
+
+    // String returns (shape 5): void downcall, exchange param leads.
+    GET_NODE_VALUE("jfxpanama_dom_Node_getNodeValue",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE)),
+    GET_NAMESPACE_URI("jfxpanama_dom_Node_getNamespaceURI",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE)),
+    GET_LOCAL_NAME("jfxpanama_dom_Node_getLocalName",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE)),
+    GET_BASE_URI("jfxpanama_dom_Node_getBaseURI",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE)),
+    GET_TEXT_CONTENT("jfxpanama_dom_Node_getTextContent",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE)),
+    // String return (shape 5) combined with a real input string param
+    // (shape 2), same as pattern-string-return.md describes for
+    // lookupPrefix/lookupNamespaceURI.
+    LOOKUP_PREFIX("jfxpanama_dom_Node_lookupPrefix",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE, PrimitiveKind.UTF8_CSTRING)),
+    LOOKUP_NAMESPACE_URI("jfxpanama_dom_Node_lookupNamespaceURI",
+            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.NODE, PrimitiveKind.UTF8_CSTRING)),
+
+    // Object-handle return (shape 3): NamedNodeMap is an existing DomKind.
+    GET_ATTRIBUTES("jfxpanama_dom_Node_getAttributes",
+            Signature.of(DomKind.NAMED_NODE_MAP, DomKind.NODE)),
+
+    // Object handle passed as a plain argument (shape 4): another Node peer,
+    // not the self param and not the return, no exchange/exception involved.
+    IS_SAME_NODE("jfxpanama_dom_Node_isSameNode",
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE, DomKind.NODE)),
+    IS_EQUAL_NODE("jfxpanama_dom_Node_isEqualNode",
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE, DomKind.NODE)),
+    COMPARE_DOCUMENT_POSITION("jfxpanama_dom_Node_compareDocumentPosition",
+            Signature.of(PrimitiveKind.SHORT, DomKind.NODE, DomKind.NODE)),
+    CONTAINS("jfxpanama_dom_Node_contains",
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE, DomKind.NODE)),
+
+    // Object-handle return + exception-forwarding combined (shape 7): unlike
+    // APPEND_CHILD/etc above, the downcall's own return IS a fresh DomKind.NODE
+    // handle -- the exchange only ever carries error info via throwFn(), it
+    // never reserve()s anything.
+    CLONE_NODE("jfxpanama_dom_Node_cloneNode",
+            Signature.of(DomKind.NODE, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.NODE, PrimitiveKind.BOOLEAN));
 
     private final String symbol;
     private final Signature signature;
