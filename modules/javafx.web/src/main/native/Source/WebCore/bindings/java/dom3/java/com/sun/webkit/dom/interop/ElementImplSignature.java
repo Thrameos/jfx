@@ -1,7 +1,6 @@
 package com.sun.webkit.dom.interop;
 
 import org.openjfx.interop.ReturnExchangeKind;
-import org.openjfx.interop.ReturnExchangeKind;
 import org.openjfx.interop.NativeSignatureEntry;
 import org.openjfx.interop.PrimitiveKind;
 import org.openjfx.interop.Signature;
