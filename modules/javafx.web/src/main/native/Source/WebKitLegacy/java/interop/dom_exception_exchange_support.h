@@ -18,7 +18,17 @@
 // custom per-call message too (raiseDOMErrorException(JNIEnv*, Exception&&)
 // only reads ec.code()), so this preserves that behavior rather than
 // "improving" it into a mismatch with JNI's fallback path.
-inline void throwDOMException(WebCore::ExceptionCode code, Exchange* exchange)
+//
+// Templated on the exchange struct type: Exchange (ByteExchangeKind) and
+// Char16StringExchange (Char16StringExchangeKind) are distinct generated C
+// struct names -- deliberately, so the generated header states each
+// downcall's exact wire shape (plans/patterns/pattern-string-return.md) --
+// but both have the identical (reserve, throwFn, data, closure) field shape,
+// so the same throwFn call works unchanged for either. This is what lets a
+// single downcall (e.g. CharacterData.substringData) both reserve() a String
+// result and throw through the same Char16StringExchange instance.
+template <typename ExchangeT>
+inline void throwDOMException(WebCore::ExceptionCode code, ExchangeT* exchange)
 {
     auto& description = WebCore::DOMException::description(code);
     exchange->throwFn(exchange->closure, description.legacyCode, description.message.characters());
@@ -26,7 +36,8 @@ inline void throwDOMException(WebCore::ExceptionCode code, Exchange* exchange)
 
 // Returns true if an exception was forwarded (caller should stop -- there is
 // no meaningful return value left to produce), false on success.
-inline bool forwardIfException(const WebCore::ExceptionOr<void>& result, Exchange* exchange)
+template <typename ExchangeT>
+inline bool forwardIfException(const WebCore::ExceptionOr<void>& result, ExchangeT* exchange)
 {
     if (result.hasException()) {
         throwDOMException(result.exception().code(), exchange);

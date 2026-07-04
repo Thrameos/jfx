@@ -6,9 +6,11 @@ import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
 import org.openjfx.interop.CString8;
+import org.openjfx.interop.Char16StringExchange;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
 import org.openjfx.interop.TransferPool;
+import org.w3c.dom.DOMException;
 
 /**
  * Real {@link Binder}-bound {@link MethodHandle}s for {@link CharacterDataImplSignature}'s
@@ -23,6 +25,7 @@ public final class CharacterDataImplBinding {
     private static final MethodHandle APPEND_DATA = bind(CharacterDataImplSignature.APPEND_DATA);
     private static final MethodHandle GET_PREVIOUS_ELEMENT_SIBLING = bind(CharacterDataImplSignature.GET_PREVIOUS_ELEMENT_SIBLING);
     private static final MethodHandle GET_NEXT_ELEMENT_SIBLING = bind(CharacterDataImplSignature.GET_NEXT_ELEMENT_SIBLING);
+    private static final MethodHandle SUBSTRING_DATA = bind(CharacterDataImplSignature.SUBSTRING_DATA);
 
     private CharacterDataImplBinding() {
     }
@@ -70,6 +73,21 @@ public final class CharacterDataImplBinding {
             return result.address();
         } catch (Throwable t) {
             throw Downcall.failed(CharacterDataImplSignature.GET_NEXT_ELEMENT_SIBLING.symbol(), t);
+        }
+    }
+
+    public static String substringData(long peer, int offset, int length) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            try {
+                SUBSTRING_DATA.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), offset, length);
+            } catch (Throwable t) {
+                throw Downcall.failed(CharacterDataImplSignature.SUBSTRING_DATA.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return exchange.value();
         }
     }
 }

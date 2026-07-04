@@ -133,9 +133,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     public String substringData(int offset
         , int length) throws DOMException
     {
-        return substringDataImpl(getPeer()
-            , offset
-            , length);
+        return com.sun.webkit.dom.interop.CharacterDataImplBinding.substringData(getPeer(), offset, length);
     }
     native static String substringDataImpl(long peer
         , int offset

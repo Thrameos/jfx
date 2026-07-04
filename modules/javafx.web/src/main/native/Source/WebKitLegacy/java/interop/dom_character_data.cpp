@@ -11,6 +11,8 @@
 using namespace WebCore;
 
 #include "dom_character_data_api.hj"
+#include "char16_string_exchange_support.h"
+#include "dom_exception_exchange_support.h"
 
 extern "C" {
 
@@ -46,6 +48,21 @@ Element* jfxpanama_dom_CharacterData_getNextElementSibling(CharacterData* peer)
 {
     WebCore::JSMainThreadNullState state;
     return RefPtr<Element> { peer->nextElementSibling() }.leakRef();
+}
+
+// Combined string-return + exception-forwarding (plans/patterns/
+// pattern-string-return.md's "Watch out for" section): one Char16String
+// Exchange instance exercises both halves of the exchange struct on the
+// same call -- reserve() on success, throwFn() on failure, never both.
+void jfxpanama_dom_CharacterData_substringData(Char16StringExchange* exchange, CharacterData* peer, int32_t offset, int32_t length)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->substringData(offset, length);
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return;
+    }
+    writeChar16String(result.releaseReturnValue(), exchange);
 }
 
 }

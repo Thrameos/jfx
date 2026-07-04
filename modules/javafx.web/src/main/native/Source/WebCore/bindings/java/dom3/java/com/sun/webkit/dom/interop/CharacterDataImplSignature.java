@@ -1,5 +1,6 @@
 package com.sun.webkit.dom.interop;
 
+import org.openjfx.interop.Char16StringExchangeKind;
 import org.openjfx.interop.NativeSignatureEntry;
 import org.openjfx.interop.PrimitiveKind;
 import org.openjfx.interop.Signature;
@@ -20,7 +21,10 @@ public enum CharacterDataImplSignature implements NativeSignatureEntry {
     GET_PREVIOUS_ELEMENT_SIBLING("jfxpanama_dom_CharacterData_getPreviousElementSibling",
             Signature.of(DomKind.ELEMENT, DomKind.CHARACTER_DATA)),
     GET_NEXT_ELEMENT_SIBLING("jfxpanama_dom_CharacterData_getNextElementSibling",
-            Signature.of(DomKind.ELEMENT, DomKind.CHARACTER_DATA));
+            Signature.of(DomKind.ELEMENT, DomKind.CHARACTER_DATA)),
+    SUBSTRING_DATA("jfxpanama_dom_CharacterData_substringData",
+            Signature.of(PrimitiveKind.VOID, Char16StringExchangeKind.EXCHANGE, DomKind.CHARACTER_DATA,
+                    PrimitiveKind.INT, PrimitiveKind.INT));
 
     private final String symbol;
     private final Signature signature;
