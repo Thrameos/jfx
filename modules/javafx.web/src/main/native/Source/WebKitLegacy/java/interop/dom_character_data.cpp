@@ -22,6 +22,15 @@ int32_t jfxpanama_dom_CharacterData_getLength(CharacterData* peer)
     return peer->length();
 }
 
+// String return (plans/patterns/pattern-string-return.md): plain data()
+// getter never throws, so only reserve() is ever exercised on this
+// exchange -- same shape as ElementImpl's getTagName/getId.
+void jfxpanama_dom_CharacterData_getData(Char16StringExchange* exchange, CharacterData* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->data(), exchange);
+}
+
 void jfxpanama_dom_CharacterData_setData(CharacterData* peer, const char* value)
 {
     WebCore::JSMainThreadNullState state;
@@ -63,6 +72,34 @@ void jfxpanama_dom_CharacterData_substringData(Char16StringExchange* exchange, C
         return;
     }
     writeChar16String(result.releaseReturnValue(), exchange);
+}
+
+// Exception forwarding (plans/patterns/pattern-exception-forwarding.md):
+// same (returnExchange, ...parameters) shape as substringData above, but the
+// shim never reserve()s a value -- only throwFn() on failure, same as
+// ElementImpl's setAttribute.
+void jfxpanama_dom_CharacterData_insertData(Exchange* exchange, CharacterData* peer, int32_t offset, const char* data)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(peer->insertData(offset, String::fromUTF8(data)), exchange);
+}
+
+void jfxpanama_dom_CharacterData_deleteData(Exchange* exchange, CharacterData* peer, int32_t offset, int32_t count)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(peer->deleteData(offset, count), exchange);
+}
+
+void jfxpanama_dom_CharacterData_replaceData(Exchange* exchange, CharacterData* peer, int32_t offset, int32_t count, const char* data)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(peer->replaceData(offset, count, String::fromUTF8(data)), exchange);
+}
+
+void jfxpanama_dom_CharacterData_remove(Exchange* exchange, CharacterData* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    forwardIfException(peer->remove(), exchange);
 }
 
 }

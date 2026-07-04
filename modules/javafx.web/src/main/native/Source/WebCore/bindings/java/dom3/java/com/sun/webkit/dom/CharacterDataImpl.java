@@ -102,7 +102,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
 // Attributes
     @Override
     public String getData() {
-        return getDataImpl(getPeer());
+        return CharacterDataImplBinding.getData(getPeer());
     }
     native static String getDataImpl(long peer);
 
@@ -154,7 +154,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     public void insertData(int offset
         , String data) throws DOMException
     {
-        insertDataImpl(getPeer()
+        CharacterDataImplBinding.insertData(getPeer()
             , offset
             , data);
     }
@@ -167,7 +167,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     public void deleteData(int offset
         , int length) throws DOMException
     {
-        deleteDataImpl(getPeer()
+        CharacterDataImplBinding.deleteData(getPeer()
             , offset
             , length);
     }
@@ -181,7 +181,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
         , int length
         , String data) throws DOMException
     {
-        replaceDataImpl(getPeer()
+        CharacterDataImplBinding.replaceData(getPeer()
             , offset
             , length
             , data);
@@ -194,7 +194,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
 
     public void remove() throws DOMException
     {
-        removeImpl(getPeer());
+        CharacterDataImplBinding.remove(getPeer());
     }
     native static void removeImpl(long peer);
 
