@@ -154,8 +154,13 @@ public class ElementImpl extends NodeImpl implements Element {
     }
     native static long getOffsetParentImpl(long peer);
 
+    // NOT migrated: getInnerHTMLImpl has no working JNI implementation to
+    // preserve behavior from (confirmed via `nm -D` on the built .so -- no
+    // Java_..._getInnerHTMLImpl symbol exists at all). Migrating it would be
+    // new WebKit-side implementation work, not a migration -- same exclusion
+    // rule the 10-class batch's six skipped setters already established.
     public String getInnerHTML() {
-        return ElementImplBinding.getInnerHTML(getPeer());
+        return getInnerHTMLImpl(getPeer());
     }
     native static String getInnerHTMLImpl(long peer);
 
@@ -164,8 +169,10 @@ public class ElementImpl extends NodeImpl implements Element {
     }
     native static void setInnerHTMLImpl(long peer, String value);
 
+    // NOT migrated: getOuterHTMLImpl has no working JNI implementation either
+    // (same `nm -D` check as getInnerHTML above).
     public String getOuterHTML() {
-        return ElementImplBinding.getOuterHTML(getPeer());
+        return getOuterHTMLImpl(getPeer());
     }
     native static String getOuterHTMLImpl(long peer);
 
@@ -1186,17 +1193,21 @@ public class ElementImpl extends NodeImpl implements Element {
         , String name);
 
 
+    // NOT migrated: matchesImpl has no working JNI implementation (confirmed
+    // via `nm -D` -- no Java_..._matchesImpl symbol exists).
     public boolean matches(String selectors) throws DOMException
     {
-        return ElementImplBinding.matches(getPeer(), selectors);
+        return matchesImpl(getPeer(), selectors);
     }
     native static boolean matchesImpl(long peer
         , String selectors);
 
 
+    // NOT migrated: closestImpl has no working JNI implementation either
+    // (same `nm -D` check as matches above).
     public Element closest(String selectors) throws DOMException
     {
-        return ElementImpl.getImpl(ElementImplBinding.closest(getPeer(), selectors));
+        return ElementImpl.getImpl(closestImpl(getPeer(), selectors));
     }
     native static long closestImpl(long peer
         , String selectors);

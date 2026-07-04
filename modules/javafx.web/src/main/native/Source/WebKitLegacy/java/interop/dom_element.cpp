@@ -20,6 +20,7 @@
 #include <WebCore/JSExecState.h>
 #include <WebCore/NamedNodeMap.h>
 #include <WebCore/NodeList.h>
+#include <WebCore/ScrollIntoViewOptions.h>
 #include <WebCore/TrustedHTML.h>
 #include <wtf/text/WTFString.h>
 
@@ -257,18 +258,9 @@ Attr* jfxpanama_dom_Element_getAttributeNodeNS(Element* peer, const char* namesp
 }
 
 // String returns (shape 4), some combined with input string args (shape 2).
-void jfxpanama_dom_Element_getInnerHTML(Char16StringExchange* exchange, Element* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    writeChar16String(peer->innerHTML(), exchange);
-}
-
-void jfxpanama_dom_Element_getOuterHTML(Char16StringExchange* exchange, Element* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    writeChar16String(peer->outerHTML(), exchange);
-}
-
+// NOTE: getInnerHTML/getOuterHTML shims removed -- reverted during
+// integration, no working JNI implementation existed to preserve behavior
+// from (confirmed via `nm -D` on the built .so).
 void jfxpanama_dom_Element_getClassName(Char16StringExchange* exchange, Element* peer)
 {
     WebCore::JSMainThreadNullState state;
@@ -362,17 +354,11 @@ void jfxpanama_dom_Element_setAttributeNS(Exchange* exchange, Element* peer, con
 // only ever carries error info via throwFn() -- same one-instance-does-both
 // idea as CharacterData::substringData (dom_character_data.cpp), just with
 // a bool/Element*/NodeList* payload on success instead of a UTF-16 string.
-bool jfxpanama_dom_Element_matches(Exchange* exchange, Element* peer, const char* selectors)
-{
-    WebCore::JSMainThreadNullState state;
-    auto result = peer->matches(AtomString { String::fromUTF8(selectors) });
-    if (result.hasException()) {
-        throwDOMException(result.exception().code(), exchange);
-        return false;
-    }
-    return result.releaseReturnValue();
-}
-
+// NOTE: matches shim removed -- reverted during integration, no working JNI
+// implementation existed to preserve behavior from (confirmed via `nm -D`
+// on the built .so). webkitMatchesSelector's JNI implementation DOES exist
+// and was verified working, so it stayed (same underlying peer->matches()
+// call as matches() would have used).
 bool jfxpanama_dom_Element_webkitMatchesSelector(Exchange* exchange, Element* peer, const char* selectors)
 {
     WebCore::JSMainThreadNullState state;
@@ -384,17 +370,9 @@ bool jfxpanama_dom_Element_webkitMatchesSelector(Exchange* exchange, Element* pe
     return result.releaseReturnValue();
 }
 
-Element* jfxpanama_dom_Element_closest(Exchange* exchange, Element* peer, const char* selectors)
-{
-    WebCore::JSMainThreadNullState state;
-    auto result = peer->closest(AtomString { String::fromUTF8(selectors) });
-    if (result.hasException()) {
-        throwDOMException(result.exception().code(), exchange);
-        return nullptr;
-    }
-    return RefPtr<Element> { result.releaseReturnValue() }.leakRef();
-}
-
+// NOTE: closest shim removed -- reverted during integration, no working JNI
+// implementation existed to preserve behavior from (confirmed via `nm -D`
+// on the built .so).
 Element* jfxpanama_dom_Element_querySelector(Exchange* exchange, Element* peer, const char* selectors)
 {
     WebCore::JSMainThreadNullState state;

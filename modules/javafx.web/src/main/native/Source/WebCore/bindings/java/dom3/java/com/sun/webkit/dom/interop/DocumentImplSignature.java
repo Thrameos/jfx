@@ -25,10 +25,9 @@ public enum DocumentImplSignature implements NativeSignatureEntry {
             Signature.of(PrimitiveKind.VOID, DomKind.DOCUMENT, PrimitiveKind.BOOLEAN)),
     GET_HIDDEN("jfxpanama_dom_Document_getHidden",
             Signature.of(PrimitiveKind.BOOLEAN, DomKind.DOCUMENT)),
-    HAS_FOCUS("jfxpanama_dom_Document_hasFocus",
-            Signature.of(PrimitiveKind.BOOLEAN, DomKind.DOCUMENT)),
-    GET_CHILD_ELEMENT_COUNT("jfxpanama_dom_Document_getChildElementCount",
-            Signature.of(PrimitiveKind.INT, DomKind.DOCUMENT)),
+    // NOTE: HAS_FOCUS/GET_CHILD_ELEMENT_COUNT are NOT here -- reverted, no
+    // working JNI implementation existed to preserve behavior from
+    // (confirmed via `nm -D` on the built .so during integration).
 
     // Input-only string argument (plans/patterns/pattern-input-only-string.md):
     // UTF-8 input string params, void or primitive return, no exception.
@@ -93,14 +92,11 @@ public enum DocumentImplSignature implements NativeSignatureEntry {
             Signature.of(DomKind.HTML_ELEMENT, DomKind.DOCUMENT)),
     GET_HEAD("jfxpanama_dom_Document_getHead",
             Signature.of(DomKind.HTML_ELEMENT, DomKind.DOCUMENT)),
-    GET_ACTIVE_ELEMENT("jfxpanama_dom_Document_getActiveElement",
-            Signature.of(DomKind.ELEMENT, DomKind.DOCUMENT)),
-    GET_SCROLLING_ELEMENT("jfxpanama_dom_Document_getScrollingElement",
-            Signature.of(DomKind.ELEMENT, DomKind.DOCUMENT)),
-    GET_FIRST_ELEMENT_CHILD("jfxpanama_dom_Document_getFirstElementChild",
-            Signature.of(DomKind.ELEMENT, DomKind.DOCUMENT)),
-    GET_LAST_ELEMENT_CHILD("jfxpanama_dom_Document_getLastElementChild",
-            Signature.of(DomKind.ELEMENT, DomKind.DOCUMENT)),
+    // NOTE: GET_ACTIVE_ELEMENT/GET_SCROLLING_ELEMENT/GET_FIRST_ELEMENT_CHILD/
+    // GET_LAST_ELEMENT_CHILD are NOT here -- reverted, no working JNI
+    // implementation existed to preserve behavior from (confirmed via
+    // `nm -D` on the built .so during integration -- the identically-named
+    // ElementImpl symbols exist, but not the DocumentImpl ones).
 
     // Combined string-return + exception-forwarding (plans/patterns/
     // pattern-string-return.md's "Watch out for" section, exactly like

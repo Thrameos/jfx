@@ -120,10 +120,9 @@ public enum ElementImplSignature implements NativeSignatureEntry {
             Signature.of(DomKind.ATTR, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
 
     // String returns (shape 4), some combined with input string args (shape 2).
-    GET_INNER_HTML("jfxpanama_dom_Element_getInnerHTML",
-            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT)),
-    GET_OUTER_HTML("jfxpanama_dom_Element_getOuterHTML",
-            Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT)),
+    // NOTE: getInnerHTML/getOuterHTML are NOT here -- reverted, no working
+    // JNI implementation existed to preserve behavior from (confirmed via
+    // `nm -D` on the built .so during integration).
     GET_CLASS_NAME("jfxpanama_dom_Element_getClassName",
             Signature.of(PrimitiveKind.VOID, ReturnExchangeKind.CHAR16_STRING, DomKind.ELEMENT)),
     GET_ATTRIBUTE("jfxpanama_dom_Element_getAttribute",
@@ -164,14 +163,12 @@ public enum ElementImplSignature implements NativeSignatureEntry {
     // Primitive/object-handle return + exception forwarding combined (shape 7):
     // the downcall's own non-VOID return is unaffected by the exchange, which
     // only ever carries error info via throwFn().
-    MATCHES("jfxpanama_dom_Element_matches",
-            Signature.of(PrimitiveKind.BOOLEAN, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
-                    PrimitiveKind.UTF8_CSTRING)),
+    // NOTE: matches/closest are NOT here -- reverted, no working JNI
+    // implementation existed to preserve behavior from (confirmed via `nm -D`
+    // on the built .so during integration). webkitMatchesSelector's JNI
+    // implementation DOES exist and was verified working, so it stayed.
     WEBKIT_MATCHES_SELECTOR("jfxpanama_dom_Element_webkitMatchesSelector",
             Signature.of(PrimitiveKind.BOOLEAN, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
-                    PrimitiveKind.UTF8_CSTRING)),
-    CLOSEST("jfxpanama_dom_Element_closest",
-            Signature.of(DomKind.ELEMENT, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,
                     PrimitiveKind.UTF8_CSTRING)),
     QUERY_SELECTOR("jfxpanama_dom_Element_querySelector",
             Signature.of(DomKind.ELEMENT, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.ELEMENT,

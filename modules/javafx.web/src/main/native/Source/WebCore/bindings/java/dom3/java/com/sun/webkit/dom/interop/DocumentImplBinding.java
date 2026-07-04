@@ -25,8 +25,6 @@ public final class DocumentImplBinding {
     private static final MethodHandle GET_XML_STANDALONE = bind(DocumentImplSignature.GET_XML_STANDALONE);
     private static final MethodHandle SET_XML_STANDALONE = bind(DocumentImplSignature.SET_XML_STANDALONE);
     private static final MethodHandle GET_HIDDEN = bind(DocumentImplSignature.GET_HIDDEN);
-    private static final MethodHandle HAS_FOCUS = bind(DocumentImplSignature.HAS_FOCUS);
-    private static final MethodHandle GET_CHILD_ELEMENT_COUNT = bind(DocumentImplSignature.GET_CHILD_ELEMENT_COUNT);
 
     private static final MethodHandle SET_DOCUMENT_URI = bind(DocumentImplSignature.SET_DOCUMENT_URI);
     private static final MethodHandle SET_TITLE = bind(DocumentImplSignature.SET_TITLE);
@@ -55,10 +53,6 @@ public final class DocumentImplBinding {
     private static final MethodHandle GET_DOCUMENT_ELEMENT = bind(DocumentImplSignature.GET_DOCUMENT_ELEMENT);
     private static final MethodHandle GET_BODY = bind(DocumentImplSignature.GET_BODY);
     private static final MethodHandle GET_HEAD = bind(DocumentImplSignature.GET_HEAD);
-    private static final MethodHandle GET_ACTIVE_ELEMENT = bind(DocumentImplSignature.GET_ACTIVE_ELEMENT);
-    private static final MethodHandle GET_SCROLLING_ELEMENT = bind(DocumentImplSignature.GET_SCROLLING_ELEMENT);
-    private static final MethodHandle GET_FIRST_ELEMENT_CHILD = bind(DocumentImplSignature.GET_FIRST_ELEMENT_CHILD);
-    private static final MethodHandle GET_LAST_ELEMENT_CHILD = bind(DocumentImplSignature.GET_LAST_ELEMENT_CHILD);
 
     private static final MethodHandle GET_COOKIE = bind(DocumentImplSignature.GET_COOKIE);
 
@@ -103,22 +97,6 @@ public final class DocumentImplBinding {
             return (boolean) GET_HIDDEN.invokeExact(MemorySegment.ofAddress(peer));
         } catch (Throwable t) {
             throw Downcall.failed(DocumentImplSignature.GET_HIDDEN.symbol(), t);
-        }
-    }
-
-    public static boolean hasFocus(long peer) {
-        try {
-            return (boolean) HAS_FOCUS.invokeExact(MemorySegment.ofAddress(peer));
-        } catch (Throwable t) {
-            throw Downcall.failed(DocumentImplSignature.HAS_FOCUS.symbol(), t);
-        }
-    }
-
-    public static int getChildElementCount(long peer) {
-        try {
-            return (int) GET_CHILD_ELEMENT_COUNT.invokeExact(MemorySegment.ofAddress(peer));
-        } catch (Throwable t) {
-            throw Downcall.failed(DocumentImplSignature.GET_CHILD_ELEMENT_COUNT.symbol(), t);
         }
     }
 
@@ -344,41 +322,9 @@ public final class DocumentImplBinding {
         }
     }
 
-    public static long getActiveElement(long peer) {
-        try {
-            MemorySegment result = (MemorySegment) GET_ACTIVE_ELEMENT.invokeExact(MemorySegment.ofAddress(peer));
-            return result.address();
-        } catch (Throwable t) {
-            throw Downcall.failed(DocumentImplSignature.GET_ACTIVE_ELEMENT.symbol(), t);
-        }
-    }
-
-    public static long getScrollingElement(long peer) {
-        try {
-            MemorySegment result = (MemorySegment) GET_SCROLLING_ELEMENT.invokeExact(MemorySegment.ofAddress(peer));
-            return result.address();
-        } catch (Throwable t) {
-            throw Downcall.failed(DocumentImplSignature.GET_SCROLLING_ELEMENT.symbol(), t);
-        }
-    }
-
-    public static long getFirstElementChild(long peer) {
-        try {
-            MemorySegment result = (MemorySegment) GET_FIRST_ELEMENT_CHILD.invokeExact(MemorySegment.ofAddress(peer));
-            return result.address();
-        } catch (Throwable t) {
-            throw Downcall.failed(DocumentImplSignature.GET_FIRST_ELEMENT_CHILD.symbol(), t);
-        }
-    }
-
-    public static long getLastElementChild(long peer) {
-        try {
-            MemorySegment result = (MemorySegment) GET_LAST_ELEMENT_CHILD.invokeExact(MemorySegment.ofAddress(peer));
-            return result.address();
-        } catch (Throwable t) {
-            throw Downcall.failed(DocumentImplSignature.GET_LAST_ELEMENT_CHILD.symbol(), t);
-        }
-    }
+    // NOTE: getActiveElement/getScrollingElement/getFirstElementChild/
+    // getLastElementChild bindings removed -- reverted during integration,
+    // no working JNI implementation existed to preserve behavior from.
 
     // Combined string-return + exception-forwarding, same shape as
     // CharacterDataImplBinding.substringData: Document::cookie() is

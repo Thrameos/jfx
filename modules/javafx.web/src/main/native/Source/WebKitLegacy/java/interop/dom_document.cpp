@@ -52,17 +52,9 @@ bool jfxpanama_dom_Document_getHidden(Document* peer)
     return peer->hidden();
 }
 
-bool jfxpanama_dom_Document_hasFocus(Document* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    return peer->hasFocus();
-}
-
-int32_t jfxpanama_dom_Document_getChildElementCount(Document* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    return peer->childElementCount();
-}
+// NOTE: hasFocus/getChildElementCount shims removed -- reverted during
+// integration, no working JNI implementation existed to preserve behavior
+// from (confirmed via `nm -D` on the built .so).
 
 // Input-only string argument (plans/patterns/pattern-input-only-string.md):
 void jfxpanama_dom_Document_setDocumentURI(Document* peer, const char* value)
@@ -253,29 +245,9 @@ HTMLElement* jfxpanama_dom_Document_getHead(Document* peer)
     return RefPtr<HTMLHeadElement> { peer->head() }.leakRef();
 }
 
-Element* jfxpanama_dom_Document_getActiveElement(Document* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    return RefPtr<Element> { peer->activeElement() }.leakRef();
-}
-
-Element* jfxpanama_dom_Document_getScrollingElement(Document* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    return RefPtr<Element> { peer->scrollingElementForAPI() }.leakRef();
-}
-
-Element* jfxpanama_dom_Document_getFirstElementChild(Document* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    return RefPtr<Element> { peer->firstElementChild() }.leakRef();
-}
-
-Element* jfxpanama_dom_Document_getLastElementChild(Document* peer)
-{
-    WebCore::JSMainThreadNullState state;
-    return RefPtr<Element> { peer->lastElementChild() }.leakRef();
-}
+// NOTE: getActiveElement/getScrollingElement/getFirstElementChild/
+// getLastElementChild shims removed -- reverted during integration, no
+// working JNI implementation existed to preserve behavior from.
 
 // Combined string-return + exception-forwarding (plans/patterns/
 // pattern-string-return.md's "Watch out for" section): one

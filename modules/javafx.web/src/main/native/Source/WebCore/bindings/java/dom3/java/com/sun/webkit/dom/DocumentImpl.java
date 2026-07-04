@@ -284,8 +284,12 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     }
     native static void setSelectedStylesheetSetImpl(long peer, String value);
 
+    // NOT migrated: getActiveElementImpl has no working JNI implementation to
+    // preserve behavior from (confirmed via `nm -D` on the built .so -- no
+    // Java_..._getActiveElementImpl symbol exists at all). Migrating it would
+    // be new WebKit-side implementation work, not a migration.
     public Element getActiveElement() {
-        return ElementImpl.getImpl(DocumentImplBinding.getActiveElement(getPeer()));
+        return ElementImpl.getImpl(getActiveElementImpl(getPeer()));
     }
     native static long getActiveElementImpl(long peer);
 
@@ -339,8 +343,10 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     }
     native static String getOriginImpl(long peer);
 
+    // NOT migrated: getScrollingElementImpl has no working JNI implementation
+    // either (same `nm -D` check as getActiveElement above).
     public Element getScrollingElement() {
-        return ElementImpl.getImpl(DocumentImplBinding.getScrollingElement(getPeer()));
+        return ElementImpl.getImpl(getScrollingElementImpl(getPeer()));
     }
     native static long getScrollingElementImpl(long peer);
 
@@ -999,18 +1005,23 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
     }
     native static long getChildrenImpl(long peer);
 
+    // NOT migrated: getFirstElementChildImpl/getLastElementChildImpl/
+    // getChildElementCountImpl (on Document, not Element) have no working JNI
+    // implementation to preserve behavior from (confirmed via `nm -D` on the
+    // built .so -- no Java_com_sun_webkit_dom_DocumentImpl_... symbols exist,
+    // even though the identically-named ElementImpl symbols DO exist).
     public Element getFirstElementChild() {
-        return ElementImpl.getImpl(DocumentImplBinding.getFirstElementChild(getPeer()));
+        return ElementImpl.getImpl(getFirstElementChildImpl(getPeer()));
     }
     native static long getFirstElementChildImpl(long peer);
 
     public Element getLastElementChild() {
-        return ElementImpl.getImpl(DocumentImplBinding.getLastElementChild(getPeer()));
+        return ElementImpl.getImpl(getLastElementChildImpl(getPeer()));
     }
     native static long getLastElementChildImpl(long peer);
 
     public int getChildElementCount() {
-        return DocumentImplBinding.getChildElementCount(getPeer());
+        return getChildElementCountImpl(getPeer());
     }
     native static int getChildElementCountImpl(long peer);
 
@@ -1387,9 +1398,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator, 
         , String classNames);
 
 
+    // NOT migrated: hasFocusImpl has no working JNI implementation either
+    // (same `nm -D` check as getActiveElement/getScrollingElement above).
     public boolean hasFocus()
     {
-        return DocumentImplBinding.hasFocus(getPeer());
+        return hasFocusImpl(getPeer());
     }
     native static boolean hasFocusImpl(long peer);
 

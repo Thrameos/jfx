@@ -72,8 +72,6 @@ public final class ElementImplBinding {
     private static final MethodHandle GET_ATTRIBUTE_NODE = bind(ElementImplSignature.GET_ATTRIBUTE_NODE);
     private static final MethodHandle GET_ATTRIBUTE_NODE_NS = bind(ElementImplSignature.GET_ATTRIBUTE_NODE_NS);
 
-    private static final MethodHandle GET_INNER_HTML = bind(ElementImplSignature.GET_INNER_HTML);
-    private static final MethodHandle GET_OUTER_HTML = bind(ElementImplSignature.GET_OUTER_HTML);
     private static final MethodHandle GET_CLASS_NAME = bind(ElementImplSignature.GET_CLASS_NAME);
     private static final MethodHandle GET_ATTRIBUTE = bind(ElementImplSignature.GET_ATTRIBUTE);
     private static final MethodHandle GET_ATTRIBUTE_NS = bind(ElementImplSignature.GET_ATTRIBUTE_NS);
@@ -91,9 +89,7 @@ public final class ElementImplBinding {
     private static final MethodHandle REMOVE = bind(ElementImplSignature.REMOVE);
     private static final MethodHandle SET_ATTRIBUTE_NS = bind(ElementImplSignature.SET_ATTRIBUTE_NS);
 
-    private static final MethodHandle MATCHES = bind(ElementImplSignature.MATCHES);
     private static final MethodHandle WEBKIT_MATCHES_SELECTOR = bind(ElementImplSignature.WEBKIT_MATCHES_SELECTOR);
-    private static final MethodHandle CLOSEST = bind(ElementImplSignature.CLOSEST);
     private static final MethodHandle QUERY_SELECTOR = bind(ElementImplSignature.QUERY_SELECTOR);
     private static final MethodHandle QUERY_SELECTOR_ALL = bind(ElementImplSignature.QUERY_SELECTOR_ALL);
 
@@ -391,24 +387,6 @@ public final class ElementImplBinding {
         }
     }
 
-    public static String getInnerHTML(long peer) {
-        try (Char16StringExchange exchange = new Char16StringExchange()) {
-            GET_INNER_HTML.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
-            return exchange.value();
-        } catch (Throwable t) {
-            throw Downcall.failed(ElementImplSignature.GET_INNER_HTML.symbol(), t);
-        }
-    }
-
-    public static String getOuterHTML(long peer) {
-        try (Char16StringExchange exchange = new Char16StringExchange()) {
-            GET_OUTER_HTML.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
-            return exchange.value();
-        } catch (Throwable t) {
-            throw Downcall.failed(ElementImplSignature.GET_OUTER_HTML.symbol(), t);
-        }
-    }
-
     public static String getClassName(long peer) {
         try (Char16StringExchange exchange = new Char16StringExchange()) {
             GET_CLASS_NAME.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
@@ -537,22 +515,6 @@ public final class ElementImplBinding {
         }
     }
 
-    public static boolean matches(long peer, String selectors) {
-        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
-                ByteExchange exchange = new ByteExchange()) {
-            boolean result;
-            try {
-                result = (boolean) MATCHES.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
-            } catch (Throwable t) {
-                throw Downcall.failed(ElementImplSignature.MATCHES.symbol(), t);
-            }
-            if (exchange.threw()) {
-                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
-            }
-            return result;
-        }
-    }
-
     public static boolean webkitMatchesSelector(long peer, String selectors) {
         try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
                 ByteExchange exchange = new ByteExchange()) {
@@ -567,22 +529,6 @@ public final class ElementImplBinding {
                 throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
             }
             return result;
-        }
-    }
-
-    public static long closest(long peer, String selectors) {
-        try (Transfer utf8 = CString8.of(selectors, TransferPool.SHARED);
-                ByteExchange exchange = new ByteExchange()) {
-            MemorySegment result;
-            try {
-                result = (MemorySegment) CLOSEST.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
-            } catch (Throwable t) {
-                throw Downcall.failed(ElementImplSignature.CLOSEST.symbol(), t);
-            }
-            if (exchange.threw()) {
-                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
-            }
-            return result.address();
         }
     }
 
