@@ -378,7 +378,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     public Node insertBefore(Node newChild
         , Node refChild) throws DOMException
     {
-        return NodeImpl.getImpl(insertBeforeImpl(getPeer()
+        return NodeImpl.getImpl(com.sun.webkit.dom.interop.NodeImplBinding.insertBefore(getPeer()
             , NodeImpl.getPeer(newChild)
             , NodeImpl.getPeer(refChild)));
     }
@@ -391,7 +391,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     public Node replaceChild(Node newChild
         , Node oldChild) throws DOMException
     {
-        return NodeImpl.getImpl(replaceChildImpl(getPeer()
+        return NodeImpl.getImpl(com.sun.webkit.dom.interop.NodeImplBinding.replaceChild(getPeer()
             , NodeImpl.getPeer(newChild)
             , NodeImpl.getPeer(oldChild)));
     }
@@ -403,7 +403,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public Node removeChild(Node oldChild) throws DOMException
     {
-        return NodeImpl.getImpl(removeChildImpl(getPeer()
+        return NodeImpl.getImpl(com.sun.webkit.dom.interop.NodeImplBinding.removeChild(getPeer()
             , NodeImpl.getPeer(oldChild)));
     }
     native static long removeChildImpl(long peer
@@ -413,7 +413,7 @@ public class NodeImpl extends JSObject implements Node, EventTarget {
     @Override
     public Node appendChild(Node newChild) throws DOMException
     {
-        return NodeImpl.getImpl(appendChildImpl(getPeer()
+        return NodeImpl.getImpl(com.sun.webkit.dom.interop.NodeImplBinding.appendChild(getPeer()
             , NodeImpl.getPeer(newChild)));
     }
     native static long appendChildImpl(long peer

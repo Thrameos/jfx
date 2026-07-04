@@ -15,6 +15,7 @@
 using namespace WebCore;
 
 #include "dom_node_api.hj"
+#include "dom_exception_exchange_support.h"
 
 extern "C" {
 
@@ -87,6 +88,57 @@ bool jfxpanama_dom_Node_isDefaultNamespace(Node* peer, const char* namespaceURI)
 {
     WebCore::JSMainThreadNullState state;
     return peer->isDefaultNamespace(AtomString { String::fromUTF8(namespaceURI) });
+}
+
+// Object-handle return + exception-forwarding combined
+// (plans/patterns/pattern-node-mutation.md): unlike every other exchange
+// use so far, success here never calls reserve() -- there is no fresh
+// handle to hand back, the answer is always the newChild/oldChild peer the
+// Java caller already holds. Null-argument checks mirror the old JNI shim's
+// raiseTypeErrorException(env) exactly (a generic ExceptionCode::TypeError
+// DOMException, not a distinct Java exception type).
+void jfxpanama_dom_Node_appendChild(Exchange* exchange, Node* peer, Node* newChild)
+{
+    WebCore::JSMainThreadNullState state;
+    if (!newChild) {
+        throwDOMException(WebCore::ExceptionCode::TypeError, exchange);
+        return;
+    }
+    forwardIfException(peer->appendChild(*newChild), exchange);
+}
+
+void jfxpanama_dom_Node_insertBefore(Exchange* exchange, Node* peer, Node* newChild, Node* refChild)
+{
+    WebCore::JSMainThreadNullState state;
+    if (!newChild) {
+        throwDOMException(WebCore::ExceptionCode::TypeError, exchange);
+        return;
+    }
+    forwardIfException(peer->insertBefore(*newChild, RefPtr<Node> { refChild }), exchange);
+}
+
+void jfxpanama_dom_Node_replaceChild(Exchange* exchange, Node* peer, Node* newChild, Node* oldChild)
+{
+    WebCore::JSMainThreadNullState state;
+    if (!newChild) {
+        throwDOMException(WebCore::ExceptionCode::TypeError, exchange);
+        return;
+    }
+    if (!oldChild) {
+        throwDOMException(WebCore::ExceptionCode::TypeError, exchange);
+        return;
+    }
+    forwardIfException(peer->replaceChild(*newChild, *oldChild), exchange);
+}
+
+void jfxpanama_dom_Node_removeChild(Exchange* exchange, Node* peer, Node* oldChild)
+{
+    WebCore::JSMainThreadNullState state;
+    if (!oldChild) {
+        throwDOMException(WebCore::ExceptionCode::TypeError, exchange);
+        return;
+    }
+    forwardIfException(peer->removeChild(*oldChild), exchange);
 }
 
 }

@@ -5,10 +5,12 @@ import java.lang.foreign.SymbolLookup;
 import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
+import org.openjfx.interop.ByteExchange;
 import org.openjfx.interop.CString8;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
 import org.openjfx.interop.TransferPool;
+import org.w3c.dom.DOMException;
 
 /**
  * Real {@link Binder}-bound {@link MethodHandle}s for {@link NodeImplSignature}'s
@@ -29,6 +31,10 @@ public final class NodeImplBinding {
     private static final MethodHandle SET_PREFIX = bind(NodeImplSignature.SET_PREFIX);
     private static final MethodHandle SET_TEXT_CONTENT = bind(NodeImplSignature.SET_TEXT_CONTENT);
     private static final MethodHandle IS_DEFAULT_NAMESPACE = bind(NodeImplSignature.IS_DEFAULT_NAMESPACE);
+    private static final MethodHandle APPEND_CHILD = bind(NodeImplSignature.APPEND_CHILD);
+    private static final MethodHandle INSERT_BEFORE = bind(NodeImplSignature.INSERT_BEFORE);
+    private static final MethodHandle REPLACE_CHILD = bind(NodeImplSignature.REPLACE_CHILD);
+    private static final MethodHandle REMOVE_CHILD = bind(NodeImplSignature.REMOVE_CHILD);
 
     private NodeImplBinding() {
     }
@@ -129,6 +135,72 @@ public final class NodeImplBinding {
             return (boolean) IS_DEFAULT_NAMESPACE.invokeExact(MemorySegment.ofAddress(peer), utf8.segment());
         } catch (Throwable t) {
             throw Downcall.failed(NodeImplSignature.IS_DEFAULT_NAMESPACE.symbol(), t);
+        }
+    }
+
+    // Object-handle return + exception-forwarding combined
+    // (plans/patterns/pattern-node-mutation.md): on success there is no
+    // fresh handle to read back from the exchange -- the answer is always
+    // one of the peers the caller already passed in, exactly the old JNI
+    // shim's `return JavaReturn<Node>(env, pnewChild)`/`pnewChild`/
+    // `poldChild` behavior.
+    public static long appendChild(long peer, long newChild) {
+        try (ByteExchange exchange = new ByteExchange()) {
+            try {
+                APPEND_CHILD.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), MemorySegment.ofAddress(newChild));
+            } catch (Throwable t) {
+                throw Downcall.failed(NodeImplSignature.APPEND_CHILD.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return newChild;
+        }
+    }
+
+    public static long insertBefore(long peer, long newChild, long refChild) {
+        try (ByteExchange exchange = new ByteExchange()) {
+            try {
+                INSERT_BEFORE.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer),
+                        MemorySegment.ofAddress(newChild), MemorySegment.ofAddress(refChild));
+            } catch (Throwable t) {
+                throw Downcall.failed(NodeImplSignature.INSERT_BEFORE.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return newChild;
+        }
+    }
+
+    public static long replaceChild(long peer, long newChild, long oldChild) {
+        try (ByteExchange exchange = new ByteExchange()) {
+            try {
+                REPLACE_CHILD.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer),
+                        MemorySegment.ofAddress(newChild), MemorySegment.ofAddress(oldChild));
+            } catch (Throwable t) {
+                throw Downcall.failed(NodeImplSignature.REPLACE_CHILD.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return oldChild;
+        }
+    }
+
+    public static long removeChild(long peer, long oldChild) {
+        try (ByteExchange exchange = new ByteExchange()) {
+            try {
+                REMOVE_CHILD.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), MemorySegment.ofAddress(oldChild));
+            } catch (Throwable t) {
+                throw Downcall.failed(NodeImplSignature.REMOVE_CHILD.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return oldChild;
         }
     }
 }
