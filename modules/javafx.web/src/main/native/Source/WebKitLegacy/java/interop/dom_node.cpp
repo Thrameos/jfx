@@ -8,6 +8,7 @@
 #include <WebCore/Document.h>
 #include <WebCore/Element.h>
 #include <WebCore/JSExecState.h>
+#include <WebCore/NamedNodeMap.h>
 #include <WebCore/Node.h>
 #include <WebCore/NodeInlines.h>
 #include <wtf/text/WTFString.h>
@@ -16,6 +17,7 @@ using namespace WebCore;
 
 #include "dom_node_api.hj"
 #include "dom_exception_exchange_support.h"
+#include "char16_string_exchange_support.h"
 
 extern "C" {
 
@@ -139,6 +141,127 @@ void jfxpanama_dom_Node_removeChild(Exchange* exchange, Node* peer, Node* oldChi
         return;
     }
     forwardIfException(peer->removeChild(*oldChild), exchange);
+}
+
+// Primitive getter/setter (shape 1): no extra params beyond self, plain
+// PrimitiveKind return.
+short jfxpanama_dom_Node_getNodeType(Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->nodeType();
+}
+
+bool jfxpanama_dom_Node_hasChildNodes(Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->hasChildNodes();
+}
+
+bool jfxpanama_dom_Node_hasAttributes(Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->hasAttributes();
+}
+
+void jfxpanama_dom_Node_normalize(Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    peer->normalize();
+}
+
+// String returns (shape 5): void downcall, value handed back through
+// exchange->reserve()'s UTF-16 buffer -- see dom_element.cpp's getTagName/
+// getId for the same shape.
+void jfxpanama_dom_Node_getNodeValue(Char16StringExchange* exchange, Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->nodeValue(), exchange);
+}
+
+void jfxpanama_dom_Node_getNamespaceURI(Char16StringExchange* exchange, Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->namespaceURI(), exchange);
+}
+
+void jfxpanama_dom_Node_getLocalName(Char16StringExchange* exchange, Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->localName(), exchange);
+}
+
+void jfxpanama_dom_Node_getBaseURI(Char16StringExchange* exchange, Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->baseURI().string(), exchange);
+}
+
+void jfxpanama_dom_Node_getTextContent(Char16StringExchange* exchange, Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->textContent(), exchange);
+}
+
+// String return (shape 5) combined with a real input string param
+// (shape 2).
+void jfxpanama_dom_Node_lookupPrefix(Char16StringExchange* exchange, Node* peer, const char* namespaceURI)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->lookupPrefix(AtomString { String::fromUTF8(namespaceURI) }), exchange);
+}
+
+void jfxpanama_dom_Node_lookupNamespaceURI(Char16StringExchange* exchange, Node* peer, const char* prefix)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->lookupNamespaceURI(AtomString { String::fromUTF8(prefix) }), exchange);
+}
+
+// Object-handle return (shape 3): NamedNodeMap is an existing DomKind.
+NamedNodeMap* jfxpanama_dom_Node_getAttributes(Node* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    return RefPtr<NamedNodeMap> { peer->attributesMap() }.leakRef();
+}
+
+// Object handle passed as a plain argument (shape 4).
+bool jfxpanama_dom_Node_isSameNode(Node* peer, Node* other)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->isSameNode(other);
+}
+
+bool jfxpanama_dom_Node_isEqualNode(Node* peer, Node* other)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->isEqualNode(other);
+}
+
+short jfxpanama_dom_Node_compareDocumentPosition(Node* peer, Node* other)
+{
+    WebCore::JSMainThreadNullState state;
+    if (!other)
+        return Node::DOCUMENT_POSITION_DISCONNECTED;
+    return peer->compareDocumentPosition(*other);
+}
+
+bool jfxpanama_dom_Node_contains(Node* peer, Node* other)
+{
+    WebCore::JSMainThreadNullState state;
+    return peer->contains(other);
+}
+
+// Object-handle return + exception-forwarding combined (shape 7): the
+// downcall's own return IS a fresh Node* handle on success -- the exchange
+// only ever carries error info via throwFn(), it never reserve()s anything.
+Node* jfxpanama_dom_Node_cloneNode(Exchange* exchange, Node* peer, bool deep)
+{
+    WebCore::JSMainThreadNullState state;
+    auto result = peer->cloneNodeForBindings(deep);
+    if (result.hasException()) {
+        throwDOMException(result.exception().code(), exchange);
+        return nullptr;
+    }
+    return RefPtr<Node> { result.releaseReturnValue() }.leakRef();
 }
 
 }

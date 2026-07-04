@@ -6,6 +6,7 @@ import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
 import org.openjfx.interop.ByteExchange;
+import org.openjfx.interop.Char16StringExchange;
 import org.openjfx.interop.CString8;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
@@ -35,6 +36,28 @@ public final class NodeImplBinding {
     private static final MethodHandle INSERT_BEFORE = bind(NodeImplSignature.INSERT_BEFORE);
     private static final MethodHandle REPLACE_CHILD = bind(NodeImplSignature.REPLACE_CHILD);
     private static final MethodHandle REMOVE_CHILD = bind(NodeImplSignature.REMOVE_CHILD);
+
+    private static final MethodHandle GET_NODE_TYPE = bind(NodeImplSignature.GET_NODE_TYPE);
+    private static final MethodHandle HAS_CHILD_NODES = bind(NodeImplSignature.HAS_CHILD_NODES);
+    private static final MethodHandle HAS_ATTRIBUTES = bind(NodeImplSignature.HAS_ATTRIBUTES);
+    private static final MethodHandle NORMALIZE = bind(NodeImplSignature.NORMALIZE);
+
+    private static final MethodHandle GET_NODE_VALUE = bind(NodeImplSignature.GET_NODE_VALUE);
+    private static final MethodHandle GET_NAMESPACE_URI = bind(NodeImplSignature.GET_NAMESPACE_URI);
+    private static final MethodHandle GET_LOCAL_NAME = bind(NodeImplSignature.GET_LOCAL_NAME);
+    private static final MethodHandle GET_BASE_URI = bind(NodeImplSignature.GET_BASE_URI);
+    private static final MethodHandle GET_TEXT_CONTENT = bind(NodeImplSignature.GET_TEXT_CONTENT);
+    private static final MethodHandle LOOKUP_PREFIX = bind(NodeImplSignature.LOOKUP_PREFIX);
+    private static final MethodHandle LOOKUP_NAMESPACE_URI = bind(NodeImplSignature.LOOKUP_NAMESPACE_URI);
+
+    private static final MethodHandle GET_ATTRIBUTES = bind(NodeImplSignature.GET_ATTRIBUTES);
+
+    private static final MethodHandle IS_SAME_NODE = bind(NodeImplSignature.IS_SAME_NODE);
+    private static final MethodHandle IS_EQUAL_NODE = bind(NodeImplSignature.IS_EQUAL_NODE);
+    private static final MethodHandle COMPARE_DOCUMENT_POSITION = bind(NodeImplSignature.COMPARE_DOCUMENT_POSITION);
+    private static final MethodHandle CONTAINS = bind(NodeImplSignature.CONTAINS);
+
+    private static final MethodHandle CLONE_NODE = bind(NodeImplSignature.CLONE_NODE);
 
     private NodeImplBinding() {
     }
@@ -201,6 +224,165 @@ public final class NodeImplBinding {
                 throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
             }
             return oldChild;
+        }
+    }
+
+    public static short getNodeType(long peer) {
+        try {
+            return (short) GET_NODE_TYPE.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_NODE_TYPE.symbol(), t);
+        }
+    }
+
+    public static boolean hasChildNodes(long peer) {
+        try {
+            return (boolean) HAS_CHILD_NODES.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.HAS_CHILD_NODES.symbol(), t);
+        }
+    }
+
+    public static boolean hasAttributes(long peer) {
+        try {
+            return (boolean) HAS_ATTRIBUTES.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.HAS_ATTRIBUTES.symbol(), t);
+        }
+    }
+
+    public static void normalize(long peer) {
+        try {
+            NORMALIZE.invokeExact(MemorySegment.ofAddress(peer));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.NORMALIZE.symbol(), t);
+        }
+    }
+
+    public static String getNodeValue(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_NODE_VALUE.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_NODE_VALUE.symbol(), t);
+        }
+    }
+
+    public static String getNamespaceURI(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_NAMESPACE_URI.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_NAMESPACE_URI.symbol(), t);
+        }
+    }
+
+    public static String getLocalName(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_LOCAL_NAME.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_LOCAL_NAME.symbol(), t);
+        }
+    }
+
+    public static String getBaseURI(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_BASE_URI.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_BASE_URI.symbol(), t);
+        }
+    }
+
+    public static String getTextContent(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_TEXT_CONTENT.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_TEXT_CONTENT.symbol(), t);
+        }
+    }
+
+    public static String lookupPrefix(long peer, String namespaceURI) {
+        try (Transfer utf8 = CString8.of(namespaceURI, TransferPool.SHARED);
+                Char16StringExchange exchange = new Char16StringExchange()) {
+            LOOKUP_PREFIX.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.LOOKUP_PREFIX.symbol(), t);
+        }
+    }
+
+    public static String lookupNamespaceURI(long peer, String prefix) {
+        try (Transfer utf8 = CString8.of(prefix, TransferPool.SHARED);
+                Char16StringExchange exchange = new Char16StringExchange()) {
+            LOOKUP_NAMESPACE_URI.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer), utf8.segment());
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.LOOKUP_NAMESPACE_URI.symbol(), t);
+        }
+    }
+
+    public static long getAttributes(long peer) {
+        try {
+            MemorySegment result = (MemorySegment) GET_ATTRIBUTES.invokeExact(MemorySegment.ofAddress(peer));
+            return result.address();
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.GET_ATTRIBUTES.symbol(), t);
+        }
+    }
+
+    public static boolean isSameNode(long peer, long other) {
+        try {
+            return (boolean) IS_SAME_NODE.invokeExact(MemorySegment.ofAddress(peer), MemorySegment.ofAddress(other));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.IS_SAME_NODE.symbol(), t);
+        }
+    }
+
+    public static boolean isEqualNode(long peer, long other) {
+        try {
+            return (boolean) IS_EQUAL_NODE.invokeExact(MemorySegment.ofAddress(peer), MemorySegment.ofAddress(other));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.IS_EQUAL_NODE.symbol(), t);
+        }
+    }
+
+    public static short compareDocumentPosition(long peer, long other) {
+        try {
+            return (short) COMPARE_DOCUMENT_POSITION.invokeExact(
+                    MemorySegment.ofAddress(peer), MemorySegment.ofAddress(other));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.COMPARE_DOCUMENT_POSITION.symbol(), t);
+        }
+    }
+
+    public static boolean contains(long peer, long other) {
+        try {
+            return (boolean) CONTAINS.invokeExact(MemorySegment.ofAddress(peer), MemorySegment.ofAddress(other));
+        } catch (Throwable t) {
+            throw Downcall.failed(NodeImplSignature.CONTAINS.symbol(), t);
+        }
+    }
+
+    // Object-handle return + exception-forwarding combined: unlike
+    // appendChild/insertBefore/replaceChild/removeChild above, the downcall's
+    // own return IS a fresh Node* handle on success -- the exchange only
+    // ever carries error info, it never reserve()s anything.
+    public static long cloneNode(long peer, boolean deep) {
+        try (ByteExchange exchange = new ByteExchange()) {
+            MemorySegment result;
+            try {
+                result = (MemorySegment) CLONE_NODE.invokeExact(
+                        exchange.segment(), MemorySegment.ofAddress(peer), deep);
+            } catch (Throwable t) {
+                throw Downcall.failed(NodeImplSignature.CLONE_NODE.symbol(), t);
+            }
+            if (exchange.threw()) {
+                throw new DOMException((short) exchange.errorCode(), exchange.errorMessage());
+            }
+            return result.address();
         }
     }
 }
