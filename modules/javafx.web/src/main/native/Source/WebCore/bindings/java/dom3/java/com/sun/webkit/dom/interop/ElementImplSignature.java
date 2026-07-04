@@ -1,5 +1,6 @@
 package com.sun.webkit.dom.interop;
 
+import org.openjfx.interop.Char16StringExchangeKind;
 import org.openjfx.interop.NativeSignatureEntry;
 import org.openjfx.interop.PrimitiveKind;
 import org.openjfx.interop.Signature;
@@ -72,18 +73,27 @@ public enum ElementImplSignature implements NativeSignatureEntry {
     HAS_ATTRIBUTES("jfxpanama_dom_Element_hasAttributes",
             Signature.of(PrimitiveKind.BOOLEAN, DomKind.ELEMENT)),
     HAS_ATTRIBUTE("jfxpanama_dom_Element_hasAttribute",
-            Signature.of(PrimitiveKind.BOOLEAN, DomKind.ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     REMOVE_ATTRIBUTE("jfxpanama_dom_Element_removeAttribute",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
 
     SET_ID("jfxpanama_dom_Element_setId",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_CLASS_NAME("jfxpanama_dom_Element_setClassName",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_INNER_HTML("jfxpanama_dom_Element_setInnerHTML",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_OUTER_HTML("jfxpanama_dom_Element_setOuterHTML",
-            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, PrimitiveKind.UTF8_CSTRING)),
+
+    // String returns (plans/patterns/pattern-string-return.md): void downcall +
+    // trailing Char16StringExchange param, native reserve()s a UTF-16 buffer sized
+    // to the WTF::String's own length (or never reserves at all, for a null
+    // String) rather than returning a value directly.
+    GET_TAG_NAME("jfxpanama_dom_Element_getTagName",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, Char16StringExchangeKind.EXCHANGE)),
+    GET_ID("jfxpanama_dom_Element_getId",
+            Signature.of(PrimitiveKind.VOID, DomKind.ELEMENT, Char16StringExchangeKind.EXCHANGE));
 
     private final String symbol;
     private final Signature signature;

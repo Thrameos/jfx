@@ -14,17 +14,17 @@ import org.openjfx.interop.annotations.NativeHeader;
 @NativeHeader(value = "dom_html_body_element_api", includes = { "<stdint.h>" })
 public enum HTMLBodyElementImplSignature implements NativeSignatureEntry {
     SET_ALINK("jfxpanama_dom_HTMLBodyElement_setALink",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_BACKGROUND("jfxpanama_dom_HTMLBodyElement_setBackground",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_BGCOLOR("jfxpanama_dom_HTMLBodyElement_setBgColor",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_LINK("jfxpanama_dom_HTMLBodyElement_setLink",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_TEXT("jfxpanama_dom_HTMLBodyElement_setText",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_VLINK("jfxpanama_dom_HTMLBodyElement_setVLink",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_BODY_ELEMENT, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

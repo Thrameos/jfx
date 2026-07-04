@@ -16,7 +16,7 @@ public enum AttrImplSignature implements NativeSignatureEntry {
     IS_ID("jfxpanama_dom_Attr_isId",
             Signature.of(PrimitiveKind.BOOLEAN, DomKind.ATTR)),
     SET_VALUE("jfxpanama_dom_Attr_setValue",
-            Signature.of(PrimitiveKind.VOID, DomKind.ATTR, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.ATTR, PrimitiveKind.UTF8_CSTRING)),
     GET_OWNER_ELEMENT("jfxpanama_dom_Attr_getOwnerElement",
             Signature.of(DomKind.ELEMENT, DomKind.ATTR));
 

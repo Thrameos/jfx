@@ -5,6 +5,7 @@ import java.lang.foreign.SymbolLookup;
 import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
+import org.openjfx.interop.Char16StringExchange;
 import org.openjfx.interop.CString8;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
@@ -58,6 +59,9 @@ public final class ElementImplBinding {
     private static final MethodHandle SET_CLASS_NAME = bind(ElementImplSignature.SET_CLASS_NAME);
     private static final MethodHandle SET_INNER_HTML = bind(ElementImplSignature.SET_INNER_HTML);
     private static final MethodHandle SET_OUTER_HTML = bind(ElementImplSignature.SET_OUTER_HTML);
+
+    private static final MethodHandle GET_TAG_NAME = bind(ElementImplSignature.GET_TAG_NAME);
+    private static final MethodHandle GET_ID = bind(ElementImplSignature.GET_ID);
 
     private ElementImplBinding() {
     }
@@ -275,6 +279,24 @@ public final class ElementImplBinding {
             SET_OUTER_HTML.invokeExact(MemorySegment.ofAddress(peer), utf8.segment());
         } catch (Throwable t) {
             throw Downcall.failed(ElementImplSignature.SET_OUTER_HTML.symbol(), t);
+        }
+    }
+
+    public static String getTagName(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_TAG_NAME.invokeExact(MemorySegment.ofAddress(peer), exchange.segment());
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_TAG_NAME.symbol(), t);
+        }
+    }
+
+    public static String getId(long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            GET_ID.invokeExact(MemorySegment.ofAddress(peer), exchange.segment());
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(ElementImplSignature.GET_ID.symbol(), t);
         }
     }
 }

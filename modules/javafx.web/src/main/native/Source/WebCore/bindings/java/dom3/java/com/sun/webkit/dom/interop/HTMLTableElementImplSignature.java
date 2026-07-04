@@ -31,23 +31,23 @@ public enum HTMLTableElementImplSignature implements NativeSignatureEntry {
             Signature.of(DomKind.ELEMENT, DomKind.HTML_TABLE_ELEMENT)),
 
     SET_ALIGN("jfxpanama_dom_HTMLTableElement_setAlign",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_BGCOLOR("jfxpanama_dom_HTMLTableElement_setBgColor",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_BORDER("jfxpanama_dom_HTMLTableElement_setBorder",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_CELLPADDING("jfxpanama_dom_HTMLTableElement_setCellPadding",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_CELLSPACING("jfxpanama_dom_HTMLTableElement_setCellSpacing",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_FRAME("jfxpanama_dom_HTMLTableElement_setFrame",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_RULES("jfxpanama_dom_HTMLTableElement_setRules",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_SUMMARY("jfxpanama_dom_HTMLTableElement_setSummary",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_WIDTH("jfxpanama_dom_HTMLTableElement_setWidth",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_TABLE_ELEMENT, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

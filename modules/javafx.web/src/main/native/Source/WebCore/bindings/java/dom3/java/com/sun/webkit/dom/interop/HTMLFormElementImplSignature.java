@@ -24,13 +24,13 @@ public enum HTMLFormElementImplSignature implements NativeSignatureEntry {
             Signature.of(PrimitiveKind.BOOLEAN, DomKind.HTML_FORM_ELEMENT)),
 
     SET_ACCEPT_CHARSET("jfxpanama_dom_HTMLFormElement_setAcceptCharset",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_ACTION("jfxpanama_dom_HTMLFormElement_setAction",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_NAME("jfxpanama_dom_HTMLFormElement_setName",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_TARGET("jfxpanama_dom_HTMLFormElement_setTarget",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_FORM_ELEMENT, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

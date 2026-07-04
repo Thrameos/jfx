@@ -35,21 +35,21 @@ public enum HTMLElementImplSignature implements NativeSignatureEntry {
             Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.BOOLEAN)),
 
     SET_ID("jfxpanama_dom_HTMLElement_setId",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_TITLE("jfxpanama_dom_HTMLElement_setTitle",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_LANG("jfxpanama_dom_HTMLElement_setLang",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_WEBKITDROPZONE("jfxpanama_dom_HTMLElement_setWebkitdropzone",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_ACCESS_KEY("jfxpanama_dom_HTMLElement_setAccessKey",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_INNER_TEXT("jfxpanama_dom_HTMLElement_setInnerText",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_OUTER_TEXT("jfxpanama_dom_HTMLElement_setOuterText",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_CONTENT_EDITABLE("jfxpanama_dom_HTMLElement_setContentEditable",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_ELEMENT, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

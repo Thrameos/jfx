@@ -33,25 +33,25 @@ public enum HTMLImageElementImplSignature implements NativeSignatureEntry {
             Signature.of(PrimitiveKind.INT, DomKind.HTML_IMAGE_ELEMENT)),
 
     SET_NAME("jfxpanama_dom_HTMLImageElement_setName",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_ALIGN("jfxpanama_dom_HTMLImageElement_setAlign",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_ALT("jfxpanama_dom_HTMLImageElement_setAlt",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_BORDER("jfxpanama_dom_HTMLImageElement_setBorder",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_LONG_DESC("jfxpanama_dom_HTMLImageElement_setLongDesc",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_SRC("jfxpanama_dom_HTMLImageElement_setSrc",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_SRCSET("jfxpanama_dom_HTMLImageElement_setSrcset",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_SIZES("jfxpanama_dom_HTMLImageElement_setSizes",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_USE_MAP("jfxpanama_dom_HTMLImageElement_setUseMap",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_LOWSRC("jfxpanama_dom_HTMLImageElement_setLowsrc",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_IMAGE_ELEMENT, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;

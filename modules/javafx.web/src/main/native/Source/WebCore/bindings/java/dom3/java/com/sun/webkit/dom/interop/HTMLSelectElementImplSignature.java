@@ -49,11 +49,11 @@ public enum HTMLSelectElementImplSignature implements NativeSignatureEntry {
             Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.INT)),
 
     SET_NAME("jfxpanama_dom_HTMLSelectElement_setName",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_VALUE("jfxpanama_dom_HTMLSelectElement_setValue",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
     SET_CUSTOM_VALIDITY("jfxpanama_dom_HTMLSelectElement_setCustomValidity",
-            Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.HTML_SELECT_ELEMENT, PrimitiveKind.UTF8_CSTRING)),
 
     GET_FORM("jfxpanama_dom_HTMLSelectElement_getForm",
             Signature.of(DomKind.ELEMENT, DomKind.HTML_SELECT_ELEMENT));

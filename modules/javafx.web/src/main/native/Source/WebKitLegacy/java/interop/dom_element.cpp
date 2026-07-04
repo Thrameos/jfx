@@ -14,6 +14,7 @@
 // via DomKind.ELEMENT), not a forward declaration the generator would need
 // new machinery to emit, so the real declaration must already be visible.
 #include <WebCore/Element.h>
+#include <WebCore/ElementInlines.h>
 #include <WebCore/HTMLNames.h>
 #include <WebCore/JSExecState.h>
 #include <WebCore/TrustedHTML.h>
@@ -22,6 +23,7 @@
 using namespace WebCore;
 
 #include "dom_element_api.hj"
+#include "char16_string_exchange_support.h"
 
 extern "C" {
 
@@ -187,6 +189,24 @@ void jfxpanama_dom_Element_setOuterHTML(Element* peer, const char* value)
 {
     WebCore::JSMainThreadNullState state;
     peer->setOuterHTML(AtomString { String::fromUTF8(value) });
+}
+
+// String returns (plans/patterns/pattern-string-return.md): void downcall,
+// value handed back through exchange->reserve()'s UTF-16 buffer instead of a
+// return value -- reserve() is only called at all when the WTF::String isn't
+// null, so a null String (e.g. no id attribute set) round-trips as Java null
+// exactly like the old JavaReturn<String>, since Char16StringExchange.value()
+// returns null when reserve() was never invoked.
+void jfxpanama_dom_Element_getTagName(Element* peer, Char16StringExchange* exchange)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->tagName(), exchange);
+}
+
+void jfxpanama_dom_Element_getId(Element* peer, Char16StringExchange* exchange)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->getIdAttribute(), exchange);
 }
 
 }

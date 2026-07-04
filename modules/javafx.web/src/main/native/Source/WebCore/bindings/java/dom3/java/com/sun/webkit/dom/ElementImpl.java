@@ -53,7 +53,7 @@ public class ElementImpl extends NodeImpl implements Element {
 // Attributes
     @Override
     public String getTagName() {
-        return getTagNameImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getTagName(getPeer());
     }
     native static String getTagNameImpl(long peer);
 
@@ -69,7 +69,7 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getStyleImpl(long peer);
 
     public String getId() {
-        return getIdImpl(getPeer());
+        return com.sun.webkit.dom.interop.ElementImplBinding.getId(getPeer());
     }
     native static String getIdImpl(long peer);
 

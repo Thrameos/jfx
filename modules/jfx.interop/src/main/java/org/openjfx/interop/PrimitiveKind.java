@@ -11,19 +11,32 @@ import java.lang.foreign.ValueLayout;
  * modules that need struct-carrying Kinds (e.g. {@link ExchangeKind}) add their own
  * enum implementing {@link Kind} instead of extending this one.
  *
- * <p>{@code HANDLE} and {@code STRING} share one FFI layout (ADDRESS/MemorySegment --
- * Panama doesn't care) but spell different C types ({@code void*} vs {@code const char*}),
- * the same one-layout/several-Kinds shape {@code radixllm-java}'s {@code Layout.Kind}
- * uses (its {@code POINTER}/{@code STRING}/{@code MODEL}/... all share {@code C_POINTER}).
- * Distinguishing them here is what lets the generator emit a header that exactly
- * matches a hand-written {@code const char*} parameter instead of a generic {@code void*}
+ * <p>{@code HANDLE} and {@code UTF8_CSTRING} share one FFI layout (ADDRESS/
+ * MemorySegment -- Panama doesn't care) but spell different C types ({@code void*}
+ * vs {@code const char*}), the same one-layout/several-Kinds shape
+ * {@code radixllm-java}'s {@code Layout.Kind} uses (its {@code POINTER}/
+ * {@code STRING}/{@code MODEL}/... all share {@code C_POINTER}). Distinguishing
+ * them here is what lets the generator emit a header that exactly matches a
+ * hand-written {@code const char*} parameter instead of a generic {@code void*}
  * that would conflict with it at C-compile time.
+ *
+ * <p>Named {@code UTF8_CSTRING}, not {@code STRING} -- a bare "string" Kind is
+ * exactly the ambiguity {@link Kind} exists to rule out: this project alone
+ * has three incompatible on-the-wire string shapes (this one, input-only
+ * NUL-terminated UTF-8 via {@link CString8}; {@link Char16StringExchangeKind},
+ * output-only length-prefixed UTF-16 matching {@code WTF::String}'s native
+ * form; and whatever a future UTF-32 or raw-bytes need turns out to require).
+ * A generic {@code STRING} constant would silently invite exactly the
+ * void*-for-Element* style mistake {@code DomKind}'s class doc warns about,
+ * just one level up -- at the "which string encoding" level instead of "which
+ * pointee type." Every {@code Kind} name states its exact wire shape, no
+ * exceptions.
  */
 @NativeKindSet
 public enum PrimitiveKind implements Kind {
     VOID(null, void.class, "void"),
     HANDLE(ValueLayout.ADDRESS, java.lang.foreign.MemorySegment.class, "void*"),
-    STRING(ValueLayout.ADDRESS, java.lang.foreign.MemorySegment.class, "const char*"),
+    UTF8_CSTRING(ValueLayout.ADDRESS, java.lang.foreign.MemorySegment.class, "const char*"),
     INT(ValueLayout.JAVA_INT, int.class, "int32_t"),
     LONG(ValueLayout.JAVA_LONG, long.class, "int64_t"),
     SHORT(ValueLayout.JAVA_SHORT, short.class, "int16_t"),

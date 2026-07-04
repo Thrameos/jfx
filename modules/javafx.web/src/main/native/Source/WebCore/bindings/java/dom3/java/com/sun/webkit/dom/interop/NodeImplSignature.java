@@ -31,13 +31,13 @@ public enum NodeImplSignature implements NativeSignatureEntry {
             Signature.of(DomKind.DOCUMENT, DomKind.NODE)),
 
     SET_NODE_VALUE("jfxpanama_dom_Node_setNodeValue",
-            Signature.of(PrimitiveKind.VOID, DomKind.NODE, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.NODE, PrimitiveKind.UTF8_CSTRING)),
     SET_PREFIX("jfxpanama_dom_Node_setPrefix",
-            Signature.of(PrimitiveKind.VOID, DomKind.NODE, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.NODE, PrimitiveKind.UTF8_CSTRING)),
     SET_TEXT_CONTENT("jfxpanama_dom_Node_setTextContent",
-            Signature.of(PrimitiveKind.VOID, DomKind.NODE, PrimitiveKind.STRING)),
+            Signature.of(PrimitiveKind.VOID, DomKind.NODE, PrimitiveKind.UTF8_CSTRING)),
     IS_DEFAULT_NAMESPACE("jfxpanama_dom_Node_isDefaultNamespace",
-            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE, PrimitiveKind.STRING));
+            Signature.of(PrimitiveKind.BOOLEAN, DomKind.NODE, PrimitiveKind.UTF8_CSTRING));
 
     private final String symbol;
     private final Signature signature;
