@@ -31,6 +31,8 @@ import org.w3c.dom.css.Counter;
 import org.w3c.dom.css.RGBColor;
 import org.w3c.dom.css.Rect;
 
+import com.sun.webkit.dom.interop.CSSPrimitiveValueImplBinding;
+
 public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveValue {
     CSSPrimitiveValueImpl(long peer) {
         super(peer);
@@ -76,7 +78,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
 // Attributes
     @Override
     public short getPrimitiveType() {
-        return getPrimitiveTypeImpl(getPeer());
+        return CSSPrimitiveValueImplBinding.getPrimitiveType(getPeer());
     }
     native static short getPrimitiveTypeImpl(long peer);
 
@@ -86,7 +88,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     public void setFloatValue(short unitType
         , float floatValue) throws DOMException
     {
-        setFloatValueImpl(getPeer()
+        CSSPrimitiveValueImplBinding.setFloatValue(getPeer()
             , unitType
             , floatValue);
     }
@@ -98,7 +100,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     @Override
     public float getFloatValue(short unitType) throws DOMException
     {
-        return getFloatValueImpl(getPeer()
+        return CSSPrimitiveValueImplBinding.getFloatValue(getPeer()
             , unitType);
     }
     native static float getFloatValueImpl(long peer
@@ -109,7 +111,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     public void setStringValue(short stringType
         , String stringValue) throws DOMException
     {
-        setStringValueImpl(getPeer()
+        CSSPrimitiveValueImplBinding.setStringValue(getPeer()
             , stringType
             , stringValue);
     }
@@ -121,7 +123,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     @Override
     public String getStringValue() throws DOMException
     {
-        return getStringValueImpl(getPeer());
+        return CSSPrimitiveValueImplBinding.getStringValue(getPeer());
     }
     native static String getStringValueImpl(long peer);
 
@@ -129,7 +131,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     @Override
     public Counter getCounterValue() throws DOMException
     {
-        return CounterImpl.getImpl(getCounterValueImpl(getPeer()));
+        return CounterImpl.getImpl(CSSPrimitiveValueImplBinding.getCounterValue(getPeer()));
     }
     native static long getCounterValueImpl(long peer);
 
@@ -137,7 +139,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     @Override
     public Rect getRectValue() throws DOMException
     {
-        return RectImpl.getImpl(getRectValueImpl(getPeer()));
+        return RectImpl.getImpl(CSSPrimitiveValueImplBinding.getRectValue(getPeer()));
     }
     native static long getRectValueImpl(long peer);
 
@@ -145,7 +147,7 @@ public class CSSPrimitiveValueImpl extends CSSValueImpl implements CSSPrimitiveV
     @Override
     public RGBColor getRGBColorValue() throws DOMException
     {
-        return RGBColorImpl.getImpl(getRGBColorValueImpl(getPeer()));
+        return RGBColorImpl.getImpl(CSSPrimitiveValueImplBinding.getRGBColorValue(getPeer()));
     }
     native static long getRGBColorValueImpl(long peer);
 
