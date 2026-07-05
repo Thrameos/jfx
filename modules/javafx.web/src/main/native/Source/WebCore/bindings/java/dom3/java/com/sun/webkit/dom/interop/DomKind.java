@@ -55,7 +55,9 @@ public enum DomKind implements Kind {
     HTML_INPUT_ELEMENT("HTMLInputElement*"),
     HTML_TEXT_AREA_ELEMENT("HTMLTextAreaElement*"),
     NAMED_NODE_MAP("NamedNodeMap*"),
-    NODE_LIST("NodeList*");
+    NODE_LIST("NodeList*"),
+    CSS_FONT_FACE_RULE("CSSFontFaceRule*"),
+    CSS_STYLE_DECLARATION("CSSStyleDeclaration*");
 
     private final Layout.Primitive cLayout;
 

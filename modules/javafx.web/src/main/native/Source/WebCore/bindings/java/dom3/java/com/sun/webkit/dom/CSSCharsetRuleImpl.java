@@ -39,17 +39,18 @@ public class CSSCharsetRuleImpl extends CSSRuleImpl implements CSSCharsetRule {
 
 
 // Attributes
+    // Pure Java stubs, no native call: CSSCharsetRule was removed from the CSS
+    // OM (see JavaCSSCharsetRule.cpp's own comment) -- there is no real
+    // WebCore::CSSCharsetRule to call into, the old JNI implementation always
+    // returned null / did nothing regardless of peer.
     @Override
     public String getEncoding() {
-        return getEncodingImpl(getPeer());
+        return null;
     }
-    native static String getEncodingImpl(long peer);
 
     @Override
     public void setEncoding(String value) throws DOMException {
-        setEncodingImpl(getPeer(), value);
     }
-    native static void setEncodingImpl(long peer, String value);
 
 }
 
