@@ -158,6 +158,7 @@ list(APPEND WebKitLegacy_SOURCES
     java/interop/dom_html_text_area_element.cpp
     java/interop/dom_css_font_face_rule.cpp
     java/interop/dom_css_import_rule.cpp
+    java/interop/dom_css_media_rule.cpp
 )
 
 # for DRT
