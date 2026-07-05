@@ -28,6 +28,8 @@ package com.sun.webkit.dom;
 import org.w3c.dom.css.CSSValue;
 import org.w3c.dom.css.CSSValueList;
 
+import com.sun.webkit.dom.interop.CSSValueListImplBinding;
+
 public class CSSValueListImpl extends CSSValueImpl implements CSSValueList {
     CSSValueListImpl(long peer) {
         super(peer);
@@ -41,7 +43,7 @@ public class CSSValueListImpl extends CSSValueImpl implements CSSValueList {
 // Attributes
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return CSSValueListImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -50,7 +52,7 @@ public class CSSValueListImpl extends CSSValueImpl implements CSSValueList {
     @Override
     public CSSValue item(int index)
     {
-        return CSSValueImpl.getImpl(itemImpl(getPeer()
+        return CSSValueImpl.getImpl(CSSValueListImplBinding.item(getPeer()
             , index));
     }
     native static long itemImpl(long peer
