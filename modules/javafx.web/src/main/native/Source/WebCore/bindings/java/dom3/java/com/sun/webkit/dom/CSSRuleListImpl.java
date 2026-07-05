@@ -30,6 +30,8 @@ import com.sun.webkit.DisposerRecord;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 
+import com.sun.webkit.dom.interop.CSSRuleListImplBinding;
+
 public class CSSRuleListImpl implements CSSRuleList {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -82,7 +84,7 @@ public class CSSRuleListImpl implements CSSRuleList {
 // Attributes
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return CSSRuleListImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -91,7 +93,7 @@ public class CSSRuleListImpl implements CSSRuleList {
     @Override
     public CSSRule item(int index)
     {
-        return CSSRuleImpl.getImpl(itemImpl(getPeer()
+        return CSSRuleImpl.getImpl(CSSRuleListImplBinding.item(getPeer()
             , index));
     }
     native static long itemImpl(long peer
