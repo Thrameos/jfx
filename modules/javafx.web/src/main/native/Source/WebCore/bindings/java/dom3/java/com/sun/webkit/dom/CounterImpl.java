@@ -29,6 +29,8 @@ import com.sun.webkit.Disposer;
 import com.sun.webkit.DisposerRecord;
 import org.w3c.dom.css.Counter;
 
+import com.sun.webkit.dom.interop.CounterImplBinding;
+
 public class CounterImpl implements Counter {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -81,19 +83,19 @@ public class CounterImpl implements Counter {
 // Attributes
     @Override
     public String getIdentifier() {
-        return getIdentifierImpl(getPeer());
+        return CounterImplBinding.getIdentifier(getPeer());
     }
     native static String getIdentifierImpl(long peer);
 
     @Override
     public String getListStyle() {
-        return getListStyleImpl(getPeer());
+        return CounterImplBinding.getListStyle(getPeer());
     }
     native static String getListStyleImpl(long peer);
 
     @Override
     public String getSeparator() {
-        return getSeparatorImpl(getPeer());
+        return CounterImplBinding.getSeparator(getPeer());
     }
     native static String getSeparatorImpl(long peer);
 
