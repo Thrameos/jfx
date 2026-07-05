@@ -32,6 +32,8 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSValue;
 
+import com.sun.webkit.dom.interop.CSSStyleDeclarationImplBinding;
+
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -84,25 +86,25 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 // Attributes
     @Override
     public String getCssText() {
-        return getCssTextImpl(getPeer());
+        return CSSStyleDeclarationImplBinding.getCssText(getPeer());
     }
     native static String getCssTextImpl(long peer);
 
     @Override
     public void setCssText(String value) throws DOMException {
-        setCssTextImpl(getPeer(), value);
+        CSSStyleDeclarationImplBinding.setCssText(getPeer(), value);
     }
     native static void setCssTextImpl(long peer, String value);
 
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return CSSStyleDeclarationImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
     @Override
     public CSSRule getParentRule() {
-        return CSSRuleImpl.getImpl(getParentRuleImpl(getPeer()));
+        return CSSRuleImpl.getImpl(CSSStyleDeclarationImplBinding.getParentRule(getPeer()));
     }
     native static long getParentRuleImpl(long peer);
 
@@ -111,7 +113,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String getPropertyValue(String propertyName)
     {
-        return getPropertyValueImpl(getPeer()
+        return CSSStyleDeclarationImplBinding.getPropertyValue(getPeer()
             , propertyName);
     }
     native static String getPropertyValueImpl(long peer
@@ -121,7 +123,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public CSSValue getPropertyCSSValue(String propertyName)
     {
-        return CSSValueImpl.getImpl(getPropertyCSSValueImpl(getPeer()
+        return CSSValueImpl.getImpl(CSSStyleDeclarationImplBinding.getPropertyCSSValue(getPeer()
             , propertyName));
     }
     native static long getPropertyCSSValueImpl(long peer
@@ -131,7 +133,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String removeProperty(String propertyName) throws DOMException
     {
-        return removePropertyImpl(getPeer()
+        return CSSStyleDeclarationImplBinding.removeProperty(getPeer()
             , propertyName);
     }
     native static String removePropertyImpl(long peer
@@ -141,7 +143,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String getPropertyPriority(String propertyName)
     {
-        return getPropertyPriorityImpl(getPeer()
+        return CSSStyleDeclarationImplBinding.getPropertyPriority(getPeer()
             , propertyName);
     }
     native static String getPropertyPriorityImpl(long peer
@@ -153,7 +155,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         , String value
         , String priority) throws DOMException
     {
-        setPropertyImpl(getPeer()
+        CSSStyleDeclarationImplBinding.setProperty(getPeer()
             , propertyName
             , value
             , priority);
@@ -167,7 +169,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String item(int index)
     {
-        return itemImpl(getPeer()
+        return CSSStyleDeclarationImplBinding.item(getPeer()
             , index);
     }
     native static String itemImpl(long peer
@@ -176,7 +178,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     public String getPropertyShorthand(String propertyName)
     {
-        return getPropertyShorthandImpl(getPeer()
+        return CSSStyleDeclarationImplBinding.getPropertyShorthand(getPeer()
             , propertyName);
     }
     native static String getPropertyShorthandImpl(long peer
@@ -185,7 +187,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     public boolean isPropertyImplicit(String propertyName)
     {
-        return isPropertyImplicitImpl(getPeer()
+        return CSSStyleDeclarationImplBinding.isPropertyImplicit(getPeer()
             , propertyName);
     }
     native static boolean isPropertyImplicitImpl(long peer

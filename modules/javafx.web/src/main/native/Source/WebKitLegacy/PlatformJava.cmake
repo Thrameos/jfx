@@ -163,6 +163,7 @@ list(APPEND WebKitLegacy_SOURCES
     java/interop/dom_css_primitive_value.cpp
     java/interop/dom_css_rule.cpp
     java/interop/dom_css_rule_list.cpp
+    java/interop/dom_css_style_declaration.cpp
 )
 
 # for DRT
