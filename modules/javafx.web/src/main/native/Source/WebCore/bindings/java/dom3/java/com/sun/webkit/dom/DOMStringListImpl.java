@@ -29,6 +29,8 @@ import com.sun.webkit.Disposer;
 import com.sun.webkit.DisposerRecord;
 import org.w3c.dom.DOMStringList;
 
+import com.sun.webkit.dom.interop.DOMStringListImplBinding;
+
 public class DOMStringListImpl implements DOMStringList {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -81,7 +83,7 @@ public class DOMStringListImpl implements DOMStringList {
 // Attributes
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return DOMStringListImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -90,7 +92,7 @@ public class DOMStringListImpl implements DOMStringList {
     @Override
     public String item(int index)
     {
-        return itemImpl(getPeer()
+        return DOMStringListImplBinding.item(getPeer()
             , index);
     }
     native static String itemImpl(long peer
@@ -100,7 +102,7 @@ public class DOMStringListImpl implements DOMStringList {
     @Override
     public boolean contains(String string)
     {
-        return containsImpl(getPeer()
+        return DOMStringListImplBinding.contains(getPeer()
             , string);
     }
     native static boolean containsImpl(long peer
