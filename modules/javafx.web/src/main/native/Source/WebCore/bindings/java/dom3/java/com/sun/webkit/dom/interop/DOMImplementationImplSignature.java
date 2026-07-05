@@ -25,8 +25,13 @@ public enum DOMImplementationImplSignature implements NativeSignatureEntry {
             Signature.of(DomKind.DOCUMENT_TYPE, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.DOM_IMPLEMENTATION, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
     CREATE_DOCUMENT("jfxpanama_dom_DOMImplementation_createDocument",
             Signature.of(DomKind.DOCUMENT, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.DOM_IMPLEMENTATION, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING, DomKind.DOCUMENT_TYPE)),
+    // DOMImplementation::createCSSStyleSheet (DOMImplementation.h) returns a
+    // plain Ref<CSSStyleSheet>, not an ExceptionOr -- it never throws, unlike
+    // the speculative first pass's guess. Corrected here rather than kept as
+    // dead exception plumbing (see dom_dom_implementation.cpp's header
+    // comment).
     CREATE_CSS_STYLE_SHEET("jfxpanama_dom_DOMImplementation_createCSSStyleSheet",
-            Signature.of(DomKind.CSS_STYLE_SHEET, ReturnExchangeKind.BYTE_EXCHANGE, DomKind.DOM_IMPLEMENTATION, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
+            Signature.of(DomKind.CSS_STYLE_SHEET, DomKind.DOM_IMPLEMENTATION, PrimitiveKind.UTF8_CSTRING, PrimitiveKind.UTF8_CSTRING)),
     CREATE_HTML_DOCUMENT("jfxpanama_dom_DOMImplementation_createHTMLDocument",
             Signature.of(DomKind.HTML_DOCUMENT, DomKind.DOM_IMPLEMENTATION, PrimitiveKind.UTF8_CSTRING));
 

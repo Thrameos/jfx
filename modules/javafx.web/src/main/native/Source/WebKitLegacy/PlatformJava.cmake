@@ -169,6 +169,7 @@ list(APPEND WebKitLegacy_SOURCES
     java/interop/dom_css_value.cpp
     java/interop/dom_css_value_list.cpp
     java/interop/dom_counter.cpp
+    java/interop/dom_dom_implementation.cpp
 )
 
 # for DRT
