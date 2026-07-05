@@ -12,6 +12,7 @@
 using namespace WebCore;
 
 #include "dom_attr_api.hj"
+#include "char16_string_exchange_support.h"
 
 extern "C" {
 
@@ -39,6 +40,19 @@ Element* jfxpanama_dom_Attr_getOwnerElement(Attr* peer)
 {
     WebCore::JSMainThreadNullState state;
     return RefPtr<Element> { peer->ownerElement() }.leakRef();
+}
+
+// String returns (plans/patterns/pattern-string-return.md).
+void jfxpanama_dom_Attr_getName(Char16StringExchange* exchange, Attr* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->name(), exchange);
+}
+
+void jfxpanama_dom_Attr_getValue(Char16StringExchange* exchange, Attr* peer)
+{
+    WebCore::JSMainThreadNullState state;
+    writeChar16String(peer->value(), exchange);
 }
 
 }

@@ -5,6 +5,7 @@ import java.lang.foreign.SymbolLookup;
 import java.lang.invoke.MethodHandle;
 
 import org.openjfx.interop.Binder;
+import org.openjfx.interop.Char16StringExchange;
 import org.openjfx.interop.CString8;
 import org.openjfx.interop.Downcall;
 import org.openjfx.interop.Transfer;
@@ -22,6 +23,8 @@ public final class AttrImplBinding {
     private static final MethodHandle IS_ID = bind(AttrImplSignature.IS_ID);
     private static final MethodHandle SET_VALUE = bind(AttrImplSignature.SET_VALUE);
     private static final MethodHandle GET_OWNER_ELEMENT = bind(AttrImplSignature.GET_OWNER_ELEMENT);
+    private static final MethodHandle GET_NAME = bind(AttrImplSignature.GET_NAME);
+    private static final MethodHandle GET_VALUE = bind(AttrImplSignature.GET_VALUE);
 
     private AttrImplBinding() {
     }
@@ -60,6 +63,23 @@ public final class AttrImplBinding {
             return result.address();
         } catch (Throwable t) {
             throw Downcall.failed(AttrImplSignature.GET_OWNER_ELEMENT.symbol(), t);
+        }
+    }
+
+    public static String getName(long peer) {
+        return invokeGetter(GET_NAME, AttrImplSignature.GET_NAME.symbol(), peer);
+    }
+
+    public static String getValue(long peer) {
+        return invokeGetter(GET_VALUE, AttrImplSignature.GET_VALUE.symbol(), peer);
+    }
+
+    private static String invokeGetter(MethodHandle handle, String symbol, long peer) {
+        try (Char16StringExchange exchange = new Char16StringExchange()) {
+            handle.invokeExact(exchange.segment(), MemorySegment.ofAddress(peer));
+            return exchange.value();
+        } catch (Throwable t) {
+            throw Downcall.failed(symbol, t);
         }
     }
 }

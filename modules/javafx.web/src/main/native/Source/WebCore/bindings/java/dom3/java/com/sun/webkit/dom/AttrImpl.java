@@ -44,7 +44,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 // Attributes
     @Override
     public String getName() {
-        return getNameImpl(getPeer());
+        return AttrImplBinding.getName(getPeer());
     }
     native static String getNameImpl(long peer);
 
@@ -56,7 +56,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 
     @Override
     public String getValue() {
-        return getValueImpl(getPeer());
+        return AttrImplBinding.getValue(getPeer());
     }
     native static String getValueImpl(long peer);
 
