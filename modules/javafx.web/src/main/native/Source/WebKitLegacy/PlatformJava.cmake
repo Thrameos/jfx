@@ -135,6 +135,44 @@ list(APPEND WebKitLegacy_SOURCES
     java/storage/WebDatabaseProviderJava.cpp
 )
 
+# JNI-to-Panama migration: new leaf downcall targets live only here, never
+# mixed into the java/DOM, java/WebCoreSupport, etc. files above -- so that
+# retiring a subsystem's old JNI files at the end of the migration is a plain
+# deletion, not an untangling.
+list(APPEND WebKitLegacy_SOURCES
+    java/interop/dom_element.cpp
+    java/interop/dom_node.cpp
+    java/interop/dom_character_data.cpp
+    java/interop/dom_attr.cpp
+    java/interop/dom_html_element.cpp
+    java/interop/dom_html_anchor_element.cpp
+    java/interop/dom_html_image_element.cpp
+    java/interop/dom_html_table_element.cpp
+    java/interop/dom_html_select_element.cpp
+    java/interop/dom_html_form_element.cpp
+    java/interop/dom_html_body_element.cpp
+    java/interop/dom_named_node_map.cpp
+    java/interop/dom_node_list.cpp
+    java/interop/dom_document.cpp
+    java/interop/dom_html_input_element.cpp
+    java/interop/dom_html_text_area_element.cpp
+    java/interop/dom_css_font_face_rule.cpp
+    java/interop/dom_css_import_rule.cpp
+    java/interop/dom_css_media_rule.cpp
+    java/interop/dom_css_page_rule.cpp
+    java/interop/dom_css_primitive_value.cpp
+    java/interop/dom_css_rule.cpp
+    java/interop/dom_css_rule_list.cpp
+    java/interop/dom_css_style_declaration.cpp
+    java/interop/dom_css_style_rule.cpp
+    java/interop/dom_css_style_sheet.cpp
+    java/interop/dom_css_value.cpp
+    java/interop/dom_css_value_list.cpp
+    java/interop/dom_counter.cpp
+    java/interop/dom_dom_implementation.cpp
+    java/interop/dom_dom_string_list.cpp
+)
+
 # for DRT
 list(APPEND WebKitLegacy_PRIVATE_LIBRARIES
     WebKit::WebCoreTestSupport

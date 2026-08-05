@@ -30,6 +30,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLInputElement;
 
+import com.sun.webkit.dom.interop.HTMLInputElementImplBinding;
+
 public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputElement {
     HTMLInputElementImpl(long peer) {
         super(peer);
@@ -43,102 +45,111 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 // Attributes
     @Override
     public String getAccept() {
-        return getAcceptImpl(getPeer());
+        return HTMLInputElementImplBinding.getAccept(getPeer());
     }
     native static String getAcceptImpl(long peer);
 
     @Override
     public void setAccept(String value) {
-        setAcceptImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setAccept(getPeer(), value);
     }
     native static void setAcceptImpl(long peer, String value);
 
     @Override
     public String getAlt() {
-        return getAltImpl(getPeer());
+        return HTMLInputElementImplBinding.getAlt(getPeer());
     }
     native static String getAltImpl(long peer);
 
     @Override
     public void setAlt(String value) {
-        setAltImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setAlt(getPeer(), value);
     }
     native static void setAltImpl(long peer, String value);
 
     public String getAutocomplete() {
-        return getAutocompleteImpl(getPeer());
+        return HTMLInputElementImplBinding.getAutocomplete(getPeer());
     }
     native static String getAutocompleteImpl(long peer);
 
+    // NOTE: setAutocomplete still routes through the old JNI Impl -- no
+    // native symbol was ever implemented for it (confirmed via `nm -D` on
+    // the built .so), so migrating it would be new functionality, not a
+    // migration (same reasoning as the phantom methods reverted in
+    // ElementImpl/DocumentImpl).
     public void setAutocomplete(String value) {
         setAutocompleteImpl(getPeer(), value);
     }
     native static void setAutocompleteImpl(long peer, String value);
 
     public boolean getAutofocus() {
-        return getAutofocusImpl(getPeer());
+        return HTMLInputElementImplBinding.getAutofocus(getPeer());
     }
     native static boolean getAutofocusImpl(long peer);
 
     public void setAutofocus(boolean value) {
-        setAutofocusImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setAutofocus(getPeer(), value);
     }
     native static void setAutofocusImpl(long peer, boolean value);
 
     @Override
     public boolean getDefaultChecked() {
-        return getDefaultCheckedImpl(getPeer());
+        return HTMLInputElementImplBinding.getDefaultChecked(getPeer());
     }
     native static boolean getDefaultCheckedImpl(long peer);
 
     @Override
     public void setDefaultChecked(boolean value) {
-        setDefaultCheckedImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setDefaultChecked(getPeer(), value);
     }
     native static void setDefaultCheckedImpl(long peer, boolean value);
 
     @Override
     public boolean getChecked() {
-        return getCheckedImpl(getPeer());
+        return HTMLInputElementImplBinding.getChecked(getPeer());
     }
     native static boolean getCheckedImpl(long peer);
 
     @Override
     public void setChecked(boolean value) {
-        setCheckedImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setChecked(getPeer(), value);
     }
     native static void setCheckedImpl(long peer, boolean value);
 
     public String getDirName() {
-        return getDirNameImpl(getPeer());
+        return HTMLInputElementImplBinding.getDirName(getPeer());
     }
     native static String getDirNameImpl(long peer);
 
     public void setDirName(String value) {
-        setDirNameImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setDirName(getPeer(), value);
     }
     native static void setDirNameImpl(long peer, String value);
 
     @Override
     public boolean getDisabled() {
-        return getDisabledImpl(getPeer());
+        return HTMLInputElementImplBinding.getDisabled(getPeer());
     }
     native static boolean getDisabledImpl(long peer);
 
     @Override
     public void setDisabled(boolean value) {
-        setDisabledImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setDisabled(getPeer(), value);
     }
     native static void setDisabledImpl(long peer, boolean value);
 
     @Override
     public HTMLFormElement getForm() {
-        return HTMLFormElementImpl.getImpl(getFormImpl(getPeer()));
+        return HTMLFormElementImpl.getImpl(HTMLInputElementImplBinding.getForm(getPeer()));
     }
     native static long getFormImpl(long peer);
 
+    // NOTE: setFormAction/setFormEnctype/setFormMethod/setType below still
+    // route through the old JNI Impl -- no native symbol was ever
+    // implemented for any of them (confirmed via `nm -D`), so migrating
+    // them would be new functionality, not a migration.
     public String getFormAction() {
-        return getFormActionImpl(getPeer());
+        return HTMLInputElementImplBinding.getFormAction(getPeer());
     }
     native static String getFormActionImpl(long peer);
 
@@ -148,7 +159,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     native static void setFormActionImpl(long peer, String value);
 
     public String getFormEnctype() {
-        return getFormEnctypeImpl(getPeer());
+        return HTMLInputElementImplBinding.getFormEnctype(getPeer());
     }
     native static String getFormEnctypeImpl(long peer);
 
@@ -158,7 +169,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     native static void setFormEnctypeImpl(long peer, String value);
 
     public String getFormMethod() {
-        return getFormMethodImpl(getPeer());
+        return HTMLInputElementImplBinding.getFormMethod(getPeer());
     }
     native static String getFormMethodImpl(long peer);
 
@@ -168,178 +179,180 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     native static void setFormMethodImpl(long peer, String value);
 
     public boolean getFormNoValidate() {
-        return getFormNoValidateImpl(getPeer());
+        return HTMLInputElementImplBinding.getFormNoValidate(getPeer());
     }
     native static boolean getFormNoValidateImpl(long peer);
 
     public void setFormNoValidate(boolean value) {
-        setFormNoValidateImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setFormNoValidate(getPeer(), value);
     }
     native static void setFormNoValidateImpl(long peer, boolean value);
 
     public String getFormTarget() {
-        return getFormTargetImpl(getPeer());
+        return HTMLInputElementImplBinding.getFormTarget(getPeer());
     }
     native static String getFormTargetImpl(long peer);
 
     public void setFormTarget(String value) {
-        setFormTargetImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setFormTarget(getPeer(), value);
     }
     native static void setFormTargetImpl(long peer, String value);
 
     public int getHeight() {
-        return getHeightImpl(getPeer());
+        return HTMLInputElementImplBinding.getHeight(getPeer());
     }
     native static int getHeightImpl(long peer);
 
+    // NOTE: setHeight/setWidth still route through the old JNI Impl -- no
+    // native symbol was ever implemented for either (confirmed via `nm -D`).
     public void setHeight(int value) {
         setHeightImpl(getPeer(), value);
     }
     native static void setHeightImpl(long peer, int value);
 
     public boolean getIndeterminate() {
-        return getIndeterminateImpl(getPeer());
+        return HTMLInputElementImplBinding.getIndeterminate(getPeer());
     }
     native static boolean getIndeterminateImpl(long peer);
 
     public void setIndeterminate(boolean value) {
-        setIndeterminateImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setIndeterminate(getPeer(), value);
     }
     native static void setIndeterminateImpl(long peer, boolean value);
 
     public String getMax() {
-        return getMaxImpl(getPeer());
+        return HTMLInputElementImplBinding.getMax(getPeer());
     }
     native static String getMaxImpl(long peer);
 
     public void setMax(String value) {
-        setMaxImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setMax(getPeer(), value);
     }
     native static void setMaxImpl(long peer, String value);
 
     @Override
     public int getMaxLength() {
-        return getMaxLengthImpl(getPeer());
+        return HTMLInputElementImplBinding.getMaxLength(getPeer());
     }
     native static int getMaxLengthImpl(long peer);
 
     @Override
     public void setMaxLength(int value) throws DOMException {
-        setMaxLengthImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setMaxLength(getPeer(), value);
     }
     native static void setMaxLengthImpl(long peer, int value);
 
     public String getMin() {
-        return getMinImpl(getPeer());
+        return HTMLInputElementImplBinding.getMin(getPeer());
     }
     native static String getMinImpl(long peer);
 
     public void setMin(String value) {
-        setMinImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setMin(getPeer(), value);
     }
     native static void setMinImpl(long peer, String value);
 
     public boolean getMultiple() {
-        return getMultipleImpl(getPeer());
+        return HTMLInputElementImplBinding.getMultiple(getPeer());
     }
     native static boolean getMultipleImpl(long peer);
 
     public void setMultiple(boolean value) {
-        setMultipleImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setMultiple(getPeer(), value);
     }
     native static void setMultipleImpl(long peer, boolean value);
 
     @Override
     public String getName() {
-        return getNameImpl(getPeer());
+        return HTMLInputElementImplBinding.getName(getPeer());
     }
     native static String getNameImpl(long peer);
 
     @Override
     public void setName(String value) {
-        setNameImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
     public String getPattern() {
-        return getPatternImpl(getPeer());
+        return HTMLInputElementImplBinding.getPattern(getPeer());
     }
     native static String getPatternImpl(long peer);
 
     public void setPattern(String value) {
-        setPatternImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setPattern(getPeer(), value);
     }
     native static void setPatternImpl(long peer, String value);
 
     public String getPlaceholder() {
-        return getPlaceholderImpl(getPeer());
+        return HTMLInputElementImplBinding.getPlaceholder(getPeer());
     }
     native static String getPlaceholderImpl(long peer);
 
     public void setPlaceholder(String value) {
-        setPlaceholderImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setPlaceholder(getPeer(), value);
     }
     native static void setPlaceholderImpl(long peer, String value);
 
     @Override
     public boolean getReadOnly() {
-        return getReadOnlyImpl(getPeer());
+        return HTMLInputElementImplBinding.getReadOnly(getPeer());
     }
     native static boolean getReadOnlyImpl(long peer);
 
     @Override
     public void setReadOnly(boolean value) {
-        setReadOnlyImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setReadOnly(getPeer(), value);
     }
     native static void setReadOnlyImpl(long peer, boolean value);
 
     public boolean getRequired() {
-        return getRequiredImpl(getPeer());
+        return HTMLInputElementImplBinding.getRequired(getPeer());
     }
     native static boolean getRequiredImpl(long peer);
 
     public void setRequired(boolean value) {
-        setRequiredImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setRequired(getPeer(), value);
     }
     native static void setRequiredImpl(long peer, boolean value);
 
     @Override
     public String getSize() {
-        return getSizeImpl(getPeer())+"";
+        return HTMLInputElementImplBinding.getSize(getPeer())+"";
     }
     native static String getSizeImpl(long peer);
 
     @Override
     public void setSize(String value) {
-        setSizeImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setSize(getPeer(), value);
     }
     native static void setSizeImpl(long peer, String value);
 
     @Override
     public String getSrc() {
-        return getSrcImpl(getPeer());
+        return HTMLInputElementImplBinding.getSrc(getPeer());
     }
     native static String getSrcImpl(long peer);
 
     @Override
     public void setSrc(String value) {
-        setSrcImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setSrc(getPeer(), value);
     }
     native static void setSrcImpl(long peer, String value);
 
     public String getStep() {
-        return getStepImpl(getPeer());
+        return HTMLInputElementImplBinding.getStep(getPeer());
     }
     native static String getStepImpl(long peer);
 
     public void setStep(String value) {
-        setStepImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setStep(getPeer(), value);
     }
     native static void setStepImpl(long peer, String value);
 
     @Override
     public String getType() {
-        return getTypeImpl(getPeer());
+        return HTMLInputElementImplBinding.getType(getPeer());
     }
     native static String getTypeImpl(long peer);
 
@@ -348,6 +361,14 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     }
     native static void setTypeImpl(long peer, String value);
 
+    // NOTE: getDefaultValue/setDefaultValue and getValueAsDate/
+    // setValueAsDate below still route through the old JNI Impl.
+    // getDefaultValue/setDefaultValue: no native symbol was ever
+    // implemented (confirmed via `nm -D`), so migrating would be new
+    // functionality. getValueAsDate/setValueAsDate: the old JNI symbol IS
+    // real, but it round-trips a WallTime through
+    // `approximateMonotonicTime().get_time_value()`, a time-representation
+    // shape with no proven Panama pattern yet -- deferred, not phantom.
     @Override
     public String getDefaultValue() {
         return getDefaultValueImpl(getPeer());
@@ -362,13 +383,13 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
     @Override
     public String getValue() {
-        return getValueImpl(getPeer());
+        return HTMLInputElementImplBinding.getValue(getPeer());
     }
     native static String getValueImpl(long peer);
 
     @Override
     public void setValue(String value) {
-        setValueImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setValue(getPeer(), value);
     }
     native static void setValueImpl(long peer, String value);
 
@@ -383,17 +404,17 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     native static void setValueAsDateImpl(long peer, long value);
 
     public double getValueAsNumber() {
-        return getValueAsNumberImpl(getPeer());
+        return HTMLInputElementImplBinding.getValueAsNumber(getPeer());
     }
     native static double getValueAsNumberImpl(long peer);
 
     public void setValueAsNumber(double value) throws DOMException {
-        setValueAsNumberImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setValueAsNumber(getPeer(), value);
     }
     native static void setValueAsNumberImpl(long peer, double value);
 
     public int getWidth() {
-        return getWidthImpl(getPeer());
+        return HTMLInputElementImplBinding.getWidth(getPeer());
     }
     native static int getWidthImpl(long peer);
 
@@ -403,44 +424,49 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     native static void setWidthImpl(long peer, int value);
 
     public boolean getWillValidate() {
-        return getWillValidateImpl(getPeer());
+        return HTMLInputElementImplBinding.getWillValidate(getPeer());
     }
     native static boolean getWillValidateImpl(long peer);
 
     public String getValidationMessage() {
-        return getValidationMessageImpl(getPeer());
+        return HTMLInputElementImplBinding.getValidationMessage(getPeer());
     }
     native static String getValidationMessageImpl(long peer);
 
     public NodeList getLabels() {
-        return NodeListImpl.getImpl(getLabelsImpl(getPeer()));
+        return NodeListImpl.getImpl(HTMLInputElementImplBinding.getLabels(getPeer()));
     }
     native static long getLabelsImpl(long peer);
 
     @Override
     public String getAlign() {
-        return getAlignImpl(getPeer());
+        return HTMLInputElementImplBinding.getAlign(getPeer());
     }
     native static String getAlignImpl(long peer);
 
     @Override
     public void setAlign(String value) {
-        setAlignImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setAlign(getPeer(), value);
     }
     native static void setAlignImpl(long peer, String value);
 
     @Override
     public String getUseMap() {
-        return getUseMapImpl(getPeer());
+        return HTMLInputElementImplBinding.getUseMap(getPeer());
     }
     native static String getUseMapImpl(long peer);
 
     @Override
     public void setUseMap(String value) {
-        setUseMapImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setUseMap(getPeer(), value);
     }
     native static void setUseMapImpl(long peer, String value);
 
+    // NOTE: getIncremental/setIncremental still route through the old JNI
+    // Impl -- no native symbol was ever implemented for either (confirmed
+    // via `nm -D`), so migrating them would be new functionality, not a
+    // migration. Also not part of org.w3c.dom.html.HTMLInputElement, a
+    // JavaFX-only extension.
     public boolean getIncremental() {
         return getIncrementalImpl(getPeer());
     }
@@ -453,13 +479,13 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
     @Override
     public String getAccessKey() {
-        return getAccessKeyImpl(getPeer());
+        return HTMLInputElementImplBinding.getAccessKey(getPeer());
     }
     native static String getAccessKeyImpl(long peer);
 
     @Override
     public void setAccessKey(String value) {
-        setAccessKeyImpl(getPeer(), value);
+        HTMLInputElementImplBinding.setAccessKey(getPeer(), value);
     }
     native static void setAccessKeyImpl(long peer, String value);
 
@@ -467,8 +493,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 // Functions
     public void stepUp(int n) throws DOMException
     {
-        stepUpImpl(getPeer()
-            , n);
+        HTMLInputElementImplBinding.stepUp(getPeer(), n);
     }
     native static void stepUpImpl(long peer
         , int n);
@@ -476,8 +501,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
     public void stepDown(int n) throws DOMException
     {
-        stepDownImpl(getPeer()
-            , n);
+        HTMLInputElementImplBinding.stepDown(getPeer(), n);
     }
     native static void stepDownImpl(long peer
         , int n);
@@ -485,15 +509,14 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
 
     public boolean checkValidity()
     {
-        return checkValidityImpl(getPeer());
+        return HTMLInputElementImplBinding.checkValidity(getPeer());
     }
     native static boolean checkValidityImpl(long peer);
 
 
     public void setCustomValidity(String error)
     {
-        setCustomValidityImpl(getPeer()
-            , error);
+        HTMLInputElementImplBinding.setCustomValidity(getPeer(), error);
     }
     native static void setCustomValidityImpl(long peer
         , String error);
@@ -502,15 +525,14 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     @Override
     public void select()
     {
-        selectImpl(getPeer());
+        HTMLInputElementImplBinding.select(getPeer());
     }
     native static void selectImpl(long peer);
 
 
     public void setRangeText(String replacement) throws DOMException
     {
-        setRangeTextImpl(getPeer()
-            , replacement);
+        HTMLInputElementImplBinding.setRangeText(getPeer(), replacement);
     }
     native static void setRangeTextImpl(long peer
         , String replacement);
@@ -521,11 +543,7 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
         , int end
         , String selectionMode) throws DOMException
     {
-        setRangeTextExImpl(getPeer()
-            , replacement
-            , start
-            , end
-            , selectionMode);
+        HTMLInputElementImplBinding.setRangeTextEx(getPeer(), replacement, start, end, selectionMode);
     }
     native static void setRangeTextExImpl(long peer
         , String replacement
@@ -537,15 +555,14 @@ public class HTMLInputElementImpl extends HTMLElementImpl implements HTMLInputEl
     @Override
     public void click()
     {
-        clickImpl(getPeer());
+        HTMLInputElementImplBinding.click(getPeer());
     }
     native static void clickImpl(long peer);
 
 
     public void setValueForUser(String value)
     {
-        setValueForUserImpl(getPeer()
-            , value);
+        HTMLInputElementImplBinding.setValueForUser(getPeer(), value);
     }
     native static void setValueForUserImpl(long peer
         , String value);

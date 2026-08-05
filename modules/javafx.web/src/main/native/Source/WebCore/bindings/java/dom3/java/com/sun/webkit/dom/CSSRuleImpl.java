@@ -31,6 +31,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.sun.webkit.dom.interop.CSSRuleImplBinding;
+
 public class CSSRuleImpl implements CSSRule {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -106,31 +108,31 @@ public class CSSRuleImpl implements CSSRule {
 // Attributes
     @Override
     public short getType() {
-        return getTypeImpl(getPeer());
+        return CSSRuleImplBinding.getType(getPeer());
     }
     native static short getTypeImpl(long peer);
 
     @Override
     public String getCssText() {
-        return getCssTextImpl(getPeer());
+        return CSSRuleImplBinding.getCssText(getPeer());
     }
     native static String getCssTextImpl(long peer);
 
     @Override
     public void setCssText(String value) throws DOMException {
-        setCssTextImpl(getPeer(), value);
+        CSSRuleImplBinding.setCssText(getPeer(), value);
     }
     native static void setCssTextImpl(long peer, String value);
 
     @Override
     public CSSStyleSheet getParentStyleSheet() {
-        return CSSStyleSheetImpl.getImpl(getParentStyleSheetImpl(getPeer()));
+        return CSSStyleSheetImpl.getImpl(CSSRuleImplBinding.getParentStyleSheet(getPeer()));
     }
     native static long getParentStyleSheetImpl(long peer);
 
     @Override
     public CSSRule getParentRule() {
-        return CSSRuleImpl.getImpl(getParentRuleImpl(getPeer()));
+        return CSSRuleImpl.getImpl(CSSRuleImplBinding.getParentRule(getPeer()));
     }
     native static long getParentRuleImpl(long peer);
 

@@ -28,6 +28,8 @@ package com.sun.webkit.dom;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleRule;
 
+import com.sun.webkit.dom.interop.CSSStyleRuleImplBinding;
+
 public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
     CSSStyleRuleImpl(long peer) {
         super(peer);
@@ -41,19 +43,19 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
 // Attributes
     @Override
     public String getSelectorText() {
-        return getSelectorTextImpl(getPeer());
+        return CSSStyleRuleImplBinding.getSelectorText(getPeer());
     }
     native static String getSelectorTextImpl(long peer);
 
     @Override
     public void setSelectorText(String value) {
-        setSelectorTextImpl(getPeer(), value);
+        CSSStyleRuleImplBinding.setSelectorText(getPeer(), value);
     }
     native static void setSelectorTextImpl(long peer, String value);
 
     @Override
     public CSSStyleDeclaration getStyle() {
-        return CSSStyleDeclarationImpl.getImpl(getStyleImpl(getPeer()));
+        return CSSStyleDeclarationImpl.getImpl(CSSStyleRuleImplBinding.getStyle(getPeer()));
     }
     native static long getStyleImpl(long peer);
 

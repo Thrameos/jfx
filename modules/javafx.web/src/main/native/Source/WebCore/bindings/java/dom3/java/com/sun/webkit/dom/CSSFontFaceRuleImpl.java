@@ -27,6 +27,7 @@ package com.sun.webkit.dom;
 
 import org.w3c.dom.css.CSSFontFaceRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
+import com.sun.webkit.dom.interop.CSSFontFaceRuleImplBinding;
 
 public class CSSFontFaceRuleImpl extends CSSRuleImpl implements CSSFontFaceRule {
     CSSFontFaceRuleImpl(long peer) {
@@ -41,7 +42,7 @@ public class CSSFontFaceRuleImpl extends CSSRuleImpl implements CSSFontFaceRule 
 // Attributes
     @Override
     public CSSStyleDeclaration getStyle() {
-        return CSSStyleDeclarationImpl.getImpl(getStyleImpl(getPeer()));
+        return CSSStyleDeclarationImpl.getImpl(CSSFontFaceRuleImplBinding.getStyle(getPeer()));
     }
     native static long getStyleImpl(long peer);
 

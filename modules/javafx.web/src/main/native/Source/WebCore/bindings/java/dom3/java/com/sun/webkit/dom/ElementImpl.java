@@ -34,6 +34,7 @@ import org.w3c.dom.TypeInfo;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.html.HTMLCollection;
+import com.sun.webkit.dom.interop.ElementImplBinding;
 
 public class ElementImpl extends NodeImpl implements Element {
     ElementImpl(long peer) {
@@ -53,13 +54,13 @@ public class ElementImpl extends NodeImpl implements Element {
 // Attributes
     @Override
     public String getTagName() {
-        return getTagNameImpl(getPeer());
+        return ElementImplBinding.getTagName(getPeer());
     }
     native static String getTagNameImpl(long peer);
 
     @Override
     public NamedNodeMap getAttributes() {
-        return NamedNodeMapImpl.getImpl(getAttributesImpl(getPeer()));
+        return NamedNodeMapImpl.getImpl(ElementImplBinding.getAttributes(getPeer()));
     }
     native static long getAttributesImpl(long peer);
 
@@ -69,117 +70,124 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getStyleImpl(long peer);
 
     public String getId() {
-        return getIdImpl(getPeer());
+        return ElementImplBinding.getId(getPeer());
     }
     native static String getIdImpl(long peer);
 
     public void setId(String value) {
-        setIdImpl(getPeer(), value);
+        ElementImplBinding.setId(getPeer(), value);
     }
     native static void setIdImpl(long peer, String value);
 
     public double getOffsetLeft() {
-        return getOffsetLeftImpl(getPeer());
+        return ElementImplBinding.getOffsetLeft(getPeer());
     }
     native static double getOffsetLeftImpl(long peer);
 
     public double getOffsetTop() {
-        return getOffsetTopImpl(getPeer());
+        return ElementImplBinding.getOffsetTop(getPeer());
     }
     native static double getOffsetTopImpl(long peer);
 
     public double getOffsetWidth() {
-        return getOffsetWidthImpl(getPeer());
+        return ElementImplBinding.getOffsetWidth(getPeer());
     }
     native static double getOffsetWidthImpl(long peer);
 
     public double getOffsetHeight() {
-        return getOffsetHeightImpl(getPeer());
+        return ElementImplBinding.getOffsetHeight(getPeer());
     }
     native static double getOffsetHeightImpl(long peer);
 
     public double getClientLeft() {
-        return getClientLeftImpl(getPeer());
+        return ElementImplBinding.getClientLeft(getPeer());
     }
     native static double getClientLeftImpl(long peer);
 
     public double getClientTop() {
-        return getClientTopImpl(getPeer());
+        return ElementImplBinding.getClientTop(getPeer());
     }
     native static double getClientTopImpl(long peer);
 
     public double getClientWidth() {
-        return getClientWidthImpl(getPeer());
+        return ElementImplBinding.getClientWidth(getPeer());
     }
     native static double getClientWidthImpl(long peer);
 
     public double getClientHeight() {
-        return getClientHeightImpl(getPeer());
+        return ElementImplBinding.getClientHeight(getPeer());
     }
     native static double getClientHeightImpl(long peer);
 
     public int getScrollLeft() {
-        return getScrollLeftImpl(getPeer());
+        return ElementImplBinding.getScrollLeft(getPeer());
     }
     native static int getScrollLeftImpl(long peer);
 
     public void setScrollLeft(int value) {
-        setScrollLeftImpl(getPeer(), value);
+        ElementImplBinding.setScrollLeft(getPeer(), value);
     }
     native static void setScrollLeftImpl(long peer, int value);
 
     public int getScrollTop() {
-        return getScrollTopImpl(getPeer());
+        return ElementImplBinding.getScrollTop(getPeer());
     }
     native static int getScrollTopImpl(long peer);
 
     public void setScrollTop(int value) {
-        setScrollTopImpl(getPeer(), value);
+        ElementImplBinding.setScrollTop(getPeer(), value);
     }
     native static void setScrollTopImpl(long peer, int value);
 
     public int getScrollWidth() {
-        return getScrollWidthImpl(getPeer());
+        return ElementImplBinding.getScrollWidth(getPeer());
     }
     native static int getScrollWidthImpl(long peer);
 
     public int getScrollHeight() {
-        return getScrollHeightImpl(getPeer());
+        return ElementImplBinding.getScrollHeight(getPeer());
     }
     native static int getScrollHeightImpl(long peer);
 
     public Element getOffsetParent() {
-        return ElementImpl.getImpl(getOffsetParentImpl(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getOffsetParent(getPeer()));
     }
     native static long getOffsetParentImpl(long peer);
 
+    // NOT migrated: getInnerHTMLImpl has no working JNI implementation to
+    // preserve behavior from (confirmed via `nm -D` on the built .so -- no
+    // Java_..._getInnerHTMLImpl symbol exists at all). Migrating it would be
+    // new WebKit-side implementation work, not a migration -- same exclusion
+    // rule the 10-class batch's six skipped setters already established.
     public String getInnerHTML() {
         return getInnerHTMLImpl(getPeer());
     }
     native static String getInnerHTMLImpl(long peer);
 
     public void setInnerHTML(String value) throws DOMException {
-        setInnerHTMLImpl(getPeer(), value);
+        ElementImplBinding.setInnerHTML(getPeer(), value);
     }
     native static void setInnerHTMLImpl(long peer, String value);
 
+    // NOT migrated: getOuterHTMLImpl has no working JNI implementation either
+    // (same `nm -D` check as getInnerHTML above).
     public String getOuterHTML() {
         return getOuterHTMLImpl(getPeer());
     }
     native static String getOuterHTMLImpl(long peer);
 
     public void setOuterHTML(String value) throws DOMException {
-        setOuterHTMLImpl(getPeer(), value);
+        ElementImplBinding.setOuterHTML(getPeer(), value);
     }
     native static void setOuterHTMLImpl(long peer, String value);
 
     public String getClassName() {
-        return getClassNameImpl(getPeer());
+        return ElementImplBinding.getClassName(getPeer());
     }
     native static String getClassNameImpl(long peer);
 
     public void setClassName(String value) {
-        setClassNameImpl(getPeer(), value);
+        ElementImplBinding.setClassName(getPeer(), value);
     }
     native static void setClassNameImpl(long peer, String value);
 
@@ -924,12 +932,12 @@ public class ElementImpl extends NodeImpl implements Element {
     native static void setOnwheelImpl(long peer, long value);
 
     public Element getPreviousElementSibling() {
-        return ElementImpl.getImpl(getPreviousElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getPreviousElementSibling(getPeer()));
     }
     native static long getPreviousElementSiblingImpl(long peer);
 
     public Element getNextElementSibling() {
-        return ElementImpl.getImpl(getNextElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getNextElementSibling(getPeer()));
     }
     native static long getNextElementSiblingImpl(long peer);
 
@@ -939,18 +947,26 @@ public class ElementImpl extends NodeImpl implements Element {
     native static long getChildrenImpl(long peer);
 
     public Element getFirstElementChild() {
-        return ElementImpl.getImpl(getFirstElementChildImpl(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getFirstElementChild(getPeer()));
     }
+    // Migration pilot: getFirstElementChild() above now calls the Panama
+    // downcall in interop.ElementImplBinding instead. getFirstElementChildImpl/
+    // its JNI native implementation are kept, unmodified, as the fallback/
+    // reference implementation until the Panama path is proven out.
     native static long getFirstElementChildImpl(long peer);
 
     public Element getLastElementChild() {
-        return ElementImpl.getImpl(getLastElementChildImpl(getPeer()));
+        return ElementImpl.getImpl(ElementImplBinding.getLastElementChild(getPeer()));
     }
     native static long getLastElementChildImpl(long peer);
 
     public int getChildElementCount() {
-        return getChildElementCountImpl(getPeer());
+        return ElementImplBinding.getChildElementCount(getPeer());
     }
+    // Migration pilot: getChildElementCount() above now calls the Panama
+    // downcall in interop.ElementImplBinding instead. getChildElementCountImpl/
+    // its JNI native implementation are kept, unmodified, as the fallback/
+    // reference implementation until the Panama path is proven out.
     native static int getChildElementCountImpl(long peer);
 
 
@@ -958,8 +974,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public String getAttribute(String name)
     {
-        return getAttributeImpl(getPeer()
-            , name);
+        return ElementImplBinding.getAttribute(getPeer(), name);
     }
     native static String getAttributeImpl(long peer
         , String name);
@@ -969,9 +984,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public void setAttribute(String name
         , String value) throws DOMException
     {
-        setAttributeImpl(getPeer()
-            , name
-            , value);
+        ElementImplBinding.setAttribute(getPeer(), name, value);
     }
     native static void setAttributeImpl(long peer
         , String name
@@ -981,8 +994,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public void removeAttribute(String name)
     {
-        removeAttributeImpl(getPeer()
-            , name);
+        ElementImplBinding.removeAttribute(getPeer(), name);
     }
     native static void removeAttributeImpl(long peer
         , String name);
@@ -991,8 +1003,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public Attr getAttributeNode(String name)
     {
-        return AttrImpl.getImpl(getAttributeNodeImpl(getPeer()
-            , name));
+        return AttrImpl.getImpl(ElementImplBinding.getAttributeNode(getPeer(), name));
     }
     native static long getAttributeNodeImpl(long peer
         , String name);
@@ -1031,7 +1042,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public boolean hasAttributes()
     {
-        return hasAttributesImpl(getPeer());
+        return ElementImplBinding.hasAttributes(getPeer());
     }
     native static boolean hasAttributesImpl(long peer);
 
@@ -1040,9 +1051,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public String getAttributeNS(String namespaceURI
         , String localName)
     {
-        return getAttributeNSImpl(getPeer()
-            , namespaceURI
-            , localName);
+        return ElementImplBinding.getAttributeNS(getPeer(), namespaceURI, localName);
     }
     native static String getAttributeNSImpl(long peer
         , String namespaceURI
@@ -1054,10 +1063,7 @@ public class ElementImpl extends NodeImpl implements Element {
         , String qualifiedName
         , String value) throws DOMException
     {
-        setAttributeNSImpl(getPeer()
-            , namespaceURI
-            , qualifiedName
-            , value);
+        ElementImplBinding.setAttributeNS(getPeer(), namespaceURI, qualifiedName, value);
     }
     native static void setAttributeNSImpl(long peer
         , String namespaceURI
@@ -1069,9 +1075,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public void removeAttributeNS(String namespaceURI
         , String localName)
     {
-        removeAttributeNSImpl(getPeer()
-            , namespaceURI
-            , localName);
+        ElementImplBinding.removeAttributeNS(getPeer(), namespaceURI, localName);
     }
     native static void removeAttributeNSImpl(long peer
         , String namespaceURI
@@ -1095,9 +1099,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public Attr getAttributeNodeNS(String namespaceURI
         , String localName)
     {
-        return AttrImpl.getImpl(getAttributeNodeNSImpl(getPeer()
-            , namespaceURI
-            , localName));
+        return AttrImpl.getImpl(ElementImplBinding.getAttributeNodeNS(getPeer(), namespaceURI, localName));
     }
     native static long getAttributeNodeNSImpl(long peer
         , String namespaceURI
@@ -1117,8 +1119,7 @@ public class ElementImpl extends NodeImpl implements Element {
     @Override
     public boolean hasAttribute(String name)
     {
-        return hasAttributeImpl(getPeer()
-            , name);
+        return ElementImplBinding.hasAttribute(getPeer(), name);
     }
     native static boolean hasAttributeImpl(long peer
         , String name);
@@ -1128,9 +1129,7 @@ public class ElementImpl extends NodeImpl implements Element {
     public boolean hasAttributeNS(String namespaceURI
         , String localName)
     {
-        return hasAttributeNSImpl(getPeer()
-            , namespaceURI
-            , localName);
+        return ElementImplBinding.hasAttributeNS(getPeer(), namespaceURI, localName);
     }
     native static boolean hasAttributeNSImpl(long peer
         , String namespaceURI
@@ -1139,22 +1138,21 @@ public class ElementImpl extends NodeImpl implements Element {
 
     public void focus()
     {
-        focusImpl(getPeer());
+        ElementImplBinding.focus(getPeer());
     }
     native static void focusImpl(long peer);
 
 
     public void blur()
     {
-        blurImpl(getPeer());
+        ElementImplBinding.blur(getPeer());
     }
     native static void blurImpl(long peer);
 
 
     public void scrollIntoView(boolean alignWithTop)
     {
-        scrollIntoViewImpl(getPeer()
-            , alignWithTop);
+        ElementImplBinding.scrollIntoView(getPeer(), alignWithTop);
     }
     native static void scrollIntoViewImpl(long peer
         , boolean alignWithTop);
@@ -1162,8 +1160,7 @@ public class ElementImpl extends NodeImpl implements Element {
 
     public void scrollIntoViewIfNeeded(boolean centerIfNeeded)
     {
-        scrollIntoViewIfNeededImpl(getPeer()
-            , centerIfNeeded);
+        ElementImplBinding.scrollIntoViewIfNeeded(getPeer(), centerIfNeeded);
     }
     native static void scrollIntoViewIfNeededImpl(long peer
         , boolean centerIfNeeded);
@@ -1196,19 +1193,21 @@ public class ElementImpl extends NodeImpl implements Element {
         , String name);
 
 
+    // NOT migrated: matchesImpl has no working JNI implementation (confirmed
+    // via `nm -D` -- no Java_..._matchesImpl symbol exists).
     public boolean matches(String selectors) throws DOMException
     {
-        return matchesImpl(getPeer()
-            , selectors);
+        return matchesImpl(getPeer(), selectors);
     }
     native static boolean matchesImpl(long peer
         , String selectors);
 
 
+    // NOT migrated: closestImpl has no working JNI implementation either
+    // (same `nm -D` check as matches above).
     public Element closest(String selectors) throws DOMException
     {
-        return ElementImpl.getImpl(closestImpl(getPeer()
-            , selectors));
+        return ElementImpl.getImpl(closestImpl(getPeer(), selectors));
     }
     native static long closestImpl(long peer
         , String selectors);
@@ -1216,8 +1215,7 @@ public class ElementImpl extends NodeImpl implements Element {
 
     public boolean webkitMatchesSelector(String selectors) throws DOMException
     {
-        return webkitMatchesSelectorImpl(getPeer()
-            , selectors);
+        return ElementImplBinding.webkitMatchesSelector(getPeer(), selectors);
     }
     native static boolean webkitMatchesSelectorImpl(long peer
         , String selectors);
@@ -1225,8 +1223,7 @@ public class ElementImpl extends NodeImpl implements Element {
 
     public void webkitRequestFullScreen(short flags)
     {
-        webkitRequestFullScreenImpl(getPeer()
-            , flags);
+        ElementImplBinding.webkitRequestFullScreen(getPeer(), flags);
     }
     native static void webkitRequestFullScreenImpl(long peer
         , short flags);
@@ -1234,22 +1231,21 @@ public class ElementImpl extends NodeImpl implements Element {
 
     public void webkitRequestFullscreen()
     {
-        webkitRequestFullscreenImpl(getPeer());
+        ElementImplBinding.webkitRequestFullscreen(getPeer());
     }
     native static void webkitRequestFullscreenImpl(long peer);
 
 
     public void remove() throws DOMException
     {
-        removeImpl(getPeer());
+        ElementImplBinding.remove(getPeer());
     }
     native static void removeImpl(long peer);
 
 
     public Element querySelector(String selectors) throws DOMException
     {
-        return ElementImpl.getImpl(querySelectorImpl(getPeer()
-            , selectors));
+        return ElementImpl.getImpl(ElementImplBinding.querySelector(getPeer(), selectors));
     }
     native static long querySelectorImpl(long peer
         , String selectors);
@@ -1257,8 +1253,7 @@ public class ElementImpl extends NodeImpl implements Element {
 
     public NodeList querySelectorAll(String selectors) throws DOMException
     {
-        return NodeListImpl.getImpl(querySelectorAllImpl(getPeer()
-            , selectors));
+        return NodeListImpl.getImpl(ElementImplBinding.querySelectorAll(getPeer(), selectors));
     }
     native static long querySelectorAllImpl(long peer
         , String selectors);

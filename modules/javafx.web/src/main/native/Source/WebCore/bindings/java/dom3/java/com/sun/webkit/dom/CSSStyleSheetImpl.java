@@ -30,6 +30,8 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.sun.webkit.dom.interop.CSSStyleSheetImplBinding;
+
 public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
     CSSStyleSheetImpl(long peer) {
         super(peer);
@@ -43,18 +45,18 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 // Attributes
     @Override
     public CSSRule getOwnerRule() {
-        return CSSRuleImpl.getImpl(getOwnerRuleImpl(getPeer()));
+        return CSSRuleImpl.getImpl(CSSStyleSheetImplBinding.getOwnerRule(getPeer()));
     }
     native static long getOwnerRuleImpl(long peer);
 
     @Override
     public CSSRuleList getCssRules() {
-        return CSSRuleListImpl.getImpl(getCssRulesImpl(getPeer()));
+        return CSSRuleListImpl.getImpl(CSSStyleSheetImplBinding.getCssRules(getPeer()));
     }
     native static long getCssRulesImpl(long peer);
 
     public CSSRuleList getRules() {
-        return CSSRuleListImpl.getImpl(getRulesImpl(getPeer()));
+        return CSSRuleListImpl.getImpl(CSSStyleSheetImplBinding.getRules(getPeer()));
     }
     native static long getRulesImpl(long peer);
 
@@ -64,7 +66,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
     public int insertRule(String rule
         , int index) throws DOMException
     {
-        return insertRuleImpl(getPeer()
+        return CSSStyleSheetImplBinding.insertRule(getPeer()
             , rule
             , index);
     }
@@ -76,7 +78,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
     @Override
     public void deleteRule(int index) throws DOMException
     {
-        deleteRuleImpl(getPeer()
+        CSSStyleSheetImplBinding.deleteRule(getPeer()
             , index);
     }
     native static void deleteRuleImpl(long peer
@@ -87,7 +89,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
         , String style
         , int index) throws DOMException
     {
-        return addRuleImpl(getPeer()
+        return CSSStyleSheetImplBinding.addRule(getPeer()
             , selector
             , style
             , index);
@@ -100,7 +102,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
     public void removeRule(int index) throws DOMException
     {
-        removeRuleImpl(getPeer()
+        CSSStyleSheetImplBinding.removeRule(getPeer()
             , index);
     }
     native static void removeRuleImpl(long peer

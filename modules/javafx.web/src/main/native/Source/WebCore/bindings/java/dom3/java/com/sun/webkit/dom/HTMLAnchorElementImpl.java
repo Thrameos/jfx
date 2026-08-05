@@ -27,6 +27,7 @@ package com.sun.webkit.dom;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.html.HTMLAnchorElement;
+import com.sun.webkit.dom.interop.HTMLAnchorElementImplBinding;
 
 public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchorElement {
     HTMLAnchorElementImpl(long peer) {
@@ -41,236 +42,236 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
 // Attributes
     @Override
     public String getCharset() {
-        return getCharsetImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getCharset(getPeer());
     }
     native static String getCharsetImpl(long peer);
 
     @Override
     public void setCharset(String value) {
-        setCharsetImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setCharset(getPeer(), value);
     }
     native static void setCharsetImpl(long peer, String value);
 
     @Override
     public String getCoords() {
-        return getCoordsImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getCoords(getPeer());
     }
     native static String getCoordsImpl(long peer);
 
     @Override
     public void setCoords(String value) {
-        setCoordsImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setCoords(getPeer(), value);
     }
     native static void setCoordsImpl(long peer, String value);
 
     @Override
     public String getHreflang() {
-        return getHreflangImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getHreflang(getPeer());
     }
     native static String getHreflangImpl(long peer);
 
     @Override
     public void setHreflang(String value) {
-        setHreflangImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setHreflang(getPeer(), value);
     }
     native static void setHreflangImpl(long peer, String value);
 
     @Override
     public String getName() {
-        return getNameImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getName(getPeer());
     }
     native static String getNameImpl(long peer);
 
     @Override
     public void setName(String value) {
-        setNameImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
     public String getPing() {
-        return getPingImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getPing(getPeer());
     }
     native static String getPingImpl(long peer);
 
     public void setPing(String value) {
-        setPingImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setPing(getPeer(), value);
     }
     native static void setPingImpl(long peer, String value);
 
     @Override
     public String getRel() {
-        return getRelImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getRel(getPeer());
     }
     native static String getRelImpl(long peer);
 
     @Override
     public void setRel(String value) {
-        setRelImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setRel(getPeer(), value);
     }
     native static void setRelImpl(long peer, String value);
 
     @Override
     public String getRev() {
-        return getRevImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getRev(getPeer());
     }
     native static String getRevImpl(long peer);
 
     @Override
     public void setRev(String value) {
-        setRevImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setRev(getPeer(), value);
     }
     native static void setRevImpl(long peer, String value);
 
     @Override
     public String getShape() {
-        return getShapeImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getShape(getPeer());
     }
     native static String getShapeImpl(long peer);
 
     @Override
     public void setShape(String value) {
-        setShapeImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setShape(getPeer(), value);
     }
     native static void setShapeImpl(long peer, String value);
 
     @Override
     public String getTarget() {
-        return getTargetImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getTarget(getPeer());
     }
     native static String getTargetImpl(long peer);
 
     @Override
     public void setTarget(String value) {
-        setTargetImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setTarget(getPeer(), value);
     }
     native static void setTargetImpl(long peer, String value);
 
     @Override
     public String getType() {
-        return getTypeImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getType(getPeer());
     }
     native static String getTypeImpl(long peer);
 
     @Override
     public void setType(String value) {
-        setTypeImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setType(getPeer(), value);
     }
     native static void setTypeImpl(long peer, String value);
 
     public String getText() {
-        return getTextImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getText(getPeer());
     }
     native static String getTextImpl(long peer);
 
     public void setText(String value) throws DOMException {
-        setTextImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setText(getPeer(), value);
     }
     native static void setTextImpl(long peer, String value);
 
     @Override
     public String getHref() {
-        return getHrefImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getHref(getPeer());
     }
     native static String getHrefImpl(long peer);
 
     @Override
     public void setHref(String value) {
-        setHrefImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setHref(getPeer(), value);
     }
     native static void setHrefImpl(long peer, String value);
 
     public String getOrigin() {
-        return getOriginImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getOrigin(getPeer());
     }
     native static String getOriginImpl(long peer);
 
     public String getProtocol() {
-        return getProtocolImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getProtocol(getPeer());
     }
     native static String getProtocolImpl(long peer);
 
     public void setProtocol(String value) {
-        setProtocolImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setProtocol(getPeer(), value);
     }
     native static void setProtocolImpl(long peer, String value);
 
     public String getUsername() {
-        return getUsernameImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getUsername(getPeer());
     }
     native static String getUsernameImpl(long peer);
 
     public void setUsername(String value) {
-        setUsernameImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setUsername(getPeer(), value);
     }
     native static void setUsernameImpl(long peer, String value);
 
     public String getPassword() {
-        return getPasswordImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getPassword(getPeer());
     }
     native static String getPasswordImpl(long peer);
 
     public void setPassword(String value) {
-        setPasswordImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setPassword(getPeer(), value);
     }
     native static void setPasswordImpl(long peer, String value);
 
     public String getHost() {
-        return getHostImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getHost(getPeer());
     }
     native static String getHostImpl(long peer);
 
     public void setHost(String value) {
-        setHostImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setHost(getPeer(), value);
     }
     native static void setHostImpl(long peer, String value);
 
     public String getHostname() {
-        return getHostnameImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getHostname(getPeer());
     }
     native static String getHostnameImpl(long peer);
 
     public void setHostname(String value) {
-        setHostnameImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setHostname(getPeer(), value);
     }
     native static void setHostnameImpl(long peer, String value);
 
     public String getPort() {
-        return getPortImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getPort(getPeer());
     }
     native static String getPortImpl(long peer);
 
     public void setPort(String value) {
-        setPortImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setPort(getPeer(), value);
     }
     native static void setPortImpl(long peer, String value);
 
     public String getPathname() {
-        return getPathnameImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getPathname(getPeer());
     }
     native static String getPathnameImpl(long peer);
 
     public void setPathname(String value) {
-        setPathnameImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setPathname(getPeer(), value);
     }
     native static void setPathnameImpl(long peer, String value);
 
     public String getSearch() {
-        return getSearchImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getSearch(getPeer());
     }
     native static String getSearchImpl(long peer);
 
     public void setSearch(String value) {
-        setSearchImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setSearch(getPeer(), value);
     }
     native static void setSearchImpl(long peer, String value);
 
     public String getHash() {
-        return getHashImpl(getPeer());
+        return HTMLAnchorElementImplBinding.getHash(getPeer());
     }
     native static String getHashImpl(long peer);
 
     public void setHash(String value) {
-        setHashImpl(getPeer(), value);
+        HTMLAnchorElementImplBinding.setHash(getPeer(), value);
     }
     native static void setHashImpl(long peer, String value);
 

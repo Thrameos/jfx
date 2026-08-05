@@ -29,6 +29,8 @@ import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 
+import com.sun.webkit.dom.interop.CSSImportRuleImplBinding;
+
 public class CSSImportRuleImpl extends CSSRuleImpl implements CSSImportRule {
     CSSImportRuleImpl(long peer) {
         super(peer);
@@ -42,19 +44,19 @@ public class CSSImportRuleImpl extends CSSRuleImpl implements CSSImportRule {
 // Attributes
     @Override
     public String getHref() {
-        return getHrefImpl(getPeer());
+        return CSSImportRuleImplBinding.getHref(getPeer());
     }
     native static String getHrefImpl(long peer);
 
     @Override
     public MediaList getMedia() {
-        return MediaListImpl.getImpl(getMediaImpl(getPeer()));
+        return MediaListImpl.getImpl(CSSImportRuleImplBinding.getMedia(getPeer()));
     }
     native static long getMediaImpl(long peer);
 
     @Override
     public CSSStyleSheet getStyleSheet() {
-        return CSSStyleSheetImpl.getImpl(getStyleSheetImpl(getPeer()));
+        return CSSStyleSheetImpl.getImpl(CSSImportRuleImplBinding.getStyleSheet(getPeer()));
     }
     native static long getStyleSheetImpl(long peer);
 

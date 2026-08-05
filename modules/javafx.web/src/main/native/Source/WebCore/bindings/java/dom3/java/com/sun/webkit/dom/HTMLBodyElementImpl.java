@@ -27,6 +27,7 @@ package com.sun.webkit.dom;
 
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.html.HTMLBodyElement;
+import com.sun.webkit.dom.interop.HTMLBodyElementImplBinding;
 
 public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElement {
     HTMLBodyElementImpl(long peer) {
@@ -41,73 +42,73 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 // Attributes
     @Override
     public String getALink() {
-        return getALinkImpl(getPeer());
+        return HTMLBodyElementImplBinding.getALink(getPeer());
     }
     native static String getALinkImpl(long peer);
 
     @Override
     public void setALink(String value) {
-        setALinkImpl(getPeer(), value);
+        HTMLBodyElementImplBinding.setALink(getPeer(), value);
     }
     native static void setALinkImpl(long peer, String value);
 
     @Override
     public String getBackground() {
-        return getBackgroundImpl(getPeer());
+        return HTMLBodyElementImplBinding.getBackground(getPeer());
     }
     native static String getBackgroundImpl(long peer);
 
     @Override
     public void setBackground(String value) {
-        setBackgroundImpl(getPeer(), value);
+        HTMLBodyElementImplBinding.setBackground(getPeer(), value);
     }
     native static void setBackgroundImpl(long peer, String value);
 
     @Override
     public String getBgColor() {
-        return getBgColorImpl(getPeer());
+        return HTMLBodyElementImplBinding.getBgColor(getPeer());
     }
     native static String getBgColorImpl(long peer);
 
     @Override
     public void setBgColor(String value) {
-        setBgColorImpl(getPeer(), value);
+        HTMLBodyElementImplBinding.setBgColor(getPeer(), value);
     }
     native static void setBgColorImpl(long peer, String value);
 
     @Override
     public String getLink() {
-        return getLinkImpl(getPeer());
+        return HTMLBodyElementImplBinding.getLink(getPeer());
     }
     native static String getLinkImpl(long peer);
 
     @Override
     public void setLink(String value) {
-        setLinkImpl(getPeer(), value);
+        HTMLBodyElementImplBinding.setLink(getPeer(), value);
     }
     native static void setLinkImpl(long peer, String value);
 
     @Override
     public String getText() {
-        return getTextImpl(getPeer());
+        return HTMLBodyElementImplBinding.getText(getPeer());
     }
     native static String getTextImpl(long peer);
 
     @Override
     public void setText(String value) {
-        setTextImpl(getPeer(), value);
+        HTMLBodyElementImplBinding.setText(getPeer(), value);
     }
     native static void setTextImpl(long peer, String value);
 
     @Override
     public String getVLink() {
-        return getVLinkImpl(getPeer());
+        return HTMLBodyElementImplBinding.getVLink(getPeer());
     }
     native static String getVLinkImpl(long peer);
 
     @Override
     public void setVLink(String value) {
-        setVLinkImpl(getPeer(), value);
+        HTMLBodyElementImplBinding.setVLink(getPeer(), value);
     }
     native static void setVLinkImpl(long peer, String value);
 

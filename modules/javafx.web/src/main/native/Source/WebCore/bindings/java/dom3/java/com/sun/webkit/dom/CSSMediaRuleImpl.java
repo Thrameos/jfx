@@ -30,6 +30,8 @@ import org.w3c.dom.css.CSSMediaRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.stylesheets.MediaList;
 
+import com.sun.webkit.dom.interop.CSSMediaRuleImplBinding;
+
 public class CSSMediaRuleImpl extends CSSRuleImpl implements CSSMediaRule {
     CSSMediaRuleImpl(long peer) {
         super(peer);
@@ -43,13 +45,13 @@ public class CSSMediaRuleImpl extends CSSRuleImpl implements CSSMediaRule {
 // Attributes
     @Override
     public MediaList getMedia() {
-        return MediaListImpl.getImpl(getMediaImpl(getPeer()));
+        return MediaListImpl.getImpl(CSSMediaRuleImplBinding.getMedia(getPeer()));
     }
     native static long getMediaImpl(long peer);
 
     @Override
     public CSSRuleList getCssRules() {
-        return CSSRuleListImpl.getImpl(getCssRulesImpl(getPeer()));
+        return CSSRuleListImpl.getImpl(CSSMediaRuleImplBinding.getCssRules(getPeer()));
     }
     native static long getCssRulesImpl(long peer);
 
@@ -59,7 +61,7 @@ public class CSSMediaRuleImpl extends CSSRuleImpl implements CSSMediaRule {
     public int insertRule(String rule
         , int index) throws DOMException
     {
-        return insertRuleImpl(getPeer()
+        return CSSMediaRuleImplBinding.insertRule(getPeer()
             , rule
             , index);
     }
@@ -71,7 +73,7 @@ public class CSSMediaRuleImpl extends CSSRuleImpl implements CSSMediaRule {
     @Override
     public void deleteRule(int index) throws DOMException
     {
-        deleteRuleImpl(getPeer()
+        CSSMediaRuleImplBinding.deleteRule(getPeer()
             , index);
     }
     native static void deleteRuleImpl(long peer

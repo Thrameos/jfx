@@ -30,6 +30,8 @@ import com.sun.webkit.DisposerRecord;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSValue;
 
+import com.sun.webkit.dom.interop.CSSValueImplBinding;
+
 public class CSSValueImpl implements CSSValue {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -92,19 +94,19 @@ public class CSSValueImpl implements CSSValue {
 // Attributes
     @Override
     public String getCssText() {
-        return getCssTextImpl(getPeer());
+        return CSSValueImplBinding.getCssText(getPeer());
     }
     native static String getCssTextImpl(long peer);
 
     @Override
     public void setCssText(String value) throws DOMException {
-        setCssTextImpl(getPeer(), value);
+        CSSValueImplBinding.setCssText(getPeer(), value);
     }
     native static void setCssTextImpl(long peer, String value);
 
     @Override
     public short getCssValueType() {
-        return getCssValueTypeImpl(getPeer());
+        return CSSValueImplBinding.getCssValueType(getPeer());
     }
     native static short getCssValueTypeImpl(long peer);
 

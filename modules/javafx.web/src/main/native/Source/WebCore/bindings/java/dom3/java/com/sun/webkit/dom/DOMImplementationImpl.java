@@ -34,6 +34,8 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.html.HTMLDocument;
 
+import com.sun.webkit.dom.interop.DOMImplementationImplBinding;
+
 public class DOMImplementationImpl implements DOMImplementation {
     private static class SelfDisposer implements DisposerRecord {
         private final long peer;
@@ -102,7 +104,7 @@ public class DOMImplementationImpl implements DOMImplementation {
         , String publicId
         , String systemId) throws DOMException
     {
-        return DocumentTypeImpl.getImpl(createDocumentTypeImpl(getPeer()
+        return DocumentTypeImpl.getImpl(DOMImplementationImplBinding.createDocumentType(getPeer()
             , qualifiedName
             , publicId
             , systemId));
@@ -118,7 +120,7 @@ public class DOMImplementationImpl implements DOMImplementation {
         , String qualifiedName
         , DocumentType doctype) throws DOMException
     {
-        return DocumentImpl.getImpl(createDocumentImpl(getPeer()
+        return DocumentImpl.getImpl(DOMImplementationImplBinding.createDocument(getPeer()
             , namespaceURI
             , qualifiedName
             , DocumentTypeImpl.getPeer(doctype)));
@@ -132,7 +134,7 @@ public class DOMImplementationImpl implements DOMImplementation {
     public CSSStyleSheet createCSSStyleSheet(String title
         , String media) throws DOMException
     {
-        return CSSStyleSheetImpl.getImpl(createCSSStyleSheetImpl(getPeer()
+        return CSSStyleSheetImpl.getImpl(DOMImplementationImplBinding.createCSSStyleSheet(getPeer()
             , title
             , media));
     }
@@ -143,7 +145,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 
     public HTMLDocument createHTMLDocument(String title)
     {
-        return HTMLDocumentImpl.getImpl(createHTMLDocumentImpl(getPeer()
+        return HTMLDocumentImpl.getImpl(DOMImplementationImplBinding.createHTMLDocument(getPeer()
             , title));
     }
     native static long createHTMLDocumentImpl(long peer

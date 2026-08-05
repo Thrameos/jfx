@@ -36,6 +36,7 @@ module javafx.web {
     requires javafx.media;
     requires jdk.jsobject;
     requires jdk.xml.dom;
+    requires jfx.interop;
 
     requires transitive java.xml;
     requires transitive javafx.base;

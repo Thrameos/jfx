@@ -27,6 +27,7 @@ package com.sun.webkit.dom;
 
 import org.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.html.HTMLFormElement;
+import com.sun.webkit.dom.interop.HTMLFormElementImplBinding;
 
 public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElement {
     HTMLFormElementImpl(long peer) {
@@ -47,7 +48,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
     @Override
     public void setAcceptCharset(String value) {
-        setAcceptCharsetImpl(getPeer(), value);
+        HTMLFormElementImplBinding.setAcceptCharset(getPeer(), value);
     }
     native static void setAcceptCharsetImpl(long peer, String value);
 
@@ -59,7 +60,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
     @Override
     public void setAction(String value) {
-        setActionImpl(getPeer(), value);
+        HTMLFormElementImplBinding.setAction(getPeer(), value);
     }
     native static void setActionImpl(long peer, String value);
 
@@ -115,17 +116,17 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
     @Override
     public void setName(String value) {
-        setNameImpl(getPeer(), value);
+        HTMLFormElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
     public boolean getNoValidate() {
-        return getNoValidateImpl(getPeer());
+        return HTMLFormElementImplBinding.getNoValidate(getPeer());
     }
     native static boolean getNoValidateImpl(long peer);
 
     public void setNoValidate(boolean value) {
-        setNoValidateImpl(getPeer(), value);
+        HTMLFormElementImplBinding.setNoValidate(getPeer(), value);
     }
     native static void setNoValidateImpl(long peer, boolean value);
 
@@ -137,7 +138,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
     @Override
     public void setTarget(String value) {
-        setTargetImpl(getPeer(), value);
+        HTMLFormElementImplBinding.setTarget(getPeer(), value);
     }
     native static void setTargetImpl(long peer, String value);
 
@@ -149,7 +150,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return HTMLFormElementImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -173,7 +174,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 
     public boolean checkValidity()
     {
-        return checkValidityImpl(getPeer());
+        return HTMLFormElementImplBinding.checkValidity(getPeer());
     }
     native static boolean checkValidityImpl(long peer);
 

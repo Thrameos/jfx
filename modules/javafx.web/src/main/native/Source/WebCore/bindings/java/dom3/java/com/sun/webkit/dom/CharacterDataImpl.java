@@ -30,6 +30,7 @@ import org.w3c.dom.CharacterData;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import com.sun.webkit.dom.interop.CharacterDataImplBinding;
 
 public class CharacterDataImpl extends NodeImpl implements CharacterData {
     @Native public static final byte DIRECTIONALITY_LEFT_TO_RIGHT = Character.DIRECTIONALITY_LEFT_TO_RIGHT;
@@ -101,29 +102,29 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
 // Attributes
     @Override
     public String getData() {
-        return getDataImpl(getPeer());
+        return CharacterDataImplBinding.getData(getPeer());
     }
     native static String getDataImpl(long peer);
 
     @Override
     public void setData(String value) {
-        setDataImpl(getPeer(), value);
+        CharacterDataImplBinding.setData(getPeer(), value);
     }
     native static void setDataImpl(long peer, String value);
 
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return CharacterDataImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
     public Element getPreviousElementSibling() {
-        return ElementImpl.getImpl(getPreviousElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(CharacterDataImplBinding.getPreviousElementSibling(getPeer()));
     }
     native static long getPreviousElementSiblingImpl(long peer);
 
     public Element getNextElementSibling() {
-        return ElementImpl.getImpl(getNextElementSiblingImpl(getPeer()));
+        return ElementImpl.getImpl(CharacterDataImplBinding.getNextElementSibling(getPeer()));
     }
     native static long getNextElementSiblingImpl(long peer);
 
@@ -133,9 +134,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     public String substringData(int offset
         , int length) throws DOMException
     {
-        return substringDataImpl(getPeer()
-            , offset
-            , length);
+        return CharacterDataImplBinding.substringData(getPeer(), offset, length);
     }
     native static String substringDataImpl(long peer
         , int offset
@@ -145,8 +144,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     @Override
     public void appendData(String data)
     {
-        appendDataImpl(getPeer()
-            , data);
+        CharacterDataImplBinding.appendData(getPeer(), data);
     }
     native static void appendDataImpl(long peer
         , String data);
@@ -156,7 +154,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     public void insertData(int offset
         , String data) throws DOMException
     {
-        insertDataImpl(getPeer()
+        CharacterDataImplBinding.insertData(getPeer()
             , offset
             , data);
     }
@@ -169,7 +167,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
     public void deleteData(int offset
         , int length) throws DOMException
     {
-        deleteDataImpl(getPeer()
+        CharacterDataImplBinding.deleteData(getPeer()
             , offset
             , length);
     }
@@ -183,7 +181,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
         , int length
         , String data) throws DOMException
     {
-        replaceDataImpl(getPeer()
+        CharacterDataImplBinding.replaceData(getPeer()
             , offset
             , length
             , data);
@@ -196,7 +194,7 @@ public class CharacterDataImpl extends NodeImpl implements CharacterData {
 
     public void remove() throws DOMException
     {
-        removeImpl(getPeer());
+        CharacterDataImplBinding.remove(getPeer());
     }
     native static void removeImpl(long peer);
 

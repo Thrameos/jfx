@@ -31,6 +31,7 @@ import org.w3c.dom.html.HTMLElement;
 import org.w3c.dom.html.HTMLTableCaptionElement;
 import org.w3c.dom.html.HTMLTableElement;
 import org.w3c.dom.html.HTMLTableSectionElement;
+import com.sun.webkit.dom.interop.HTMLTableElementImplBinding;
 
 public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableElement {
     HTMLTableElementImpl(long peer) {
@@ -45,7 +46,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 // Attributes
     @Override
     public HTMLTableCaptionElement getCaption() {
-        return HTMLTableCaptionElementImpl.getImpl(getCaptionImpl(getPeer()));
+        return HTMLTableCaptionElementImpl.getImpl(HTMLTableElementImplBinding.getCaption(getPeer()));
     }
     native static long getCaptionImpl(long peer);
 
@@ -57,7 +58,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public HTMLTableSectionElement getTHead() {
-        return HTMLTableSectionElementImpl.getImpl(getTHeadImpl(getPeer()));
+        return HTMLTableSectionElementImpl.getImpl(HTMLTableElementImplBinding.getTHead(getPeer()));
     }
     native static long getTHeadImpl(long peer);
 
@@ -69,7 +70,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public HTMLTableSectionElement getTFoot() {
-        return HTMLTableSectionElementImpl.getImpl(getTFootImpl(getPeer()));
+        return HTMLTableSectionElementImpl.getImpl(HTMLTableElementImplBinding.getTFoot(getPeer()));
     }
     native static long getTFootImpl(long peer);
 
@@ -99,7 +100,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setAlign(String value) {
-        setAlignImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setAlign(getPeer(), value);
     }
     native static void setAlignImpl(long peer, String value);
 
@@ -111,7 +112,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setBgColor(String value) {
-        setBgColorImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setBgColor(getPeer(), value);
     }
     native static void setBgColorImpl(long peer, String value);
 
@@ -123,7 +124,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setBorder(String value) {
-        setBorderImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setBorder(getPeer(), value);
     }
     native static void setBorderImpl(long peer, String value);
 
@@ -135,7 +136,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setCellPadding(String value) {
-        setCellPaddingImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setCellPadding(getPeer(), value);
     }
     native static void setCellPaddingImpl(long peer, String value);
 
@@ -147,7 +148,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setCellSpacing(String value) {
-        setCellSpacingImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setCellSpacing(getPeer(), value);
     }
     native static void setCellSpacingImpl(long peer, String value);
 
@@ -159,7 +160,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setFrame(String value) {
-        setFrameImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setFrame(getPeer(), value);
     }
     native static void setFrameImpl(long peer, String value);
 
@@ -171,7 +172,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setRules(String value) {
-        setRulesImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setRules(getPeer(), value);
     }
     native static void setRulesImpl(long peer, String value);
 
@@ -183,7 +184,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setSummary(String value) {
-        setSummaryImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setSummary(getPeer(), value);
     }
     native static void setSummaryImpl(long peer, String value);
 
@@ -195,7 +196,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     @Override
     public void setWidth(String value) {
-        setWidthImpl(getPeer(), value);
+        HTMLTableElementImplBinding.setWidth(getPeer(), value);
     }
     native static void setWidthImpl(long peer, String value);
 
@@ -204,7 +205,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
     @Override
     public HTMLElement createTHead()
     {
-        return HTMLElementImpl.getImpl(createTHeadImpl(getPeer()));
+        return HTMLElementImpl.getImpl(HTMLTableElementImplBinding.createTHead(getPeer()));
     }
     native static long createTHeadImpl(long peer);
 
@@ -220,7 +221,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
     @Override
     public HTMLElement createTFoot()
     {
-        return HTMLElementImpl.getImpl(createTFootImpl(getPeer()));
+        return HTMLElementImpl.getImpl(HTMLTableElementImplBinding.createTFoot(getPeer()));
     }
     native static long createTFootImpl(long peer);
 
@@ -235,7 +236,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
     public HTMLElement createTBody()
     {
-        return HTMLElementImpl.getImpl(createTBodyImpl(getPeer()));
+        return HTMLElementImpl.getImpl(HTMLTableElementImplBinding.createTBody(getPeer()));
     }
     native static long createTBodyImpl(long peer);
 
@@ -243,7 +244,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
     @Override
     public HTMLElement createCaption()
     {
-        return HTMLElementImpl.getImpl(createCaptionImpl(getPeer()));
+        return HTMLElementImpl.getImpl(HTMLTableElementImplBinding.createCaption(getPeer()));
     }
     native static long createCaptionImpl(long peer);
 

@@ -32,6 +32,7 @@ import org.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.html.HTMLElement;
 import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLSelectElement;
+import com.sun.webkit.dom.interop.HTMLSelectElementImplBinding;
 
 public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelectElement {
     HTMLSelectElementImpl(long peer) {
@@ -45,42 +46,42 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
 // Attributes
     public boolean getAutofocus() {
-        return getAutofocusImpl(getPeer());
+        return HTMLSelectElementImplBinding.getAutofocus(getPeer());
     }
     native static boolean getAutofocusImpl(long peer);
 
     public void setAutofocus(boolean value) {
-        setAutofocusImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setAutofocus(getPeer(), value);
     }
     native static void setAutofocusImpl(long peer, boolean value);
 
     @Override
     public boolean getDisabled() {
-        return getDisabledImpl(getPeer());
+        return HTMLSelectElementImplBinding.getDisabled(getPeer());
     }
     native static boolean getDisabledImpl(long peer);
 
     @Override
     public void setDisabled(boolean value) {
-        setDisabledImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setDisabled(getPeer(), value);
     }
     native static void setDisabledImpl(long peer, boolean value);
 
     @Override
     public HTMLFormElement getForm() {
-        return HTMLFormElementImpl.getImpl(getFormImpl(getPeer()));
+        return HTMLFormElementImpl.getImpl(HTMLSelectElementImplBinding.getForm(getPeer()));
     }
     native static long getFormImpl(long peer);
 
     @Override
     public boolean getMultiple() {
-        return getMultipleImpl(getPeer());
+        return HTMLSelectElementImplBinding.getMultiple(getPeer());
     }
     native static boolean getMultipleImpl(long peer);
 
     @Override
     public void setMultiple(boolean value) {
-        setMultipleImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setMultiple(getPeer(), value);
     }
     native static void setMultipleImpl(long peer, boolean value);
 
@@ -92,29 +93,29 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public void setName(String value) {
-        setNameImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setName(getPeer(), value);
     }
     native static void setNameImpl(long peer, String value);
 
     public boolean getRequired() {
-        return getRequiredImpl(getPeer());
+        return HTMLSelectElementImplBinding.getRequired(getPeer());
     }
     native static boolean getRequiredImpl(long peer);
 
     public void setRequired(boolean value) {
-        setRequiredImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setRequired(getPeer(), value);
     }
     native static void setRequiredImpl(long peer, boolean value);
 
     @Override
     public int getSize() {
-        return getSizeImpl(getPeer());
+        return HTMLSelectElementImplBinding.getSize(getPeer());
     }
     native static int getSizeImpl(long peer);
 
     @Override
     public void setSize(int value) {
-        setSizeImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setSize(getPeer(), value);
     }
     native static void setSizeImpl(long peer, int value);
 
@@ -132,7 +133,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public int getLength() {
-        return getLengthImpl(getPeer());
+        return HTMLSelectElementImplBinding.getLength(getPeer());
     }
     native static int getLengthImpl(long peer);
 
@@ -143,13 +144,13 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public int getSelectedIndex() {
-        return getSelectedIndexImpl(getPeer());
+        return HTMLSelectElementImplBinding.getSelectedIndex(getPeer());
     }
     native static int getSelectedIndexImpl(long peer);
 
     @Override
     public void setSelectedIndex(int value) {
-        setSelectedIndexImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setSelectedIndex(getPeer(), value);
     }
     native static void setSelectedIndexImpl(long peer, int value);
 
@@ -161,12 +162,12 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     @Override
     public void setValue(String value) {
-        setValueImpl(getPeer(), value);
+        HTMLSelectElementImplBinding.setValue(getPeer(), value);
     }
     native static void setValueImpl(long peer, String value);
 
     public boolean getWillValidate() {
-        return getWillValidateImpl(getPeer());
+        return HTMLSelectElementImplBinding.getWillValidate(getPeer());
     }
     native static boolean getWillValidateImpl(long peer);
 
@@ -226,8 +227,7 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
     @Override
     public void remove(int index)
     {
-        removeImpl(getPeer()
-            , index);
+        HTMLSelectElementImplBinding.remove(getPeer(), index);
     }
     native static void removeImpl(long peer
         , int index);
@@ -235,15 +235,14 @@ public class HTMLSelectElementImpl extends HTMLElementImpl implements HTMLSelect
 
     public boolean checkValidity()
     {
-        return checkValidityImpl(getPeer());
+        return HTMLSelectElementImplBinding.checkValidity(getPeer());
     }
     native static boolean checkValidityImpl(long peer);
 
 
     public void setCustomValidity(String error)
     {
-        setCustomValidityImpl(getPeer()
-            , error);
+        HTMLSelectElementImplBinding.setCustomValidity(getPeer(), error);
     }
     native static void setCustomValidityImpl(long peer
         , String error);
